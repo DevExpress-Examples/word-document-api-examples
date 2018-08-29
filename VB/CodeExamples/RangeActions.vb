@@ -58,17 +58,7 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
             document.Paragraphs.Append()
             document.AppendText(s2)
 '            #End Region ' #AppendTextToRange
-        End Sub
-
-        Private Shared Sub CopyAndPasteRange(ByVal server As RichEditDocumentServer)
-'            #Region "#CopyAndPasteRange"
-            Dim document As Document = server.Document
-            document.LoadDocument("Documents\Grimm.docx", DocumentFormat.OpenXml)
-            Dim myRange As DocumentRange = document.Paragraphs(0).Range
-            document.Copy(myRange)
-            document.Paste(DocumentFormat.PlainText)
-'            #End Region ' #CopyAndPasteRange
-        End Sub
+        End Sub       
 
         Private Shared Sub AppendToParagraph(ByVal server As RichEditDocumentServer)
 '            #Region "#AppendToParagraph"
