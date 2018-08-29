@@ -65,18 +65,6 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             document.AppendText(s2);
             #endregion #AppendTextToRange
         }
-
-        static void CopyAndPasteRange(RichEditDocumentServer server)
-        {
-            #region #CopyAndPasteRange
-            Document document = server.Document;
-            document.LoadDocument("Documents\\Grimm.docx", DocumentFormat.OpenXml);
-            DocumentRange myRange = document.Paragraphs[0].Range;
-            document.Copy(myRange);
-            document.Paste(DocumentFormat.PlainText);
-            #endregion #CopyAndPasteRange
-        }
-
         static void AppendToParagraph(RichEditDocumentServer server)
         {
             #region #AppendToParagraph
