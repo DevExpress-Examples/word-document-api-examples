@@ -18,8 +18,8 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
         End Sub
         Private Shared Sub BeforeImport(ByVal server As RichEditDocumentServer)
 '            #Region "#HandleBeforeImportEvent"
-            server.LoadDocument("Documents\TerribleRevengeKOI8R.txt")
-            AddHandler server.BeforeImport, AddressOf BeforeImportHelper.BeforeImport
+        AddHandler server.BeforeImport, AddressOf BeforeImportHelper.BeforeImport
+            server.LoadDocument("Documents\TerribleRevengeKOI8R.txt")            
 '            #End Region ' #HandleBeforeImportEvent
         End Sub
 
@@ -27,7 +27,7 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
         Private Class BeforeImportHelper
             Public Shared Sub BeforeImport(ByVal sender As Object, ByVal e As BeforeImportEventArgs)
                 If e.DocumentFormat = DocumentFormat.PlainText Then
-                    CType(e.Options, PlainTextDocumentImporterOptions).Encoding = Encoding.UTF32
+                    CType(e.Options, PlainTextDocumentImporterOptions)).Encoding = Encoding.GetEncoding(20866)
                 End If
             End Sub
         End Class
