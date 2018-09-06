@@ -26,8 +26,8 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
         static void BeforeImport(RichEditDocumentServer server)
         {
             #region #HandleBeforeImportEvent
-            server.LoadDocument("Documents\\TerribleRevengeKOI8R.txt");
             server.BeforeImport += BeforeImportHelper.BeforeImport;
+            server.LoadDocument("Documents\\TerribleRevengeKOI8R.txt");            
             #endregion #HandleBeforeImportEvent
         }
 
@@ -38,7 +38,7 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             {
                 if (e.DocumentFormat == DocumentFormat.PlainText)
                 {
-                    ((PlainTextDocumentImporterOptions)e.Options).Encoding = Encoding.UTF32;
+                    ((PlainTextDocumentImporterOptions)e.Options).Encoding = Encoding.GetEncoding(20866);
                 }
             }
         }
