@@ -38,7 +38,7 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             {
                 if (e.DocumentFormat == DocumentFormat.PlainText)
                 {
-                    ((PlainTextDocumentImporterOptions)e.Options).Encoding = Encoding.UTF32;
+                    ((PlainTextDocumentImporterOptions)e.Options).Encoding = Encoding.GetEncoding(20866);
                 }
             }
         }
