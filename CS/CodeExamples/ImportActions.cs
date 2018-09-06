@@ -26,8 +26,8 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
         static void BeforeImport(RichEditDocumentServer server)
         {
             #region #HandleBeforeImportEvent
-            server.LoadDocument("Documents\\TerribleRevengeKOI8R.txt");
             server.BeforeImport += BeforeImportHelper.BeforeImport;
+            server.LoadDocument("Documents\\TerribleRevengeKOI8R.txt");            
             #endregion #HandleBeforeImportEvent
         }
 
