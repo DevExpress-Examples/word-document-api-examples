@@ -27,7 +27,7 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
         Private Class BeforeImportHelper
             Public Shared Sub BeforeImport(ByVal sender As Object, ByVal e As BeforeImportEventArgs)
                 If e.DocumentFormat = DocumentFormat.PlainText Then
-                    (CType(e.Options, PlainTextDocumentImporterOptions)).Encoding = Encoding.GetEncoding(20866)
+                    CType(e.Options, PlainTextDocumentImporterOptions).Encoding = Encoding.GetEncoding(20866)
                 End If
             End Sub
         End Class
