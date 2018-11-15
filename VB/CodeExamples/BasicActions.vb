@@ -25,6 +25,35 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
             server.LoadDocument("Documents\Grimm.docx", DocumentFormat.OpenXml)
 '            #End Region ' #LoadDocument
         End Sub
+
+        Private Shared Sub MergeDocuments(ByVal server As RichEditDocumentServer)
+'       #Region "#MergeDocuments"
+        server.LoadDocument("Documents//Grimm.docx", DocumentFormat.OpenXml)
+        server.Document.AppendDocumentContent("Documents//MovieRentals.docx", DocumentFormat.OpenXml)
+'       #End Region ' #MergeDocuments
+        End Sub
+
+        Private Shared Sub SplitDocument(ByVal server As RichEditDocumentServer)
+'        #Region "#SplitDocument"
+        server.LoadDocument("Documents\Grimm.docx", DocumentFormat.OpenXml)
+        Dim pageCount As Integer = server.DocumentLayout.GetPageCount()
+
+        For i As Integer = 0 To pageCount - 1
+            Dim layoutPage As DevExpress.XtraRichEdit.API.Layout.LayoutPage = server.DocumentLayout.GetPage(i)
+            Dim mainBodyRange As DevExpress.XtraRichEdit.API.Native.DocumentRange = server.Document.CreateRange(layoutPage.MainContentRange.Start, layoutPage.MainContentRange.Length)
+
+            Using tempServer As RichEditDocumentServer = New RichEditDocumentServer()
+                tempServer.Document.AppendDocumentContent(mainBodyRange)
+                tempServer.Document.Delete(tempServer.Document.Paragraphs.First().Range)
+                Dim fileName As String = String.Format("doc{0}.rtf", i)
+                tempServer.SaveDocument(fileName, DocumentFormat.Rtf)
+            End Using
+        Next
+
+        System.Diagnostics.Process.Start("explorer.exe", "/select," & "doc0.rtf")
+'       #End Region "#SplitDocument"
+        End Sub
+
         Private Shared Sub SaveDocument(ByVal server As RichEditDocumentServer)
 '            #Region "#SaveDocument"
             server.Document.AppendDocumentContent("Documents\Grimm.docx", DocumentFormat.OpenXml)

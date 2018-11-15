@@ -25,6 +25,36 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             server.LoadDocument("Documents\\Grimm.docx", DocumentFormat.OpenXml);
             #endregion #LoadDocument
         }
+        static void MergeDocuments(RichEditDocumentServer server)
+        {
+            #region #MergeDocuments
+            server.LoadDocument("Documents//Grimm.docx", DocumentFormat.OpenXml);
+            server.Document.AppendDocumentContent("Documents//MovieRentals.docx",DocumentFormat.OpenXml);
+            #endregion #MergeDocuments
+        }
+        static void SplitDocument(RichEditDocumentServer server)
+        {
+            #region #SplitDocument
+            server.LoadDocument("Documents\\Grimm.docx", DocumentFormat.OpenXml);
+            //Split a document per page
+            int pageCount = server.DocumentLayout.GetPageCount();
+            for (int i = 0; i < pageCount; i++)
+            {
+                DevExpress.XtraRichEdit.API.Layout.LayoutPage layoutPage = server.DocumentLayout.GetPage(i);
+                DevExpress.XtraRichEdit.API.Native.DocumentRange mainBodyRange = server.Document.CreateRange(layoutPage.MainContentRange.Start, layoutPage.MainContentRange.Length);
+                using (RichEditDocumentServer tempServer = new RichEditDocumentServer())
+                {
+                    tempServer.Document.AppendDocumentContent(mainBodyRange);
+                    //Delete last empty paragraph
+                    tempServer.Document.Delete(tempServer.Document.Paragraphs.First().Range);
+                    //Save the result
+                    string fileName = String.Format("doc{0}.rtf", i);
+                    tempServer.SaveDocument(fileName, DocumentFormat.Rtf);
+                }                
+            }
+            System.Diagnostics.Process.Start("explorer.exe", "/select," + "doc0.rtf");
+            #endregion #SplitDocument
+        }
         static void SaveDocument(RichEditDocumentServer server)
         {            
             #region #SaveDocument
