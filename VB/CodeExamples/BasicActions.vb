@@ -16,26 +16,26 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
        End Sub
 
         Private Shared Sub CreateNewDocument(ByVal server As RichEditDocumentServer)
-'            #Region "#CreateDocument"
+            '            #Region "#CreateDocument
             server.CreateNewDocument()
 '            #End Region ' #CreateDocument
         End Sub
         Private Shared Sub LoadDocument(ByVal server As RichEditDocumentServer)
-'            #Region "#LoadDocument"
+            '            #Region "#LoadDocument
             server.LoadDocument("Documents\Grimm.docx", DocumentFormat.OpenXml)
 '            #End Region ' #LoadDocument
         End Sub
 
         Private Shared Sub MergeDocuments(ByVal server As RichEditDocumentServer)
-'       #Region "#MergeDocuments"
-        server.LoadDocument("Documents//Grimm.docx", DocumentFormat.OpenXml)
+            '       #Region "#MergeDocuments
+            server.LoadDocument("Documents//Grimm.docx", DocumentFormat.OpenXml)
         server.Document.AppendDocumentContent("Documents//MovieRentals.docx", DocumentFormat.OpenXml)
 '       #End Region ' #MergeDocuments
         End Sub
 
         Private Shared Sub SplitDocument(ByVal server As RichEditDocumentServer)
-'        #Region "#SplitDocument"
-        server.LoadDocument("Documents\Grimm.docx", DocumentFormat.OpenXml)
+            '        #Region "#SplitDocument
+            server.LoadDocument("Documents\Grimm.docx", DocumentFormat.OpenXml)
         Dim pageCount As Integer = server.DocumentLayout.GetPageCount()
 
         For i As Integer = 0 To pageCount - 1
@@ -55,14 +55,14 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
         End Sub
 
         Private Shared Sub SaveDocument(ByVal server As RichEditDocumentServer)
-'            #Region "#SaveDocument"
+            '            #Region "#SaveDocument
             server.Document.AppendDocumentContent("Documents\Grimm.docx", DocumentFormat.OpenXml)
             server.SaveDocument("SavedDocument.docx", DocumentFormat.OpenXml)
                 System.Diagnostics.Process.Start("explorer.exe", "/select," & "SavedDocument.docx")
 '            #End Region ' #SaveDocument
         End Sub
         Private Shared Sub PrintDocument(ByVal server As RichEditDocumentServer)
-'            #Region "#PrintDocument"
+            '            #Region "#PrintDocument
             server.Document.AppendDocumentContent("Documents\Grimm.docx", DocumentFormat.OpenXml)
             server.Print()
 '            #End Region ' #PrintDocument
