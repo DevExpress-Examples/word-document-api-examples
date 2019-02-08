@@ -12,7 +12,7 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
 '            #Region "#InsertField"
             Dim document As Document = server.Document
             document.BeginUpdate()
-            document.Fields.Create(document.CaretPosition, "DATE")
+        document.Fields.Create(document.Range.Start, "DATE")
             document.Fields.Update()
             document.EndUpdate()
 '            #End Region ' #InsertField
