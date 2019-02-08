@@ -15,7 +15,7 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             #region #InsertField
             Document document = server.Document;
             document.BeginUpdate();
-            document.Fields.Create(document.CaretPosition, "DATE");
+            document.Fields.Create(document.Range.Start, "DATE");
             document.Fields.Update();
             document.EndUpdate();
             #endregion #InsertField
