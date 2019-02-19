@@ -19,18 +19,7 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             DocumentRange myRange = document.CreateRange(myStart, 216);
             document.Selection = myRange;
             #endregion #SelectTextInRange
-        }
-
-        static void InsertTextAtCaretPosition(RichEditDocumentServer server)
-        {
-            #region #InsertTextAtCaretPosition
-            Document document = server.Document;
-            DocumentPosition pos = document.CaretPosition;
-            SubDocument doc = pos.BeginUpdateDocument();
-            doc.InsertText(pos, " INSERTED TEXT ");
-            pos.EndUpdateDocument(doc);
-            #endregion #InsertTextAtCaretPosition
-        }
+        }        
 
         static void InsertTextInRange(RichEditDocumentServer server)
         {
@@ -71,13 +60,7 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             Document document = server.Document;
             document.BeginUpdate();
             document.AppendText("First Paragraph\nSecond Paragraph\nThird Paragraph");
-            document.EndUpdate();
-            DocumentPosition pos = document.CaretPosition;
-            SubDocument doc = pos.BeginUpdateDocument();
-            Paragraph par = doc.Paragraphs.Get(pos);
-            DocumentPosition newPos = doc.CreatePosition(par.Range.End.ToInt() - 1);
-            doc.InsertText(newPos, "<<Appended to Paragraph End>>");
-            pos.EndUpdateDocument(doc);
+            document.EndUpdate();            
             #endregion #AppendToParagraph
         }
     }
