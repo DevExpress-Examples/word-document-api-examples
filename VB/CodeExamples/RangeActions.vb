@@ -18,16 +18,6 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
 '            #End Region ' #SelectTextInRange
         End Sub
 
-        Private Shared Sub InsertTextAtCaretPosition(ByVal server As RichEditDocumentServer)
-'            #Region "#InsertTextAtCaretPosition"
-            Dim document As Document = server.Document
-            Dim pos As DocumentPosition = document.CaretPosition
-            Dim doc As SubDocument = pos.BeginUpdateDocument()
-            doc.InsertText(pos, " INSERTED TEXT ")
-            pos.EndUpdateDocument(doc)
-'            #End Region ' #InsertTextAtCaretPosition
-        End Sub
-
         Private Shared Sub InsertTextInRange(ByVal server As RichEditDocumentServer)
 '            #Region "#InsertTextInRange"
             Dim document As Document = server.Document
@@ -66,12 +56,6 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
             document.BeginUpdate()
             document.AppendText("First Paragraph" & vbLf & "Second Paragraph" & vbLf & "Third Paragraph")
             document.EndUpdate()
-            Dim pos As DocumentPosition = document.CaretPosition
-            Dim doc As SubDocument = pos.BeginUpdateDocument()
-            Dim par As Paragraph = doc.Paragraphs.Get(pos)
-            Dim newPos As DocumentPosition = doc.CreatePosition(par.Range.End.ToInt() - 1)
-            doc.InsertText(newPos, "<<Appended to Paragraph End>>")
-            pos.EndUpdateDocument(doc)
 '            #End Region ' #AppendToParagraph
         End Sub
     End Class
