@@ -1,5 +1,7 @@
 # Word Processing Document API Examples
+*Files to look at*:
 
+* [CodeExamples](./CS/CodeExamples) (VB: [CodeExamples](./VB/CodeExamples))
 
 <p>This example demonstrates how to use the <a href="https://documentation.devexpress.com/#DocumentServer/CustomDocument17488">Word Processing Document API</a> to programmatically manage rich edit documents, without the need for Microsoft Word to be installed.</p>
 <p>The application includes the <a href="https://documentation.devexpress.com/#WindowsForms/CustomDocument6975">RichEditControl</a> used to display and edit the code. The code modifies the rich document created or loaded by the <a href="https://documentation.devexpress.com/#CoreLibraries/clsDevExpressXtraRichEditRichEditDocumentServertopic">RichEditDocumentServer</a> instance. To see the results, open the document in Microsoft Word by clicking the button.</p>
