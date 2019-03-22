@@ -42,7 +42,7 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
         Private Shared Sub CreateNumberedList(ByVal server As RichEditDocumentServer)
             '            #Region "#CreateNumberedList
             Dim document As Document = server.Document
-            document.LoadDocument("Documents//List.docx");
+            document.LoadDocument("Documents//List.docx")
             document.BeginUpdate()
 
             'Create a new pattern object
@@ -76,7 +76,7 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
         Private Shared Sub CreateMultilevelList(ByVal server As RichEditDocumentServer)
             ' #Region "#CreateMultilevelList 
             Dim document As Document = server.Document
-            document.LoadDocument("Documents//List.docx");
+            document.LoadDocument("Documents//List.docx")
 
             document.BeginUpdate()
 
