@@ -12,7 +12,7 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
         Private Shared Sub CreateBulletedList(ByVal server As RichEditDocumentServer)
             '            #Region "#CreateBulletedList
             Dim document As Document = server.Document
-            document.LoadDocument("Documents//List.docx");
+            document.LoadDocument("Documents//List.docx")
             document.BeginUpdate()
 
             ' Create a new list pattern objects
