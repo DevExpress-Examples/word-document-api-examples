@@ -58,7 +58,8 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             // Protect document range
             RangePermissionCollection rangePermissions = document.BeginUpdateRangePermissions();
             RangePermission rp = rangePermissions.CreateRangePermission(document.Paragraphs[3].Range);
-            rp.Group = "Everyone";
+            rp.Group = "Administrators";
+            rp.UserName = "admin@somecompany.com";
             rangePermissions.Add(rp);
 
             document.EndUpdateRangePermissions(rangePermissions);
