@@ -53,7 +53,8 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
             ' Protect document range
             Dim rangePermissions As RangePermissionCollection = document.BeginUpdateRangePermissions()
             Dim rp As RangePermission = rangePermissions.CreateRangePermission(document.Paragraphs(3).Range)
-            rp.Group = "Everyone"
+            rp.Group = "Administrators"
+            rp.UserName = "admin@somecompany.com"
             rangePermissions.Add(rp)
 
             document.EndUpdateRangePermissions(rangePermissions)
