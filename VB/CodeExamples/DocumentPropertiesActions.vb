@@ -44,9 +44,9 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
             document.Fields.Create(document.AppendText(vbLf & "MyBooleanProperty: ").End, "DOCVARIABLE CustomProperty MyBooleanProperty")
             document.EndUpdate()
 
-            document.CustomProperties.Add("MyNumericProperty", 123.45)
-            document.CustomProperties.Add("MyStringProperty", "The Final Answer")
-            document.CustomProperties.Add("MyBooleanProperty", True)
+            document.CustomProperties["MyNumericProperty"] = 123.45
+            document.CustomProperties["MyStringProperty"] = "The Final Answer"
+            document.CustomProperties["MyBooleanProperty"] = True
 
             AddHandler server.CalculateDocumentVariable, AddressOf DocumentPropertyDisplayHelper.OnCalculateDocumentVariable
             document.Fields.Update()
