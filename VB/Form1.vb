@@ -35,7 +35,7 @@ Namespace RichEditDocumentServerAPIExample
             ShowExamplesInTreeList(treeList1, examples)
 
             Me.codeEditor = New ExampleCodeEditor(richEditControlCS, richEditControlVB, richEditControlCSClass, richEditControlVBClass)
-            CurrentExampleLanguage = CodeExampleDemoUtils.DetectExampleLanguage("RichEditDocumentServerExample")
+            CurrentExampleLanguage = CodeExampleDemoUtils.DetectExampleLanguage("RichEditDocumentServerAPIExample")
             Me.evaluator = New RichEditExampleEvaluatorByTimer()
 
             AddHandler Me.evaluator.QueryEvaluate, AddressOf OnExampleEvaluatorQueryEvaluate

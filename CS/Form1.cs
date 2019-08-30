@@ -36,7 +36,7 @@ namespace RichEditDocumentServerAPIExample
             ShowExamplesInTreeList(treeList1, examples);
 
             this.codeEditor = new ExampleCodeEditor(richEditControlCS, richEditControlVB, richEditControlCSClass, richEditControlVBClass);
-            CurrentExampleLanguage = CodeExampleDemoUtils.DetectExampleLanguage("RichEditDocumentServerExample");
+            CurrentExampleLanguage = CodeExampleDemoUtils.DetectExampleLanguage("RichEditDocumentServerAPIExample");
             this.evaluator = new RichEditExampleEvaluatorByTimer();
 
             this.evaluator.QueryEvaluate += OnExampleEvaluatorQueryEvaluate;
