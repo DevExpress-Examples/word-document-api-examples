@@ -10,7 +10,7 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
     Friend Class FormFieldsActions
         Private Shared Sub InsertCheckBox(ByVal server As RichEditDocumentServer)
 '            #Region "#InsertCheckbox"
-            Dim currentPosition As DocumentPosition = server.Document.CaretPosition
+            Dim currentPosition As DocumentPosition = server.Document.Range.Start
             Dim checkBox As DevExpress.XtraRichEdit.API.Native.CheckBox = server.Document.FormFields.InsertCheckBox(currentPosition)
             checkBox.Name = "check1"
             checkBox.State = CheckBoxState.Checked
