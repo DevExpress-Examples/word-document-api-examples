@@ -10,11 +10,11 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
 {
     class FormFieldsActions
     {
-        static void InsertCheckBox(RichEditDocumentServer server)
+        static void InsertCheckBox(RichEditDocumentServer wordProcessor)
         {
             #region #InsertCheckbox
-            DocumentPosition currentPosition = server.Document.Range.Start;
-            DevExpress.XtraRichEdit.API.Native.CheckBox checkBox = server.Document.FormFields.InsertCheckBox(currentPosition);
+            DocumentPosition currentPosition = wordProcessor.Document.Range.Start;
+            DevExpress.XtraRichEdit.API.Native.CheckBox checkBox = wordProcessor.Document.FormFields.InsertCheckBox(currentPosition);
             checkBox.Name = "check1";
             checkBox.State = CheckBoxState.Checked;
             checkBox.SizeMode = CheckBoxSizeMode.Auto;

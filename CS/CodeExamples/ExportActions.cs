@@ -14,10 +14,10 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
 {
     class ExportActions
     {
-        static void SaveImageFromRange(RichEditDocumentServer server)
+        static void SaveImageFromRange(RichEditDocumentServer wordProcessor)
         {
             #region #SaveImageFromRange
-            DevExpress.XtraRichEdit.API.Native.Document document = server.Document;
+            DevExpress.XtraRichEdit.API.Native.Document document = wordProcessor.Document;
             document.LoadDocument("Documents\\Grimm.docx", DocumentFormat.OpenXml);
             DocumentRange docRange = document.Paragraphs[2].Range;
             ReadOnlyDocumentImageCollection docImageColl = document.Images.Get(docRange);
@@ -32,10 +32,10 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             #endregion #SaveImageFromRange
         }
 
-        static void ExportRangeToHtml(RichEditDocumentServer server)
+        static void ExportRangeToHtml(RichEditDocumentServer wordProcessor)
         {
             #region #ExportRangeToHtml
-            DevExpress.XtraRichEdit.API.Native.Document document = server.Document;
+            DevExpress.XtraRichEdit.API.Native.Document document = wordProcessor.Document;
             document.LoadDocument("Documents\\Grimm.docx", DocumentFormat.OpenXml);
             // Get the range for three paragraphs.
             DocumentRange r = document.CreateRange(document.Paragraphs[0].Range.Start, document.Paragraphs[0].Range.Length + document.Paragraphs[1].Range.Length + document.Paragraphs[2].Range.Length);
@@ -47,19 +47,19 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             #endregion #ExportRangeToHtml
         }
 
-        static void ExportRangeToPlainText(RichEditDocumentServer server)
+        static void ExportRangeToPlainText(RichEditDocumentServer wordProcessor)
         {
             #region #ExportRangeToPlainText
-            DevExpress.XtraRichEdit.API.Native.Document document = server.Document;
+            DevExpress.XtraRichEdit.API.Native.Document document = wordProcessor.Document;
             document.LoadDocument("Documents\\Grimm.docx", DocumentFormat.OpenXml);
             string plainText = document.GetText(document.Paragraphs[2].Range);
             System.Windows.Forms.MessageBox.Show(plainText);
             #endregion #ExportRangeToPlainText
         }
-        static void ExportToPDF(RichEditDocumentServer server)
+        static void ExportToPDF(RichEditDocumentServer wordProcessor)
         {
             #region #ExportToPDF
-            server.LoadDocument("Documents\\MovieRentals.docx", DocumentFormat.OpenXml);
+            wordProcessor.LoadDocument("Documents\\MovieRentals.docx", DocumentFormat.OpenXml);
             //Specify export options:
             PdfExportOptions options = new PdfExportOptions();
             options.DocumentOptions.Author = "Mark Jones";
@@ -68,46 +68,46 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             //Export the document to the stream: 
             using (FileStream pdfFileStream = new FileStream("Document_PDF.pdf", FileMode.Create))
             {
-                server.ExportToPdf(pdfFileStream, options);
+                wordProcessor.ExportToPdf(pdfFileStream, options);
             }
             System.Diagnostics.Process.Start("Document_PDF.pdf");
             #endregion #ExportToPDF
         }
-        static void ConvertHTMLtoPDF(RichEditDocumentServer server)
+        static void ConvertHTMLtoPDF(RichEditDocumentServer wordProcessor)
         {
             #region #ConvertHTMLtoPDF
-            server.LoadDocument("Documents\\TextWithImages.htm");
-            server.ExportToPdf("Document_PDF.pdf");
+            wordProcessor.LoadDocument("Documents\\TextWithImages.htm");
+            wordProcessor.ExportToPdf("Document_PDF.pdf");
             System.Diagnostics.Process.Start("Document_PDF.pdf");
             #endregion #ConvertHTMLtoPDF
         }
-        static void ConvertHTMLtoDOCX(RichEditDocumentServer server)
+        static void ConvertHTMLtoDOCX(RichEditDocumentServer wordProcessor)
         {
             #region #ConvertHTMLtoDOCX
-            server.LoadDocument("Documents\\TextWithImages.htm");
-            server.SaveDocument("Document_DOCX.docx", DocumentFormat.OpenXml);
+            wordProcessor.LoadDocument("Documents\\TextWithImages.htm");
+            wordProcessor.SaveDocument("Document_DOCX.docx", DocumentFormat.OpenXml);
             System.Diagnostics.Process.Start("Document_DOCX.docx");
             #endregion #ConvertHTMLtoDOCX
         }
-        static void ExportToHTML(RichEditDocumentServer server)
+        static void ExportToHTML(RichEditDocumentServer wordProcessor)
         {
             #region #ExportDocumentToHTML
-            server.LoadDocument("Documents\\MovieRentals.docx", DocumentFormat.OpenXml);
+            wordProcessor.LoadDocument("Documents\\MovieRentals.docx", DocumentFormat.OpenXml);
             string filePath = "Document_HTML.html";
             using (FileStream htmlFileStream = new FileStream(filePath, FileMode.Create))
             {
-                server.SaveDocument(htmlFileStream, DocumentFormat.Html);
+                wordProcessor.SaveDocument(htmlFileStream, DocumentFormat.Html);
             }
 
             System.Diagnostics.Process.Start(filePath);
             #endregion #ExportDocumentToHTML
         }
-        static void BeforeExport(RichEditDocumentServer server)
+        static void BeforeExport(RichEditDocumentServer wordProcessor)
         {
             #region #HandleBeforeExportEvent
-            server.LoadDocument("Documents\\Grimm.docx");
-            server.BeforeExport += BeforeExportHelper.BeforeExport;
-            server.SaveDocument("Document_HTML.html", DocumentFormat.Html);
+            wordProcessor.LoadDocument("Documents\\Grimm.docx");
+            wordProcessor.BeforeExport += BeforeExportHelper.BeforeExport;
+            wordProcessor.SaveDocument("Document_HTML.html", DocumentFormat.Html);
             System.Diagnostics.Process.Start("Document_HTML.html");
             #endregion #HandleBeforeExportEvent
         }

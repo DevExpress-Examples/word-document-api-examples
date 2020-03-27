@@ -7,10 +7,10 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
     class FormattingActions
     {
         
-        static void FormatText(RichEditDocumentServer server)
+        static void FormatText(RichEditDocumentServer wordProcessor)
         {
             #region #FormatText
-            Document document = server.Document;
+            Document document = wordProcessor.Document;
             document.BeginUpdate();
             document.AppendText("Normal\nFormatted\nNormal");
             document.EndUpdate();
@@ -25,10 +25,10 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             document.EndUpdateCharacters(cp);
             #endregion #FormatText
         }
-        static void ResetCharacterFormatting(RichEditDocumentServer server)
+        static void ResetCharacterFormatting(RichEditDocumentServer wordProcessor)
         {
             #region #ResetCharacterFormatting
-            Document document = server.Document;
+            Document document = wordProcessor.Document;
             document.LoadDocument("Documents\\Grimm.docx", DocumentFormat.OpenXml);
             // Set font size and font name of the characters in the first paragraph to default. 
             // Other character properties remain intact.
@@ -38,10 +38,10 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             document.EndUpdateCharacters(cp);
             #endregion #ResetCharacterFormatting
         }
-        static void FormatParagraph(RichEditDocumentServer server)
+        static void FormatParagraph(RichEditDocumentServer wordProcessor)
         {
             #region #FormatParagraph
-            Document document = server.Document;
+            Document document = wordProcessor.Document;
             document.BeginUpdate();
             document.AppendText("Modified Paragraph\nNormal\nNormal");
             document.EndUpdate();
@@ -66,10 +66,10 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             document.EndUpdateParagraphs(pp);
             #endregion #FormatParagraph
         }
-        static void ResetParagraphFormatting(RichEditDocumentServer server)
+        static void ResetParagraphFormatting(RichEditDocumentServer wordProcessor)
         {
             #region #ResetParagraphFormatting
-            Document document = server.Document;
+            Document document = wordProcessor.Document;
             document.LoadDocument("Documents\\Grimm.docx", DocumentFormat.OpenXml);
             // Set alignment and indentation of the first line in the first paragraph to default. 
             // Other paragraph properties remain intact.

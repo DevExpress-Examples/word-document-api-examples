@@ -156,7 +156,7 @@ namespace RichEditDocumentServerAPIExample.CodeUtils
       "using TableRow = DevExpress.XtraRichEdit.API.Native.TableRow;\r\n" +
       "namespace RichEditCodeResultViewer { \r\n" +
       "public class ExampleItem { \r\n" +
-      "        public static void Process(RichEditDocumentServer server) { \r\n" +
+      "        public static void Process(RichEditDocumentServer wordProcessor) { \r\n" +
       "\r\n";
 
         const string codeBeforeClasses =
@@ -201,7 +201,7 @@ namespace RichEditDocumentServerAPIExample.CodeUtils
       "Imports TableRow = DevExpress.XtraRichEdit.API.Native.TableRow\r\n"+
       "Namespace RichEditCodeResultViewer\r\n" +
       "	Public Class ExampleItem\r\n" +
-      "		Public Shared Sub Process(ByVal server As RichEditDocumentServer)\r\n" +
+      "		Public Shared Sub Process(ByVal wordProcessor As RichEditDocumentServer)\r\n" +
       "\r\n";
 
         const string codeBeforeClasses =

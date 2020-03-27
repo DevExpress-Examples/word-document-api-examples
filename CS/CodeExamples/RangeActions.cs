@@ -10,10 +10,10 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
 {
     class RangeActions
     {       
-        static void SelectTextInRange(RichEditDocumentServer server)
+        static void SelectTextInRange(RichEditDocumentServer wordProcessor)
         {
             #region #SelectTextInRange
-            Document document = server.Document;
+            Document document = wordProcessor.Document;
             document.LoadDocument("Documents\\Grimm.docx", DocumentFormat.OpenXml);
             DocumentPosition myStart = document.CreatePosition(69);
             DocumentRange myRange = document.CreateRange(myStart, 216);
@@ -21,10 +21,10 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             #endregion #SelectTextInRange
         }        
 
-        static void InsertTextInRange(RichEditDocumentServer server)
+        static void InsertTextInRange(RichEditDocumentServer wordProcessor)
         {
             #region #InsertTextInRange
-            Document document = server.Document;
+            Document document = wordProcessor.Document;
             document.AppendText("ABCDEFGH");
             DocumentRange r1 = document.CreateRange(1, 3);
             DocumentPosition pos1 = document.CreatePosition(2);
@@ -38,10 +38,10 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             #endregion #InsertTextInRange
         }
 
-        static void AppendTextToRange(RichEditDocumentServer server)
+        static void AppendTextToRange(RichEditDocumentServer wordProcessor)
         {
             #region #AppendTextToRange
-            Document document = server.Document;
+            Document document = wordProcessor.Document;
             document.AppendText("abcdefgh");
             DocumentRange r1 = document.AppendText("X");
             string s1 = String.Format("Range r1 starts at {0}, ends at {1}", r1.Start, r1.End);
@@ -54,10 +54,10 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             document.AppendText(s2);
             #endregion #AppendTextToRange
         }
-        static void AppendToParagraph(RichEditDocumentServer server)
+        static void AppendToParagraph(RichEditDocumentServer wordProcessor)
         {
             #region #AppendToParagraph
-            Document document = server.Document;
+            Document document = wordProcessor.Document;
             document.BeginUpdate();
             document.AppendText("First Paragraph\nSecond Paragraph\nThird Paragraph");
             document.EndUpdate();            

@@ -10,11 +10,11 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
 {
     public static class DocumentPropertiesActions
     {
-        static void StandardDocumentProperties(RichEditDocumentServer server)
+        static void StandardDocumentProperties(RichEditDocumentServer wordProcessor)
         {
             #region #StandardDocumentProperties
-            server.CreateNewDocument();
-            Document document = server.Document;
+            wordProcessor.CreateNewDocument();
+            Document document = wordProcessor.Document;
             document.BeginUpdate();
 
             document.DocumentProperties.Creator = "John Doe";
@@ -33,11 +33,11 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
         }
 
 
-        static void CustomDocumentProperties(RichEditDocumentServer server)
+        static void CustomDocumentProperties(RichEditDocumentServer wordProcessor)
         {
             #region #CustomDocumentProperties
-            server.CreateNewDocument();
-            Document document = server.Document;
+            wordProcessor.CreateNewDocument();
+            Document document = wordProcessor.Document;
             document.BeginUpdate();
             document.Fields.Create(document.AppendText("\nMyNumericProperty: ").End, "DOCVARIABLE CustomProperty MyNumericProperty");
             document.Fields.Create(document.AppendText("\nMyStringProperty: ").End, "DOCVARIABLE CustomProperty MyStringProperty");
@@ -48,7 +48,7 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             document.CustomProperties["MyStringProperty"] = "The Final Answer";
             document.CustomProperties["MyBooleanProperty"] = true;
 
-            server.CalculateDocumentVariable += DocumentPropertyDisplayHelper.OnCalculateDocumentVariable;
+            wordProcessor.CalculateDocumentVariable += DocumentPropertyDisplayHelper.OnCalculateDocumentVariable;
             document.Fields.Update();
             #endregion #CustomDocumentProperties
         }

@@ -10,11 +10,11 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
 {
     public static class ProtectionActions
     {
-        static void ProtectDocument(RichEditDocumentServer server)
+        static void ProtectDocument(RichEditDocumentServer wordProcessor)
         {
             #region #ProtectDocument
-            server.LoadDocument("Documents//Grimm.docx",DocumentFormat.OpenXml);
-            Document document = server.Document;
+            wordProcessor.LoadDocument("Documents//Grimm.docx",DocumentFormat.OpenXml);
+            Document document = wordProcessor.Document;
             if (!document.IsDocumentProtected)
             {
                 //Protect the document with a password
@@ -29,11 +29,11 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             }
             #endregion #ProtectDocument
         }
-        static void UnprotectDocument(RichEditDocumentServer server)
+        static void UnprotectDocument(RichEditDocumentServer wordProcessor)
         {
             #region #UnprotectDocument
-            server.LoadDocument("Documents//Grimm_Protected.docx", DocumentFormat.OpenXml);
-            Document document = server.Document;
+            wordProcessor.LoadDocument("Documents//Grimm_Protected.docx", DocumentFormat.OpenXml);
+            Document document = wordProcessor.Document;
 
             if (document.IsDocumentProtected == true)
             {
@@ -49,11 +49,11 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             }
             #endregion #UnprotectDocument
         }
-        static void CreateRangePermissions(RichEditDocumentServer server)
+        static void CreateRangePermissions(RichEditDocumentServer wordProcessor)
         {
             #region #CreateRangePermissions
-            server.LoadDocument("Documents//Grimm.docx", DocumentFormat.OpenXml);
-            Document document = server.Document;
+            wordProcessor.LoadDocument("Documents//Grimm.docx", DocumentFormat.OpenXml);
+            Document document = wordProcessor.Document;
 
             // Protect document range
             RangePermissionCollection rangePermissions = document.BeginUpdateRangePermissions();

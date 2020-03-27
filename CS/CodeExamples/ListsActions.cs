@@ -11,10 +11,10 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
     class ListsActions
     {
 
-        static void CreateBulletedList(RichEditDocumentServer server)
+        static void CreateBulletedList(RichEditDocumentServer wordProcessor)
         {
             #region #CreateBulletedList
-            Document document = server.Document;
+            Document document = wordProcessor.Document;
             document.LoadDocument("Documents//List.docx");
             document.BeginUpdate();
 
@@ -42,10 +42,10 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             #endregion #CreateBulletedList
         }
 
-        static void CreateNumberedList(RichEditDocumentServer server)
+        static void CreateNumberedList(RichEditDocumentServer wordProcessor)
         {
             #region #CreateNumberedList
-            Document document = server.Document;
+            Document document = wordProcessor.Document;
             document.LoadDocument("Documents//List.docx");
             document.BeginUpdate();
 
@@ -79,10 +79,10 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             #endregion #CreateNumberedList
         }
 
-        static void CreateMultilevelList(RichEditDocumentServer server)
+        static void CreateMultilevelList(RichEditDocumentServer wordProcessor)
         {
             #region #CreateMultilevelList
-            Document document = server.Document;
+            Document document = wordProcessor.Document;
             document.LoadDocument("Documents//List.docx");
             document.BeginUpdate();
 

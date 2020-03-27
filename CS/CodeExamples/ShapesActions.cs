@@ -11,10 +11,10 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
     class ShapesActions
     {
        
-        static void AddFloatingPicture(RichEditDocumentServer server)
+        static void AddFloatingPicture(RichEditDocumentServer wordProcessor)
         {
             #region #AddFloatingPicture
-            Document document = server.Document;
+            Document document = wordProcessor.Document;
             document.AppendText("Line One\nLine Two\nLine Three");
             Shape myPicture = document.Shapes.InsertPicture(document.CreatePosition(15),
                 System.Drawing.Image.FromFile("Documents\\beverages.png"));
@@ -22,10 +22,10 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             #endregion #AddFloatingPicture
         }
 
-        static void FloatingPictureOffset(RichEditDocumentServer server)
+        static void FloatingPictureOffset(RichEditDocumentServer wordProcessor)
         {
             #region #FloatingPictureOffset
-            Document document = server.Document;
+            Document document = wordProcessor.Document;
             document.LoadDocument("Documents\\Grimm.docx", DocumentFormat.OpenXml);
             document.Unit = DevExpress.Office.DocumentUnit.Centimeter;
             Shape myPicture = document.Shapes[1];
@@ -40,10 +40,10 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             #endregion #FloatingPictureOffset
         }
 
-        static void ChangeZorderAndWrapping(RichEditDocumentServer server)
+        static void ChangeZorderAndWrapping(RichEditDocumentServer wordProcessor)
         {
             #region #ChangeZorderAndWrapping
-            Document document = server.Document;
+            Document document = wordProcessor.Document;
             document.LoadDocument("Documents\\Grimm.docx", DocumentFormat.OpenXml);
             Shape myPicture = document.Shapes[1];
             myPicture.VerticalAlignment = ShapeVerticalAlignment.Top;
@@ -52,10 +52,10 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             #endregion #ChangeZorderAndWrapping
         }
 
-        static void AddTextBox(RichEditDocumentServer server)
+        static void AddTextBox(RichEditDocumentServer wordProcessor)
         {
             #region #AddTextBox
-            Document document = server.Document;
+            Document document = wordProcessor.Document;
             document.AppendText("Line One\nLine Two\nLine Three");
             Shape myTextBox = document.Shapes.InsertTextBox(document.CreatePosition(15));
             myTextBox.HorizontalAlignment = ShapeHorizontalAlignment.Center;
@@ -74,10 +74,10 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             #endregion #AddTextBox
         }
 
-        static void InsertRichTextInTextBox(RichEditDocumentServer server)
+        static void InsertRichTextInTextBox(RichEditDocumentServer wordProcessor)
         {
             #region #InsertRichTextInTextBox
-            Document document = server.Document;
+            Document document = wordProcessor.Document;
             document.LoadDocument("Documents\\Grimm.docx", DocumentFormat.OpenXml);
             Shape myTextBox = document.Shapes[0];
             // Allow text box resize to fit contents.
@@ -94,10 +94,10 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             #endregion #InsertRichTextInTextBox
         }
 
-        static void RotateAndResize(RichEditDocumentServer server)
+        static void RotateAndResize(RichEditDocumentServer wordProcessor)
         {
             #region #RotateAndResize
-            Document document = server.Document;
+            Document document = wordProcessor.Document;
             document.LoadDocument("Documents\\Grimm.docx", DocumentFormat.OpenXml);
             foreach (Shape s in document.Shapes)
             {
@@ -115,10 +115,10 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             #endregion #RotateAndResize
         }
 
-        static void SelectShape(RichEditDocumentServer server)
+        static void SelectShape(RichEditDocumentServer wordProcessor)
         {
             #region #SelectShape
-            Document document = server.Document;
+            Document document = wordProcessor.Document;
             document.LoadDocument("Documents\\Grimm.docx", DocumentFormat.OpenXml);
             document.Selection = document.Shapes[0].Range;
             #endregion #SelectShape

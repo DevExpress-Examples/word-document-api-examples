@@ -10,10 +10,10 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
 {
     class PageLayoutActions
     {       
-        static void LineNumbering(RichEditDocumentServer server)
+        static void LineNumbering(RichEditDocumentServer wordProcessor)
         {
             #region #LineNumbering
-            Document document = server.Document;
+            Document document = wordProcessor.Document;
             document.LoadDocument("Documents\\Grimm.docx", DevExpress.XtraRichEdit.DocumentFormat.OpenXml);
             document.Unit = DevExpress.Office.DocumentUnit.Inch;
             Section sec = document.Sections[0];
@@ -24,10 +24,10 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             #endregion #LineNumbering
         }
 
-        static void CreateColumns(RichEditDocumentServer server)
+        static void CreateColumns(RichEditDocumentServer wordProcessor)
         {
             #region #CreateColumns
-            Document document = server.Document;
+            Document document = wordProcessor.Document;
             document.LoadDocument("Documents\\Grimm.docx", DevExpress.XtraRichEdit.DocumentFormat.OpenXml);
             document.Unit = DevExpress.Office.DocumentUnit.Inch;
             // Get the first section in a document
@@ -39,11 +39,11 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             #endregion #CreateColumns
         }
 
-        static void PrintLayout(RichEditDocumentServer server)
+        static void PrintLayout(RichEditDocumentServer wordProcessor)
         {
             #region #PrintLayout
-            server.LoadDocument("Documents\\Grimm.docx", DocumentFormat.OpenXml);
-            Document document = server.Document;
+            wordProcessor.LoadDocument("Documents\\Grimm.docx", DocumentFormat.OpenXml);
+            Document document = wordProcessor.Document;
             document.Unit = DevExpress.Office.DocumentUnit.Inch;
             document.Sections[0].Page.PaperKind = System.Drawing.Printing.PaperKind.A6;
             document.Sections[0].Page.Landscape = true;
@@ -51,11 +51,11 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             #endregion #PrintLayout
         }
 
-        static void TabStops(RichEditDocumentServer server)
+        static void TabStops(RichEditDocumentServer wordProcessor)
         {
             #region #TabStops
-            Document document = server.Document;
-            server.LoadDocument("Documents\\Grimm.docx", DocumentFormat.OpenXml);
+            Document document = wordProcessor.Document;
+            wordProcessor.LoadDocument("Documents\\Grimm.docx", DocumentFormat.OpenXml);
             document.Unit = DevExpress.Office.DocumentUnit.Inch;
             TabInfoCollection tabs = document.Paragraphs[0].BeginUpdateTabs(true);
             TabInfo tab1 = new TabInfo();

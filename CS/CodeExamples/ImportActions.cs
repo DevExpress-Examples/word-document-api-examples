@@ -11,7 +11,7 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
 {
     class ImportActions
     {        
-        static void ImportRtfText(RichEditDocumentServer server)
+        static void ImportRtfText(RichEditDocumentServer wordProcessor)
         {
             #region #ImportRtfText
             string rtfString = @"{\rtf1\ansi\ansicpg1252\deff0\deflang1049
@@ -19,15 +19,15 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
 {\f1\fswiss\fcharset0 Arial;}}
 {\colortbl ;\red0\green0\blue255;}
 \viewkind4\uc1\pard\cf1\lang1033\b\f0\fs32 Test.\cf0\b0\f1\fs20\par}";
-            Document document = server.Document;
+            Document document = wordProcessor.Document;
             document.RtfText = rtfString;
             #endregion #ImportRtfText
         }
-        static void BeforeImport(RichEditDocumentServer server)
+        static void BeforeImport(RichEditDocumentServer wordProcessor)
         {
             #region #HandleBeforeImportEvent
-            server.BeforeImport += BeforeImportHelper.BeforeImport;
-            server.LoadDocument("Documents\\TerribleRevengeKOI8R.txt");            
+            wordProcessor.BeforeImport += BeforeImportHelper.BeforeImport;
+            wordProcessor.LoadDocument("Documents\\TerribleRevengeKOI8R.txt");            
             #endregion #HandleBeforeImportEvent
         }
 

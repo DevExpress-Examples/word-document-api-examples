@@ -10,19 +10,19 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
 {
     class InlinePicturesActions
     {
-        static void ImageFromFile(RichEditDocumentServer server)
+        static void ImageFromFile(RichEditDocumentServer wordProcessor)
         {
             #region #ImageFromFile
-            Document document = server.Document;
+            Document document = wordProcessor.Document;
             DocumentPosition pos = document.Range.Start;
             document.Images.Insert(pos, DocumentImageSource.FromFile("Documents\\beverages.png"));
             #endregion #ImageFromFile
         }
 
-        static void ImageCollection(RichEditDocumentServer server)
+        static void ImageCollection(RichEditDocumentServer wordProcessor)
         {
             #region #ImageCollection
-            Document document = server.Document;
+            Document document = wordProcessor.Document;
             document.LoadDocument("Documents\\Grimm.docx", DocumentFormat.OpenXml);
             ReadOnlyDocumentImageCollection images = document.Images;
             // If the width of an image exceeds 50 millimeters, 
@@ -38,10 +38,10 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             #endregion #ImageCollection
         }
 
-        static void SaveImageToFile(RichEditDocumentServer server)
+        static void SaveImageToFile(RichEditDocumentServer wordProcessor)
         {
             #region #SaveImageToFile
-            Document document = server.Document;
+            Document document = wordProcessor.Document;
             document.LoadDocument("Documents\\MovieRentals.docx", DocumentFormat.OpenXml);
             DocumentRange myRange = document.CreateRange(0, 100);
             ReadOnlyDocumentImageCollection images = document.Images.Get(myRange);

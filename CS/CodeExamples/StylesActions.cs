@@ -10,11 +10,11 @@ namespace RTEDocumentServerExamples.CodeExamples
 {
     class StylesAction
     {   
-        static void CreateNewCharacterStyle(RichEditDocumentServer server)
+        static void CreateNewCharacterStyle(RichEditDocumentServer wordProcessor)
         {
             #region #CreateNewCharacterStyle
-            Document document = server.Document;
-            server.LoadDocument("Documents\\Grimm.docx", DocumentFormat.OpenXml);
+            Document document = wordProcessor.Document;
+            wordProcessor.LoadDocument("Documents\\Grimm.docx", DocumentFormat.OpenXml);
             CharacterStyle cstyle = document.CharacterStyles["MyCStyle"];
             if (cstyle == null)
             {
@@ -34,10 +34,10 @@ namespace RTEDocumentServerExamples.CodeExamples
             #endregion #CreateNewCharacterStyle
         }
 
-        static void CreateNewParagraphStyle(RichEditDocumentServer server)
+        static void CreateNewParagraphStyle(RichEditDocumentServer wordProcessor)
         {
             #region #CreateNewParagraphStyle
-            Document document = server.Document;
+            Document document = wordProcessor.Document;
             document.LoadDocument("Documents\\Grimm.docx", DevExpress.XtraRichEdit.DocumentFormat.OpenXml);
             ParagraphStyle pstyle = document.ParagraphStyles["MyPStyle"];
             if (pstyle == null)
@@ -52,10 +52,10 @@ namespace RTEDocumentServerExamples.CodeExamples
             #endregion #CreateNewParagraphStyle
         }
 
-        static void CreateNewLinkedStyle(RichEditDocumentServer server)
+        static void CreateNewLinkedStyle(RichEditDocumentServer wordProcessor)
         {
             #region #CreateNewLinkedStyle
-            Document document = server.Document;
+            Document document = wordProcessor.Document;
             document.BeginUpdate();
             document.AppendText("Line One\nLine Two\nLine Three");
             document.EndUpdate();

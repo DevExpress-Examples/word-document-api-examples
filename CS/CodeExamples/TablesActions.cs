@@ -9,11 +9,11 @@ namespace RTEDocumentServerExamples.CodeExamples
 
     class TablesActions
     {       
-        static void CreateTable(RichEditDocumentServer server)
+        static void CreateTable(RichEditDocumentServer wordProcessor)
         {
 
             #region #CreateTable
-            Document document = server.Document;
+            Document document = wordProcessor.Document;
             // Insert new table.
             Table tbl = document.Tables.Create(document.Range.Start, 1, 3, AutoFitBehaviorType.AutoFitToWindow);
             // Create a table header.
@@ -50,10 +50,10 @@ namespace RTEDocumentServerExamples.CodeExamples
             #endregion #CreateTable
         }
 
-        static void CreateFixedTable(RichEditDocumentServer server)
+        static void CreateFixedTable(RichEditDocumentServer wordProcessor)
         {
             #region #CreateFixedTable
-            Document document = server.Document;
+            Document document = wordProcessor.Document;
             Table table = document.Tables.Create(document.Range.Start, 3, 3);
 
             table.TableAlignment = TableRowAlignment.Center;
@@ -71,10 +71,10 @@ namespace RTEDocumentServerExamples.CodeExamples
 
             #endregion #CreateFixedTable
         }
-        static void ChangeTableColor(RichEditDocumentServer server)
+        static void ChangeTableColor(RichEditDocumentServer wordProcessor)
         {
             #region #ChangeTableColor
-            Document document = server.Document;
+            Document document = wordProcessor.Document;
             // Create a table.
             Table table = document.Tables.Create(document.Range.Start, 3, 5, AutoFitBehaviorType.AutoFitToWindow);
             table.BeginUpdate();
@@ -108,10 +108,10 @@ namespace RTEDocumentServerExamples.CodeExamples
             }
         }
         #endregion #@ChangeTableColor
-        static void CreateAndApplyTableStyle(RichEditDocumentServer server)
+        static void CreateAndApplyTableStyle(RichEditDocumentServer wordProcessor)
         {
             #region #CreateAndApplyTableStyle
-            Document document = server.Document;
+            Document document = wordProcessor.Document;
             document.BeginUpdate();
             // Create a new table style.
             TableStyle tStyleMain = document.TableStyles.CreateNew();
@@ -152,10 +152,10 @@ namespace RTEDocumentServerExamples.CodeExamples
             #endregion #CreateAndApplyTableStyle
         }
 
-        static void UseConditionalStyle(RichEditDocumentServer server)
+        static void UseConditionalStyle(RichEditDocumentServer wordProcessor)
         {
             #region #UseConditionalStyle
-            Document document = server.Document;
+            Document document = wordProcessor.Document;
             document.LoadDocument("Documents\\TableStyles.docx", DocumentFormat.OpenXml);
             document.BeginUpdate();
 
@@ -186,10 +186,10 @@ namespace RTEDocumentServerExamples.CodeExamples
             #endregion #UseConditionalStyle
         }
 
-        static void ChangeColumnAppearance(RichEditDocumentServer server)
+        static void ChangeColumnAppearance(RichEditDocumentServer wordProcessor)
         {
             #region #ChangeColumnAppearance
-            Document document = server.Document;
+            Document document = wordProcessor.Document;
             Table table = document.Tables.Create(document.Range.Start, 3, 10);
             table.BeginUpdate();
             //Change cell background color and vertical alignment in the third column.
@@ -209,10 +209,10 @@ namespace RTEDocumentServerExamples.CodeExamples
         }
         #endregion #@ChangeColumnAppearance
 
-        static void UseTableCellProcessor(RichEditDocumentServer server)
+        static void UseTableCellProcessor(RichEditDocumentServer wordProcessor)
         {
             #region #UseTableCellProcessor
-            Document document = server.Document;
+            Document document = wordProcessor.Document;
             Table table = document.Tables.Create(document.Range.Start, 8, 8);
             table.BeginUpdate();
             table.ForEachCell(new TableCellProcessorDelegate(UseTableCellProcessorHelper.MakeMultiplicationCell));
@@ -232,10 +232,10 @@ namespace RTEDocumentServerExamples.CodeExamples
         }
         #endregion #@UseTableCellProcessor
 
-        static void MergeCells(RichEditDocumentServer server)
+        static void MergeCells(RichEditDocumentServer wordProcessor)
         {
             #region #MergeCells
-            Document document = server.Document;
+            Document document = wordProcessor.Document;
             Table table = document.Tables.Create(document.Range.Start, 6, 8);
             table.BeginUpdate();
             table.MergeCells(table[2, 1], table[5, 1]);
@@ -243,19 +243,19 @@ namespace RTEDocumentServerExamples.CodeExamples
             table.EndUpdate();
             #endregion #MergeCells
         }
-        static void SplitCells(RichEditDocumentServer server)
+        static void SplitCells(RichEditDocumentServer wordProcessor)
         {
             #region #SplitCells
-            Document document = server.Document;
+            Document document = wordProcessor.Document;
             Table table = document.Tables.Create(document.Range.Start, 3, 3, AutoFitBehaviorType.FixedColumnWidth, 350);
             //split a cell to three: 
             table.Cell(2, 1).Split(1, 3);
             #endregion #SplitCells
         }
-        static void DeleteTableElements(RichEditDocumentServer server)
+        static void DeleteTableElements(RichEditDocumentServer wordProcessor)
         {
             #region #DeleteTableElements
-            Document document = server.Document;
+            Document document = wordProcessor.Document;
             Table tbl = document.Tables.Create(document.Range.Start, 3, 3, AutoFitBehaviorType.AutoFitToWindow);
             tbl.BeginUpdate();
             tbl.Rows[2].Delete();

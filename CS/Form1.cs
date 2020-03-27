@@ -21,7 +21,7 @@ namespace RichEditDocumentServerAPIExample
         ExampleEvaluatorByTimer evaluator;
         List<CodeExampleGroup> examples;
         bool treeListRootNodeLoading = true;
-        RichEditDocumentServer server = new RichEditDocumentServer();
+        RichEditDocumentServer wordProcessor = new RichEditDocumentServer();
 
         public Form1()
         {
@@ -126,10 +126,10 @@ namespace RichEditDocumentServerAPIExample
 
         void evaluator_OnBeforeCompile(object sender, EventArgs e)
         {
-            Document document = server.Document;
+            Document document = wordProcessor.Document;
             document.BeginUpdate();
             codeEditor.BeforeCompile();
-            server.CreateNewDocument();
+            wordProcessor.CreateNewDocument();
             document.Unit = DevExpress.Office.DocumentUnit.Document;
 
         }
@@ -156,7 +156,7 @@ namespace RichEditDocumentServerAPIExample
             e.Code = codeEditor.CurrentCodeEditor.Text;
             e.CodeClasses = codeEditor.CurrentCodeClassEditor.Text;
             e.Language = CurrentExampleLanguage;
-            e.EvaluationParameter = server;
+            e.EvaluationParameter = wordProcessor;
         }
 
         void OnExampleEvaluatorQueryEvaluate(object sender, CodeEvaluationEventArgs e)
@@ -194,7 +194,7 @@ namespace RichEditDocumentServerAPIExample
 
         private void btnRun_Click(object sender, EventArgs e)
         {
-            server.SaveDocument("Result.docx", DocumentFormat.OpenXml);
+            wordProcessor.SaveDocument("Result.docx", DocumentFormat.OpenXml);
             Process.Start("Result.docx");
 
         }

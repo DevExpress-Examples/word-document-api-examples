@@ -10,21 +10,21 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
 {
     public class CommentsActions
     {
-         void CreateComment(RichEditDocumentServer server)
+         void CreateComment(RichEditDocumentServer wordProcessor)
         {
             #region #CreateComment
-            Document document = server.Document;
-            server.LoadDocument("Documents\\Grimm.docx", DocumentFormat.OpenXml);
+            Document document = wordProcessor.Document;
+            wordProcessor.LoadDocument("Documents\\Grimm.docx", DocumentFormat.OpenXml);
             DocumentRange docRange = document.Paragraphs[2].Range;
             string commentAuthor = "Johnson Alphonso D";
             document.Comments.Create(docRange, commentAuthor, DateTime.Now);
             #endregion #CreateComment
         }
 
-         void CreateNestedComment(RichEditDocumentServer server)
+         void CreateNestedComment(RichEditDocumentServer wordProcessor)
         {
             #region #CreateNestedComment
-            Document document = server.Document;
+            Document document = wordProcessor.Document;
             document.LoadDocument("Documents\\Grimm.docx", DocumentFormat.OpenXml);
             if (document.Comments.Count > 0)
             {
@@ -38,10 +38,10 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             #endregion #CreateNestedComment
         }
 
-         void DeleteComment(RichEditDocumentServer server)
+         void DeleteComment(RichEditDocumentServer wordProcessor)
         {
             #region #DeleteComment
-            Document document = server.Document;
+            Document document = wordProcessor.Document;
             document.LoadDocument("Documents\\Grimm.docx", DocumentFormat.OpenXml);
             if (document.Comments.Count > 0)
             {
@@ -50,10 +50,10 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             #endregion #DeleteComment
         }
 
-         void EditCommentProperties(RichEditDocumentServer server)
+         void EditCommentProperties(RichEditDocumentServer wordProcessor)
         {
             #region #EditCommentProperties
-            Document document = server.Document;
+            Document document = wordProcessor.Document;
             document.LoadDocument("Documents\\Grimm.docx", DocumentFormat.OpenXml);
             int commentCount = document.Comments.Count;
             if (commentCount > 0)
@@ -68,10 +68,10 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             #endregion #EditCommentProperties
         }
 
-         void EditCommentContent(RichEditDocumentServer server)
+         void EditCommentContent(RichEditDocumentServer wordProcessor)
         {
             #region #EditCommentContent
-            Document document = server.Document;
+            Document document = wordProcessor.Document;
             document.LoadDocument("Documents\\Grimm.docx", DocumentFormat.OpenXml);
             int commentCount = document.Comments.Count;
             if (commentCount > 0)

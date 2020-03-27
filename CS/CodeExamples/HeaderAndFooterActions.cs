@@ -6,10 +6,10 @@ namespace RichEditEDocumentServerExample.CodeExamples
     class HeadersAndFootersActions
     {
        
-        static void CreateHeader(RichEditDocumentServer server)
+        static void CreateHeader(RichEditDocumentServer wordProcessor)
         {
             #region #CreateHeader
-            Document document = server.Document;
+            Document document = wordProcessor.Document;
             Section firstSection = document.Sections[0];
             // Create an empty header.
             SubDocument newHeader = firstSection.BeginUpdateHeader();
@@ -26,10 +26,10 @@ namespace RichEditEDocumentServerExample.CodeExamples
         }
 
 
-        static void ModifyHeader(RichEditDocumentServer server)
+        static void ModifyHeader(RichEditDocumentServer wordProcessor)
         {
             #region #ModifyHeader
-            Document document = server.Document;
+            Document document = wordProcessor.Document;
             document.AppendSection();
             Section firstSection = document.Sections[0];
             // Modify the header of the HeaderFooterType.First type.
