@@ -45,7 +45,7 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             wordProcessor.LoadDocument("Documents//Grimm.docx");
             Document document = wordProcessor.Document;
 
-            //Access the first fottnote's content:
+            //Access the first footnote's content:
             SubDocument footnote = document.Footnotes[0].BeginUpdate();
             
             //Exclude the reference mark and the space after it from the range to be edited:
