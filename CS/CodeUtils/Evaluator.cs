@@ -142,6 +142,7 @@ namespace RichEditDocumentServerAPIExample.CodeUtils
       "using DevExpress.XtraRichEdit.API.Native;\r\n" +
             "using DevExpress.XtraRichEdit.Export;\r\n" +
             "using DevExpress.XtraRichEdit.Import;\r\n" +
+            "using DevExpress.Office.Utils;\r\n" +
       "using System.Drawing;\r\n" +
       "using System.Windows.Forms;\r\n" +
       "using DevExpress.Utils;\r\n" +

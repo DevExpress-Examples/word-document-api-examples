@@ -36,24 +36,6 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Import Include="Microsoft.VisualBasic" />
-    <Import Include="System.Collections.Generic" />
-    <Import Include="System.Collections" />
-    <Import Include="System.Diagnostics" />
-    <Import Include="System.Linq" />
-    <Import Include="System.Xml.Linq" />
-    <Import Include="System.Data" />
-    <Import Include="System.Drawing" />
-    <Import Include="System.Windows.Forms" />
-    <Import Include="System.Windows.Documents" />
-    <Import Include="System.Windows.Input" />
-    <Import Include="System.Windows.Media.Imaging" />
-    <Import Include="System.Windows.Media" />
-    <Import Include="System.Windows.Navigation" />
-    <Import Include="System.Windows" />
-    <Import Include="System" />
-  </ItemGroup>
-  <ItemGroup>
     <Reference Include="DevExpress.CodeParser.v20.1, Version=20.1.2.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
@@ -129,6 +111,24 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Windows.Documents" />
+    <Import Include="System.Windows.Input" />
+    <Import Include="System.Windows.Media.Imaging" />
+    <Import Include="System.Windows.Media" />
+    <Import Include="System.Windows.Navigation" />
+    <Import Include="System.Windows" />
+    <Import Include="System" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="CodeExamples\BasicActions.vb" />
     <Compile Include="CodeExamples\BookmarksAndHyperlinks.vb" />
     <Compile Include="CodeExamples\CommentsActions.vb" />
@@ -141,6 +141,7 @@
     <Compile Include="CodeExamples\ImportActions.vb" />
     <Compile Include="CodeExamples\InlinePictureActions.vb" />
     <Compile Include="CodeExamples\ListsActions.vb" />
+    <Compile Include="CodeExamples\NotesActions.vb" />
     <Compile Include="CodeExamples\PageLayoutActions.vb" />
     <Compile Include="CodeExamples\ProtectionActions.vb" />
     <Compile Include="CodeExamples\RangeActions.vb" />
@@ -179,6 +180,9 @@
     </None>
     <None Include="Documents\Grimm_Protected.docx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Documents\List.docx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Documents\MailMergeSimple.docx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
