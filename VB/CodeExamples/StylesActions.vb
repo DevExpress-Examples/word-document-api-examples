@@ -49,7 +49,7 @@ Namespace RTEDocumentServerExamples.CodeExamples
 '			#Region "#CreateNewLinkedStyle"
 			Dim document As Document = wordProcessor.Document
 			document.BeginUpdate()
-			document.AppendText("Line One" & ControlChars.Lf & "Line Two" & ControlChars.Lf & "Line Three")
+			document.AppendText("Line One" & vbLf & "Line Two" & vbLf & "Line Three")
 			document.EndUpdate()
 			Dim lstyle As ParagraphStyle = document.ParagraphStyles("MyLinkedStyle")
 			If lstyle Is Nothing Then

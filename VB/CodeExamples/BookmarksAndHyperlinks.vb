@@ -7,12 +7,8 @@ Imports DevExpress.XtraRichEdit
 Imports DevExpress.XtraRichEdit.API.Native
 
 Namespace RichEditDocumentServerAPIExample.CodeExamples
-	Public NotInheritable Class BookmarksAndHyperlinksActions
-
-		Private Sub New()
-		End Sub
-
-		 Private Shared Sub InsertBookmark(ByVal wordProcessor As RichEditDocumentServer)
+	Public Module BookmarksAndHyperlinksActions
+		 Private Sub InsertBookmark(ByVal wordProcessor As RichEditDocumentServer)
 '			#Region "#InsertBookmark"
 			wordProcessor.LoadDocument("Documents\Grimm.docx", DocumentFormat.OpenXml)
 			wordProcessor.BeginUpdate()
@@ -26,7 +22,7 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
 			wordProcessor.EndUpdate()
 '			#End Region ' #InsertBookmark
 		 End Sub
-		 Private Shared Sub InsertHyperlink(ByVal wordProcessor As RichEditDocumentServer)
+		 Private Sub InsertHyperlink(ByVal wordProcessor As RichEditDocumentServer)
 '			#Region "#InsertHyperlink"
 			Dim document As Document = wordProcessor.Document
 			Dim hPos As DocumentPosition = wordProcessor.Document.Range.Start
@@ -38,5 +34,5 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
 
 
 
-	End Class
+	End Module
 End Namespace

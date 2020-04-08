@@ -2,13 +2,9 @@
 Imports DevExpress.XtraRichEdit.API.Native
 
 Namespace RichEditDocumentServerAPIExample.CodeExamples
-	Public NotInheritable Class NotesActions
+	Public Module NotesActions
 
-		Private Sub New()
-		End Sub
-
-
-		Private Shared Sub InsertFootnotes(ByVal wordProcessor As RichEditDocumentServer)
+		Private Sub InsertFootnotes(ByVal wordProcessor As RichEditDocumentServer)
 '			#Region "#InsertFootnotes"
 			wordProcessor.LoadDocument("Documents//Grimm.docx")
 			Dim document As Document = wordProcessor.Document
@@ -24,7 +20,7 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
 		End Sub
 
 
-		Private Shared Sub InsertEndnotes(ByVal wordProcessor As RichEditDocumentServer)
+		Private Sub InsertEndnotes(ByVal wordProcessor As RichEditDocumentServer)
 '			#Region "#InsertEndnotes"
 			wordProcessor.LoadDocument("Documents//Grimm.docx")
 			Dim document As Document = wordProcessor.Document
@@ -39,7 +35,7 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
 '			#End Region ' #InsertEndnotes
 		End Sub
 
-		Private Shared Sub EditFootnote(ByVal wordProcessor As RichEditDocumentServer)
+		Private Sub EditFootnote(ByVal wordProcessor As RichEditDocumentServer)
 '			#Region "#EditFootnote"
 			wordProcessor.LoadDocument("Documents//Grimm.docx")
 			Dim document As Document = wordProcessor.Document
@@ -61,7 +57,7 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
 '			#End Region ' #EditFootnote
 		End Sub
 
-		Private Shared Sub EditEndnote(ByVal wordProcessor As RichEditDocumentServer)
+		Private Sub EditEndnote(ByVal wordProcessor As RichEditDocumentServer)
 '			#Region "#EditEndnote"
 			wordProcessor.LoadDocument("Documents//Grimm.docx")
 			Dim document As Document = wordProcessor.Document
@@ -86,7 +82,7 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
 '			#End Region ' #EditEndnote
 		End Sub
 
-		Private Shared Sub EditSeparator(ByVal wordProcessor As RichEditDocumentServer)
+		Private Sub EditSeparator(ByVal wordProcessor As RichEditDocumentServer)
 '			#Region "#EditSeparator"
 			wordProcessor.LoadDocument("Documents//Grimm.docx")
 			Dim document As Document = wordProcessor.Document
@@ -107,7 +103,7 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
 			End If
 '			#End Region ' #EditSeparator
 		End Sub
-		Private Shared Sub RemoveNotes(ByVal wordProcessor As RichEditDocumentServer)
+		Private Sub RemoveNotes(ByVal wordProcessor As RichEditDocumentServer)
 '			#Region "#RemoveNotes"
 			wordProcessor.LoadDocument("Documents//Grimm.docx")
 			Dim document As Document = wordProcessor.Document
@@ -125,5 +121,5 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
 
 '			#End Region ' #RemoveNotes
 		End Sub
-	End Class
+	End Module
 End Namespace

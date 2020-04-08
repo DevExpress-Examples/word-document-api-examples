@@ -7,12 +7,8 @@ Imports DevExpress.XtraRichEdit.API.Native
 Imports DevExpress.XtraRichEdit
 
 Namespace RichEditDocumentServerAPIExample.CodeExamples
-	Public NotInheritable Class DocumentPropertiesActions
-
-		Private Sub New()
-		End Sub
-
-		Private Shared Sub StandardDocumentProperties(ByVal wordProcessor As RichEditDocumentServer)
+	Public Module DocumentPropertiesActions
+		Private Sub StandardDocumentProperties(ByVal wordProcessor As RichEditDocumentServer)
 '			#Region "#StandardDocumentProperties"
 			wordProcessor.CreateNewDocument()
 			Dim document As Document = wordProcessor.Document
@@ -23,25 +19,25 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
 			document.DocumentProperties.Category = "TestDoc"
 			document.DocumentProperties.Description = "This code demonstrates API to modify and display standard document properties."
 
-			document.Fields.Create(document.AppendText(ControlChars.Lf & "AUTHOR: ").End, "AUTHOR")
-			document.Fields.Create(document.AppendText(ControlChars.Lf & "TITLE: ").End, "TITLE")
-			document.Fields.Create(document.AppendText(ControlChars.Lf & "COMMENTS: ").End, "COMMENTS")
-			document.Fields.Create(document.AppendText(ControlChars.Lf & "CREATEDATE: ").End, "CREATEDATE")
-			document.Fields.Create(document.AppendText(ControlChars.Lf & "Category: ").End, "DOCPROPERTY Category")
+			document.Fields.Create(document.AppendText(vbLf & "AUTHOR: ").End, "AUTHOR")
+			document.Fields.Create(document.AppendText(vbLf & "TITLE: ").End, "TITLE")
+			document.Fields.Create(document.AppendText(vbLf & "COMMENTS: ").End, "COMMENTS")
+			document.Fields.Create(document.AppendText(vbLf & "CREATEDATE: ").End, "CREATEDATE")
+			document.Fields.Create(document.AppendText(vbLf & "Category: ").End, "DOCPROPERTY Category")
 			document.Fields.Update()
 			document.EndUpdate()
 '			#End Region ' #StandardDocumentProperties
 		End Sub
 
 
-		Private Shared Sub CustomDocumentProperties(ByVal wordProcessor As RichEditDocumentServer)
+		Private Sub CustomDocumentProperties(ByVal wordProcessor As RichEditDocumentServer)
 '			#Region "#CustomDocumentProperties"
 			wordProcessor.CreateNewDocument()
 			Dim document As Document = wordProcessor.Document
 			document.BeginUpdate()
-			document.Fields.Create(document.AppendText(ControlChars.Lf & "MyNumericProperty: ").End, "DOCVARIABLE CustomProperty MyNumericProperty")
-			document.Fields.Create(document.AppendText(ControlChars.Lf & "MyStringProperty: ").End, "DOCVARIABLE CustomProperty MyStringProperty")
-			document.Fields.Create(document.AppendText(ControlChars.Lf & "MyBooleanProperty: ").End, "DOCVARIABLE CustomProperty MyBooleanProperty")
+			document.Fields.Create(document.AppendText(vbLf & "MyNumericProperty: ").End, "DOCVARIABLE CustomProperty MyNumericProperty")
+			document.Fields.Create(document.AppendText(vbLf & "MyStringProperty: ").End, "DOCVARIABLE CustomProperty MyStringProperty")
+			document.Fields.Create(document.AppendText(vbLf & "MyBooleanProperty: ").End, "DOCVARIABLE CustomProperty MyBooleanProperty")
 			document.EndUpdate()
 
 			document.CustomProperties("MyNumericProperty") = 123.45
@@ -71,5 +67,5 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
 		#End Region ' #@CustomDocumentProperties
 
 
-	End Class
+	End Module
 End Namespace

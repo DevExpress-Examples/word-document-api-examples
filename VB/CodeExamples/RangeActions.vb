@@ -53,7 +53,7 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
 '			#Region "#AppendToParagraph"
 			Dim document As Document = wordProcessor.Document
 			document.BeginUpdate()
-			document.AppendText("First Paragraph" & ControlChars.Lf & "Second Paragraph" & ControlChars.Lf & "Third Paragraph")
+			document.AppendText("First Paragraph" & vbLf & "Second Paragraph" & vbLf & "Third Paragraph")
 			document.EndUpdate()
 '			#End Region ' #AppendToParagraph
 		End Sub

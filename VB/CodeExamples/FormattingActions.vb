@@ -9,7 +9,7 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
 '			#Region "#FormatText"
 			Dim document As Document = wordProcessor.Document
 			document.BeginUpdate()
-			document.AppendText("Normal" & ControlChars.Lf & "Formatted" & ControlChars.Lf & "Normal")
+			document.AppendText("Normal" & vbLf & "Formatted" & vbLf & "Normal")
 			document.EndUpdate()
 			Dim range As DocumentRange = document.Paragraphs(1).Range
 			Dim cp As CharacterProperties = document.BeginUpdateCharacters(range)
@@ -38,7 +38,7 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
 '			#Region "#FormatParagraph"
 			Dim document As Document = wordProcessor.Document
 			document.BeginUpdate()
-			document.AppendText("Modified Paragraph" & ControlChars.Lf & "Normal" & ControlChars.Lf & "Normal")
+			document.AppendText("Modified Paragraph" & vbLf & "Normal" & vbLf & "Normal")
 			document.EndUpdate()
 			Dim pos As DocumentPosition = document.Range.Start
 			Dim range As DocumentRange = document.CreateRange(pos, 0)

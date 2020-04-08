@@ -10,28 +10,24 @@ Imports System.Windows.Forms
 Imports DevExpress.XtraRichEdit.Export
 
 Namespace RichEditDocumentServerAPIExample.CodeExamples
-   Public NotInheritable Class BasicActions
-
-	   Private Sub New()
-	   End Sub
-
-		Private Shared Sub CreateNewDocument(ByVal wordProcessor As RichEditDocumentServer)
+   Public Module BasicActions
+		Private Sub CreateNewDocument(ByVal wordProcessor As RichEditDocumentServer)
 '			#Region "#CreateDocument"
 			wordProcessor.CreateNewDocument()
 '			#End Region ' #CreateDocument
 		End Sub
-		Private Shared Sub LoadDocument(ByVal wordProcessor As RichEditDocumentServer)
+		Private Sub LoadDocument(ByVal wordProcessor As RichEditDocumentServer)
 '			#Region "#LoadDocument"
 			wordProcessor.LoadDocument("Documents\Grimm.docx", DocumentFormat.OpenXml)
 '			#End Region ' #LoadDocument
 		End Sub
-		Private Shared Sub MergeDocuments(ByVal wordProcessor As RichEditDocumentServer)
+		Private Sub MergeDocuments(ByVal wordProcessor As RichEditDocumentServer)
 '			#Region "#MergeDocuments"
 			wordProcessor.LoadDocument("Documents//Grimm.docx", DocumentFormat.OpenXml)
 			wordProcessor.Document.AppendDocumentContent("Documents//MovieRentals.docx",DocumentFormat.OpenXml)
 '			#End Region ' #MergeDocuments
 		End Sub
-		Private Shared Sub SplitDocument(ByVal wordProcessor As RichEditDocumentServer)
+		Private Sub SplitDocument(ByVal wordProcessor As RichEditDocumentServer)
 '			#Region "#SplitDocument"
 			wordProcessor.LoadDocument("Documents\Grimm.docx", DocumentFormat.OpenXml)
 			'Split a document per page
@@ -51,18 +47,18 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
 			System.Diagnostics.Process.Start("explorer.exe", "/select," & "doc0.rtf")
 '			#End Region ' #SplitDocument
 		End Sub
-		Private Shared Sub SaveDocument(ByVal wordProcessor As RichEditDocumentServer)
+		Private Sub SaveDocument(ByVal wordProcessor As RichEditDocumentServer)
 '			#Region "#SaveDocument"
 			wordProcessor.Document.AppendDocumentContent("Documents\Grimm.docx", DocumentFormat.OpenXml)
 			wordProcessor.SaveDocument("SavedDocument.docx", DocumentFormat.OpenXml)
 				System.Diagnostics.Process.Start("explorer.exe", "/select," & "SavedDocument.docx")
 '			#End Region ' #SaveDocument
 		End Sub
-		Private Shared Sub PrintDocument(ByVal wordProcessor As RichEditDocumentServer)
+		Private Sub PrintDocument(ByVal wordProcessor As RichEditDocumentServer)
 '			#Region "#PrintDocument"
 			wordProcessor.Document.AppendDocumentContent("Documents\Grimm.docx", DocumentFormat.OpenXml)
 			wordProcessor.Print()
 '			#End Region ' #PrintDocument
 		End Sub
-   End Class
+   End Module
 End Namespace

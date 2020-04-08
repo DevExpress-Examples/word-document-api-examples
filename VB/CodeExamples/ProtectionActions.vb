@@ -7,12 +7,8 @@ Imports DevExpress.XtraRichEdit
 Imports DevExpress.XtraRichEdit.API.Native
 
 Namespace RichEditDocumentServerAPIExample.CodeExamples
-	Public NotInheritable Class ProtectionActions
-
-		Private Sub New()
-		End Sub
-
-		Private Shared Sub ProtectDocument(ByVal wordProcessor As RichEditDocumentServer)
+	Public Module ProtectionActions
+		Private Sub ProtectDocument(ByVal wordProcessor As RichEditDocumentServer)
 '			#Region "#ProtectDocument"
 			wordProcessor.LoadDocument("Documents//Grimm.docx",DocumentFormat.OpenXml)
 			Dim document As Document = wordProcessor.Document
@@ -23,12 +19,12 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
 				'Insert a comment indicating that the document is protected
 				document.Comments.Create(document.Paragraphs(0).Range, "Admin")
 				Dim commentDocument As SubDocument = document.Comments(0).BeginUpdate()
-				commentDocument.InsertText(commentDocument.CreatePosition(0), "Document is protected with a password." & ControlChars.Lf & "You cannot modify the document until protection is removed.")
+				commentDocument.InsertText(commentDocument.CreatePosition(0), "Document is protected with a password." & vbLf & "You cannot modify the document until protection is removed.")
 				commentDocument.EndUpdate()
 			End If
 '			#End Region ' #ProtectDocument
 		End Sub
-		Private Shared Sub UnprotectDocument(ByVal wordProcessor As RichEditDocumentServer)
+		Private Sub UnprotectDocument(ByVal wordProcessor As RichEditDocumentServer)
 '			#Region "#UnprotectDocument"
 			wordProcessor.LoadDocument("Documents//Grimm_Protected.docx", DocumentFormat.OpenXml)
 			Dim document As Document = wordProcessor.Document
@@ -45,7 +41,7 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
 			End If
 '			#End Region ' #UnprotectDocument
 		End Sub
-		Private Shared Sub CreateRangePermissions(ByVal wordProcessor As RichEditDocumentServer)
+		Private Sub CreateRangePermissions(ByVal wordProcessor As RichEditDocumentServer)
 '			#Region "#CreateRangePermissions"
 			wordProcessor.LoadDocument("Documents//Grimm.docx", DocumentFormat.OpenXml)
 			Dim document As Document = wordProcessor.Document
@@ -62,5 +58,5 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
 			document.Protect("123")
 '			#End Region ' #CreateRangePermissions
 		End Sub
-	End Class
+	End Module
 End Namespace

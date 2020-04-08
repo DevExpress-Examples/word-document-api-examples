@@ -12,7 +12,7 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
 		Private Shared Sub AddFloatingPicture(ByVal wordProcessor As RichEditDocumentServer)
 '			#Region "#AddFloatingPicture"
 			Dim document As Document = wordProcessor.Document
-			document.AppendText("Line One" & ControlChars.Lf & "Line Two" & ControlChars.Lf & "Line Three")
+			document.AppendText("Line One" & vbLf & "Line Two" & vbLf & "Line Three")
 			Dim myPicture As Shape = document.Shapes.InsertPicture(document.CreatePosition(15), System.Drawing.Image.FromFile("Documents\beverages.png"))
 			myPicture.HorizontalAlignment = ShapeHorizontalAlignment.Center
 '			#End Region ' #AddFloatingPicture
@@ -49,7 +49,7 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
 		Private Shared Sub AddTextBox(ByVal wordProcessor As RichEditDocumentServer)
 '			#Region "#AddTextBox"
 			Dim document As Document = wordProcessor.Document
-			document.AppendText("Line One" & ControlChars.Lf & "Line Two" & ControlChars.Lf & "Line Three")
+			document.AppendText("Line One" & vbLf & "Line Two" & vbLf & "Line Three")
 			Dim myTextBox As Shape = document.Shapes.InsertTextBox(document.CreatePosition(15))
 			myTextBox.HorizontalAlignment = ShapeHorizontalAlignment.Center
 			' Specify the text box background color.
