@@ -5,8 +5,7 @@ using System.Drawing;
 namespace RichEditDocumentServerAPIExample.CodeExamples
 {
     class FormattingActions
-    {
-        
+    {        
         static void FormatText(RichEditDocumentServer wordProcessor)
         {
             #region #FormatText
@@ -22,9 +21,27 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             cp.BackColor = Color.Snow;
             cp.Underline = UnderlineType.DoubleWave;
             cp.UnderlineColor = Color.Red;
+
             document.EndUpdateCharacters(cp);
             #endregion #FormatText
         }
+
+        static void ChangeSpacing(RichEditDocumentServer wordProcessor) 
+        {
+            #region #ChangeCharacterSpacing
+            Document document = wordProcessor.Document;
+            document.BeginUpdate();
+            document.AppendText("Normal\nFormatted\nNormal");
+            document.EndUpdate();
+            DocumentRange range = document.Paragraphs[0].Range;
+            CharacterProperties cp = document.BeginUpdateCharacters(range);
+            cp.Scale = 150;
+            cp.Spacing = -2;
+            cp.Position = 2;
+            document.EndUpdateCharacters(cp);
+            #endregion #ChangeCharacterSpacing
+        }
+
         static void ResetCharacterFormatting(RichEditDocumentServer wordProcessor)
         {
             #region #ResetCharacterFormatting
