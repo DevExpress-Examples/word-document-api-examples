@@ -4,7 +4,6 @@ Imports System.Drawing
 
 Namespace RichEditDocumentServerAPIExample.CodeExamples
 	Friend Class FormattingActions
-
 		Private Shared Sub FormatText(ByVal wordProcessor As RichEditDocumentServer)
 '			#Region "#FormatText"
 			Dim document As Document = wordProcessor.Document
@@ -19,9 +18,26 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
 			cp.BackColor = Color.Snow
 			cp.Underline = UnderlineType.DoubleWave
 			cp.UnderlineColor = Color.Red
+
 			document.EndUpdateCharacters(cp)
 '			#End Region ' #FormatText
 		End Sub
+
+		Private Shared Sub ChangeSpacing(ByVal wordProcessor As RichEditDocumentServer)
+'			#Region "#ChangeCharacterSpacing"
+			Dim document As Document = wordProcessor.Document
+			document.BeginUpdate()
+			document.AppendText("Normal" & vbLf & "Formatted" & vbLf & "Normal")
+			document.EndUpdate()
+			Dim range As DocumentRange = document.Paragraphs(0).Range
+			Dim cp As CharacterProperties = document.BeginUpdateCharacters(range)
+			cp.Scale = 150
+			cp.Spacing = -2
+			cp.Position = 2
+			document.EndUpdateCharacters(cp)
+'			#End Region ' #ChangeCharacterSpacing
+		End Sub
+
 		Private Shared Sub ResetCharacterFormatting(ByVal wordProcessor As RichEditDocumentServer)
 '			#Region "#ResetCharacterFormatting"
 			Dim document As Document = wordProcessor.Document
