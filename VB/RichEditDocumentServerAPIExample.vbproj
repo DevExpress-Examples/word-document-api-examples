@@ -178,6 +178,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="Documents\CustomXmlParts.docx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Documents\Grimm.docx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -214,6 +217,9 @@
   <ItemGroup>
     <Content Include="Documents\beverages.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Documents\Employees.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Documents\TerribleRevengeKOI8R.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
