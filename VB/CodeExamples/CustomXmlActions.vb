@@ -1,4 +1,6 @@
-﻿Imports DevExpress.XtraRichEdit
+﻿Option Infer On
+
+Imports DevExpress.XtraRichEdit
 Imports System
 Imports System.Collections.Generic
 Imports System.Linq
@@ -21,16 +23,16 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
 			xmlItem.CustomXmlPartDocument.AppendChild(elem)
 
 			' Use a string to specify the content for a custom XML part.
-			Dim xmlString As String = "<?xml version=""1.0"" encoding=""UTF-8""?>" & ControlChars.CrLf & _
-"                            <Employees>" & ControlChars.CrLf & _
-"                                <FirstName>Stephen</FirstName>" & ControlChars.CrLf & _
-"                                <LastName>Edwards</LastName>" & ControlChars.CrLf & _
-"                                <Address>4726 - 11th Ave. N.E.</Address>" & ControlChars.CrLf & _
-"                                <City>Seattle</City>" & ControlChars.CrLf & _
-"                                <Region>WA</Region>" & ControlChars.CrLf & _
-"                                <PostalCode>98122</PostalCode>" & ControlChars.CrLf & _
-"                                <Country>USA</Country>" & ControlChars.CrLf & _
-"                            </Employees>"
+			Dim xmlString As String = "<?xml version=""1.0"" encoding=""UTF-8""?>
+                            <Employees>
+                                <FirstName>Stephen</FirstName>
+                                <LastName>Edwards</LastName>
+                                <Address>4726 - 11th Ave. N.E.</Address>
+                                <City>Seattle</City>
+                                <Region>WA</Region>
+                                <PostalCode>98122</PostalCode>
+                                <Country>USA</Country>
+                            </Employees>"
 			document.CustomXmlParts.Insert(1, xmlString)
 
 			' Add a custom XML part from a file.
@@ -51,7 +53,7 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
 			Dim nameList As XmlNodeList = xmlDoc.GetElementsByTagName("Name")
 			document.AppendText("Employee list:")
 			For Each name As XmlNode In nameList
-				document.AppendText(ControlChars.CrLf & " " & ChrW(&H00B7).ToString() & " " & name.InnerText)
+				document.AppendText(vbCrLf & " " & ChrW(&H00B7).ToString() & " " & name.InnerText)
 			Next name
 '			#End Region ' #AccessCustomXmlPart
 		End Sub
@@ -62,19 +64,19 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
 			document.AppendText("This document contains custom XML parts.")
 
 			' Add the first custom XML part.
-			Dim xmlString1 As String = "<?xml version=""1.0"" encoding=""UTF-8""?>" & ControlChars.CrLf & _
-"                            <Employees>" & ControlChars.CrLf & _
-"                                <FirstName>Stephen</FirstName>" & ControlChars.CrLf & _
-"                                <LastName>Edwards</LastName>" & ControlChars.CrLf & _
-"                            </Employees>"
+			Dim xmlString1 As String = "<?xml version=""1.0"" encoding=""UTF-8""?>
+                            <Employees>
+                                <FirstName>Stephen</FirstName>
+                                <LastName>Edwards</LastName>
+                            </Employees>"
 			Dim xmlItem1 = document.CustomXmlParts.Add(xmlString1)
 
 			' Add the second custom XML part.
-			Dim xmlString2 As String = "<?xml version=""1.0"" encoding=""UTF-8""?>" & ControlChars.CrLf & _
-"                            <Employees>" & ControlChars.CrLf & _
-"                                <FirstName>Andrew</FirstName>" & ControlChars.CrLf & _
-"                                <LastName>Fuller</LastName>" & ControlChars.CrLf & _
-"                            </Employees>"
+			Dim xmlString2 As String = "<?xml version=""1.0"" encoding=""UTF-8""?>
+                            <Employees>
+                                <FirstName>Andrew</FirstName>
+                                <LastName>Fuller</LastName>
+                            </Employees>"
 			Dim xmlItem2 = document.CustomXmlParts.Add(xmlString2)
 
 			' Remove the first item from the collection.
