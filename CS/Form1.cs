@@ -12,7 +12,7 @@ using DevExpress.XtraRichEdit.API.Native;
 
 namespace RichEditDocumentServerAPIExample
 {
-    public partial class Form1 : Form
+    public partial class Form1 : DevExpress.XtraEditors.XtraForm
     {
         #region InitializeComponent
         #endregion
