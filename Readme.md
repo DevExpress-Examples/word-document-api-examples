@@ -6,34 +6,31 @@
 
 # Word Processing Document API – How to Process Word Documents in Code
 
-The  [Word Processing Document API](https://docs.devexpress.com/OfficeFileAPI/17488/word-processing-document-api) is a non-visual .NET library that allows you to generate, load, modify, import, export, and print Microsoft Word documents in code.
+The  [Word Processing Document API](https://docs.devexpress.com/OfficeFileAPI/17488/word-processing-document-api) is a non-visual .NET library that allows you to generate, load, modify, import, export, and print Microsoft Word documents in code. 
 
-This example demonstrates how to use the Word Processing Document API to execute the following actions:
+This example demonstrates how to use the Word Processing Document API to execute the following actions: 
 
--	Manage a document (create, load, merge, split, save, and print a document)
--	Save a document in PDF and HTML formats
--	Convert an HTML file to PDF and DOCX formats
--	Format a document
--	Manage document elements (paragraphs, lists, tables, shapes, pictures, headers, footers, notes, watermarks, bookmarks, hyperlinks, and comments)
--	Insert and modify fields
--	Configure page layout settings
--	Specify the built-in and custom document properties
--	Protect and unprotect a document
--	Create character, paragraph, and linked styles
--	Import formatted text to a document
--	Add checkbox form fields to a document
--	Embed arbitrary XML data (custom XML parts) in a document
+- Create, load, merge, split, save, and print documents 
+- Save a document in PDF and HTML formats 
+- Convert an HTML file to PDF and DOCX formats 
+- Format a document 
+- Manage document elements (paragraphs, lists, tables, shapes, pictures, headers, footers, notes, watermarks, bookmarks, hyperlinks, and comments) 
+- Insert and modify fields 
+- Configure page layout settings 
+- Specify the built-in and custom document properties 
+- Protect and unprotect a document 
+- Create character, paragraph, and linked styles 
+- Import formatted text to a document 
+- Add checkbox form fields to a document 
+- Embed arbitrary XML data (custom XML parts) in a document 
 
-The application’s form contains the list of supported operations and the editor that displays code of these operations. A user can select an operation to view its code and click the Run button to get the resulting document in Microsoft Word. 
+The application’s form contains the list of supported operations and the editor that displays the code of these operations. A user can select an operation to view its code and click the **Run** button to open the resulting document in Microsoft Word. 
 
 ![Word Processing Document API - List of Supported Operations](./images/word-processing-document-api.png)
 
-<!-- default file list -->
 ## Files to Look At
 
 [CodeExamples](./CS/CodeExamples) (VB: [CodeExamples](./VB/CodeExamples))
-
-<!-- default file list end -->
 
 ## Documentation
 
