@@ -3,18 +3,58 @@
 [![](https://img.shields.io/badge/Open_in_DevExpress_Support_Center-FF7200?style=flat-square&logo=DevExpress&logoColor=white)](https://supportcenter.devexpress.com/ticket/details/T418535)
 [![](https://img.shields.io/badge/📖_How_to_use_DevExpress_Examples-e9f6fc?style=flat-square)](https://docs.devexpress.com/GeneralInformation/403183)
 <!-- default badges end -->
-# Word Processing Document API Examples
-*Files to look at*:
 
-* [CodeExamples](./CS/CodeExamples) (VB: [CodeExamples](./VB/CodeExamples))
+# Word Processing Document API – How to Process Word Documents in Code
 
-<p>This example demonstrates how to use the <a href="https://documentation.devexpress.com/#DocumentServer/CustomDocument17488">Word Processing Document API</a> to programmatically manage rich edit documents, without the need for Microsoft Word to be installed.</p>
-<p>The application includes the <a href="https://documentation.devexpress.com/#WindowsForms/CustomDocument6975">RichEditControl</a> used to display and edit the code. The code modifies the rich document created or loaded by the <a href="https://documentation.devexpress.com/#CoreLibraries/clsDevExpressXtraRichEditRichEditDocumentServertopic">RichEditDocumentServer</a> instance. To see the results, open the document in Microsoft Word by clicking the button.</p>
-<p>You can modify the code and watch the result. If an error occurs during compilation or execution, the backcolor of the code window changes.</p>
-<p>This sample introduces API properties and methods used to perform the following operations:</p>
-- Create, load, save and print documents; <br>- Insert text to the document range or paragraph; <br>- Change paragraph or character formatting; <br>- Create and apply new character, paragraph or linked style;<br>- Create bulleted or numbered lists; <br>- Insert and resize inline pictures; <br>- Insert and modify floating pictures or text boxes; <br>- Create, fill, colorize tables, merge or split table cells; <br>- Change document page layout - create columns, add line numbering, change page layout settings;<br>- Insert bookmarks or hyperlinks; <br>- Create, edit and delete comments; <br>- Set document properties; <br>- Modify page headers; <br>- Insert and modify fields.<br><br>For more information, review the <a href="https://documentation.devexpress.com/#DocumentServer/CustomDocument116810">Examples</a> section in the documentation.<br>
-<p>To use this example in production code, the<strong> Universal Subscription</strong> or an additional <strong>Office File API Subscription</strong> is not required.</p>
+The  [Word Processing Document API](https://docs.devexpress.com/OfficeFileAPI/17488/word-processing-document-api) is a non-visual .NET library that allows you to generate, load, modify, import, export, and print Microsoft Word documents in code.
 
-<br/>
+This example demonstrates how to use the Word Processing Document API to execute the following actions:
 
+-	Manage a document (create, load, merge, split, save, and print a document)
+-	Save a document in PDF and HTML formats
+-	Convert an HTML file to PDF and DOCX formats
+-	Format a document
+-	Manage document elements (paragraphs, lists, tables, shapes, pictures, headers, footers, notes, watermarks, bookmarks, hyperlinks, and comments)
+-	Insert and modify fields
+-	Configure page layout settings
+-	Specify the built-in and custom document properties
+-	Protect and unprotect a document
+-	Create character, paragraph, and linked styles
+-	Import formatted text to a document
+-	Add checkbox form fields to a document
+-	Embed arbitrary XML data (custom XML parts) in a document
 
+The application’s form contains the list of supported operations and the editor that displays code of these operations. A user can select an operation to view its code and click the Run button to get the resulting document in Microsoft Word. 
+
+![Word Processing Document API - List of Supported Operations](./images/word-processing-document-api.png)
+
+<!-- default file list -->
+## Files to Look At
+
+[CodeExamples](./CS/CodeExamples) (VB: [CodeExamples](./VB/CodeExamples))
+
+<!-- default file list end -->
+
+## Documentation
+
+- [Basic Actions](http://docs.devexpress.com/OfficeFileAPI/116811/word-processing-document-api/examples/files)
+- [Document Elements](http://docs.devexpress.com/OfficeFileAPI/116861/word-processing-document-api/examples/document-elements) 
+- [Hyperlinks and Bookmarks](http://docs.devexpress.com/OfficeFileAPI/15304/word-processing-document-api/word-processing-document/hyperlinks-and-bookmarks) 
+- [Custom XML Parts](http://docs.devexpress.com/OfficeFileAPI/401609/word-processing-document-api/word-processing-document/custom-xml-parts) 
+- [Document Properties](https://docs.devexpress.com/OfficeFileAPI/116865/word-processing-document-api/examples/document-elements/how-to-specify-document-properties) 
+- [Export](http://docs.devexpress.com/OfficeFileAPI/116866/word-processing-document-api/examples/export) 
+- [Document Conversion](http://docs.devexpress.com/OfficeFileAPI/119981/word-processing-document-api/examples/document-conversion) 
+- [Fields](http://docs.devexpress.com/OfficeFileAPI/15280/word-processing-document-api/fields) 
+- [Formatting](http://docs.devexpress.com/OfficeFileAPI/400460/word-processing-document-api/text-formatting) 
+- [Checkbox Form Fields](http://docs.devexpress.com/OfficeFileAPI/120712/word-processing-document-api/word-processing-document/checkboxes) 
+- [Headers and Footers](http://docs.devexpress.com/OfficeFileAPI/15310/word-processing-document-api/word-processing-document/headers-and-footers) 
+- [Import and Export](http://docs.devexpress.com/OfficeFileAPI/15441/word-processing-document-api/import-and-export) 
+- [Lists](http://docs.devexpress.com/OfficeFileAPI/15314/word-processing-document-api/word-processing-document/lists) 
+- [Footnotes and Endnotes](http://docs.devexpress.com/OfficeFileAPI/401688/word-processing-document-api/word-processing-document/footnotes-and-endnotes) 
+- [Page Layout](http://docs.devexpress.com/OfficeFileAPI/116854/word-processing-document-api/examples/layout) 
+- [Protection](http://docs.devexpress.com/OfficeFileAPI/118639/word-processing-document-api/examples/protection)
+- [Printing](http://docs.devexpress.com/OfficeFileAPI/119883/word-processing-document-api/examples/printing/how-to-print-a-document) 
+- [Shapes](http://docs.devexpress.com/OfficeFileAPI/15315/word-processing-document-api/word-processing-document/shapes) 
+- [Styles](http://docs.devexpress.com/OfficeFileAPI/116829/word-processing-document-api/examples/styles) 
+- [Tables](http://docs.devexpress.com/OfficeFileAPI/116848/word-processing-document-api/examples/tables) 
+- [Watermarks](http://docs.devexpress.com/OfficeFileAPI/403030/word-processing-document-api/word-processing-document/watermarks)
