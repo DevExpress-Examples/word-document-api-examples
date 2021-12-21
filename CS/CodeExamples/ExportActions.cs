@@ -179,7 +179,6 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             #endregion #HandleBeforeExportEvent
         }
 
-        #region #@HandleBeforeExportEvent
         class BeforeExportHelper
         {
             public static void BeforeExport(object sender, BeforeExportEventArgs e)
@@ -194,7 +193,6 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
                 }
             }
         }
-        #endregion #@HandleBeforeExportEvent
     }
 
 }
