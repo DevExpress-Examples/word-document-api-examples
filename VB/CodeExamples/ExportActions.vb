@@ -156,7 +156,6 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
 #End Region  ' #HandleBeforeExportEvent
         End Sub
 
-#Region "#@HandleBeforeExportEvent"
         Private Class BeforeExportHelper
 
             Public Shared Sub BeforeExport(ByVal sender As Object, ByVal e As DevExpress.XtraRichEdit.BeforeExportEventArgs)
@@ -169,6 +168,5 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
                 End If
             End Sub
         End Class
-#End Region  ' #@HandleBeforeExportEvent
     End Class
 End Namespace
