@@ -133,7 +133,7 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             #endregion #ChangeTableColor
 
         }
-        #region #@ChangeTableColor
+        
         class TableHelper
         {
             public static void ChangeCellColor(TableCell cell, int i, int j)
@@ -149,7 +149,7 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
                 cell.Borders.Top.LineColor = System.Drawing.Color.Red;
             }
         }
-        #endregion #@ChangeTableColor
+        
         static void CreateAndApplyTableStyle(RichEditDocumentServer wordProcessor)
         {
             #region #CreateAndApplyTableStyle
@@ -281,7 +281,7 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             #endregion #ChangeColumnAppearance
 
         }
-        #region #@ChangeColumnAppearance
+        
         class ChangeColumnAppearanceHelper
         {
             public static void ChangeColumnColor(TableRow row, int rowIndex)
@@ -290,7 +290,7 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
                 row[2].VerticalAlignment = TableCellVerticalAlignment.Center;
             }
         }
-        #endregion #@ChangeColumnAppearance
+        
 
         static void UseTableCellProcessor(RichEditDocumentServer wordProcessor)
         {
@@ -312,7 +312,7 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             table.EndUpdate();
             #endregion #UseTableCellProcessor
         }
-        #region #@UseTableCellProcessor
+        
         class UseTableCellProcessorHelper
         {
             public static void MakeMultiplicationCell(TableCell cell, int i, int j)
@@ -323,7 +323,7 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
                 cell.Range.EndUpdateDocument(doc);
             }
         }
-        #endregion #@UseTableCellProcessor
+        
 
         static void MergeCells(RichEditDocumentServer wordProcessor)
         {
