@@ -1,72 +1,96 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DevExpress.XtraRichEdit;
-using System.Diagnostics;
-using DevExpress.XtraRichEdit.Services;
-using System.Windows.Forms;
-using DevExpress.XtraRichEdit.Export;
 
 namespace RichEditDocumentServerAPIExample.CodeExamples
 {
-   public static class BasicActions
-    {
+   public static class BasicActions {
+
+        public static Action<RichEditDocumentServer> CreateNewDocumentAction = CreateNewDocument;
+        public static Action<RichEditDocumentServer> LoadDocumentAction = LoadDocument;
+        public static Action<RichEditDocumentServer> MergeDocumentsAction = MergeDocuments;
+        public static Action<RichEditDocumentServer> SplitDocumentAction = SplitDocument;
+        public static Action<RichEditDocumentServer> SaveDocumentAction = SaveDocument;
+        public static Action<RichEditDocumentServer> PrintDocumentAction = PrintDocument;
+  
         static void CreateNewDocument(RichEditDocumentServer wordProcessor)
         {
             #region #CreateDocument
+            // Create a new blank document.
             wordProcessor.CreateNewDocument();
             #endregion #CreateDocument
         }
         static void LoadDocument(RichEditDocumentServer wordProcessor)
         {
             #region #LoadDocument
+            // Load a document from a file.
             wordProcessor.LoadDocument("Documents\\Grimm.docx", DocumentFormat.OpenXml);
             #endregion #LoadDocument
         }
         static void MergeDocuments(RichEditDocumentServer wordProcessor)
         {
             #region #MergeDocuments
+            // Load a document from a file.
             wordProcessor.LoadDocument("Documents//Grimm.docx", DocumentFormat.OpenXml);
+
+            // Insert content from the file at the document end.
             wordProcessor.Document.AppendDocumentContent("Documents//MovieRentals.docx",DocumentFormat.OpenXml);
             #endregion #MergeDocuments
         }
         static void SplitDocument(RichEditDocumentServer wordProcessor)
         {
             #region #SplitDocument
+            // Load a document from a file.
             wordProcessor.LoadDocument("Documents\\Grimm.docx", DocumentFormat.OpenXml);
-            //Split a document per page
+
+            // Obtain a number of pages in the document.
             int pageCount = wordProcessor.DocumentLayout.GetPageCount();
+            
+            // Check all pages in the document.
             for (int i = 0; i < pageCount; i++)
             {
+                // Access the document page.  
                 DevExpress.XtraRichEdit.API.Layout.LayoutPage layoutPage = wordProcessor.DocumentLayout.GetPage(i);
+
+                // Access the range of the page's main area.
                 DevExpress.XtraRichEdit.API.Native.DocumentRange mainBodyRange = wordProcessor.Document.CreateRange(layoutPage.MainContentRange.Start, layoutPage.MainContentRange.Length);
-                using (RichEditDocumentServer tempServer = new RichEditDocumentServer())
+
+                // Create the temporary RichEditDocumentServer instance.
+                using (RichEditDocumentServer tempWordProcessor = new RichEditDocumentServer())
                 {
-                    tempServer.Document.AppendDocumentContent(mainBodyRange);
-                    //Delete last empty paragraph
-                    tempServer.Document.Delete(tempServer.Document.Paragraphs.First().Range);
-                    //Save the result
+                    // Insert the page content to the instance.
+                    tempWordProcessor.Document.AppendDocumentContent(mainBodyRange);
+                    // Delete the first empty paragraph.
+                    tempWordProcessor.Document.Delete(tempWordProcessor.Document.Paragraphs.First().Range);
+                    // Save the document page as an RTF file.
                     string fileName = String.Format("doc{0}.rtf", i);
-                    tempServer.SaveDocument(fileName, DocumentFormat.Rtf);
+                    tempWordProcessor.SaveDocument(fileName, DocumentFormat.Rtf);
                 }                
             }
+            // Open the File Explorer and select the saved file.
             System.Diagnostics.Process.Start("explorer.exe", "/select," + "doc0.rtf");
             #endregion #SplitDocument
         }
         static void SaveDocument(RichEditDocumentServer wordProcessor)
-        {            
+        {
             #region #SaveDocument
-            wordProcessor.Document.AppendDocumentContent("Documents\\Grimm.docx", DocumentFormat.OpenXml);
-            wordProcessor.SaveDocument("SavedDocument.docx", DocumentFormat.OpenXml); 
-                System.Diagnostics.Process.Start("explorer.exe", "/select," + "SavedDocument.docx");
+            // Load a document from a file.
+            wordProcessor.LoadDocument("Documents\\Grimm.docx", DocumentFormat.OpenXml);
+
+            // Save the document as a DOCX file.
+            wordProcessor.SaveDocument("SavedDocument.docx", DocumentFormat.OpenXml);
+            
+            // Open the File Explorer and select the saved file.
+            System.Diagnostics.Process.Start("explorer.exe", "/select," + "SavedDocument.docx");
             #endregion #SaveDocument
         }
         static void PrintDocument(RichEditDocumentServer wordProcessor)
         {
             #region #PrintDocument
-            wordProcessor.Document.AppendDocumentContent("Documents\\Grimm.docx", DocumentFormat.OpenXml);
+            // Load a document from a file.
+            wordProcessor.LoadDocument("Documents\\Grimm.docx", DocumentFormat.OpenXml);
+            
+            // Print the document to the default printer with the default settings.
             wordProcessor.Print();
             #endregion #PrintDocument
         }

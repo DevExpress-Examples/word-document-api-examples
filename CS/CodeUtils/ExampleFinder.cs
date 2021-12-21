@@ -1,17 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace RichEditDocumentServerAPIExample.CodeUtils
 {
     #region ExampleFinder
     public abstract class ExampleFinder
     {
-        public bool isHelper = false;
         public abstract string RegexRegionPattern { get; }
         public abstract string RegionStartPattern { get; }
         public abstract string RegionHelperStartPattern { get; }
@@ -31,7 +27,6 @@ namespace RichEditDocumentServerAPIExample.CodeUtils
             List<CodeExample> foundExamples = ParseSouceFileAndFindRegionsWithExamples(groupName, code);
             return foundExamples;
         }
-
         public List<CodeExample> ParseSouceFileAndFindRegionsWithExamples(string groupName, string sourceCode)
         {
             List<CodeExample> result = new List<CodeExample>();
@@ -40,7 +35,7 @@ namespace RichEditDocumentServerAPIExample.CodeUtils
 
             foreach (var match in matches)
             {
-                string[] lines = match.ToString().Split(new string[] { "\n" }, StringSplitOptions.None);
+                string[] lines = match.ToString().Split(new string[] { "\r\n", "\n" }, StringSplitOptions.None);
 
                 if (lines.Length <= 2)
                     continue;
@@ -53,7 +48,6 @@ namespace RichEditDocumentServerAPIExample.CodeUtils
 
                 string exampleCode = string.Join("\r\n", lines, 1, lines.Length - 2);
                 result.Add(CreateRichEditExample(groupName, regionName, exampleCode));
-
             }
             return result;
         }
@@ -63,14 +57,14 @@ namespace RichEditDocumentServerAPIExample.CodeUtils
             CodeExample result = new CodeExample();
             SetExampleCode(exampleCode, result);
             result.RegionName = regionName;
-            result.HumanReadableGroupName = CodeExampleDemoUtils.ConvertStringToMoreHumanReadableForm(exampleGroup);
+            result.HumanReadableGroupName = CodeExampleUtils.ConvertStringToHumanReadableForm(exampleGroup);
             return result;
         }
         protected abstract void SetExampleCode(string exampleCode, CodeExample newExample);
 
         protected virtual string[] DeleteLeadingWhiteSpacesFromSourceCode(string[] lines)
         {
-            return CodeExampleDemoUtils.DeleteLeadingWhiteSpaces(lines, "        ");
+            return CodeExampleUtils.DeleteLeadingWhiteSpaces(lines, "        ");
         }
         protected virtual bool ValidateRegionName(string[] lines, ref string regionName)
         {
@@ -81,20 +75,18 @@ namespace RichEditDocumentServerAPIExample.CodeUtils
 
             if (regionIndex == 0)
             {
-                isHelper = true;
-                regionName = CodeExampleDemoUtils.ConvertStringToMoreHumanReadableForm(region.Substring(regionIndex + RegionHelperStartPattern.Length + keepHashMark));
+                regionName = CodeExampleUtils.ConvertStringToHumanReadableForm(region.Substring(regionIndex + RegionHelperStartPattern.Length + keepHashMark));
             }
 
             if (regionIndex < 0)
             {
-                isHelper = false;
                 regionIndex = region.IndexOf(RegionStartPattern);
                 if (regionIndex < 0)
                 {
                     regionName = String.Empty;
                     return false;
                 }
-                regionName = CodeExampleDemoUtils.ConvertStringToMoreHumanReadableForm(region.Substring(regionIndex + RegionStartPattern.Length + keepHashMark));
+                regionName = CodeExampleUtils.ConvertStringToHumanReadableForm(region.Substring(regionIndex + RegionStartPattern.Length + keepHashMark));
             }
             return true;
         }
@@ -103,8 +95,6 @@ namespace RichEditDocumentServerAPIExample.CodeUtils
     #region ExampleFinderVB
     public class ExampleFinderVB : ExampleFinder
     {
-        //public ExampleFinderVB() {
-        //}
         public override string RegexRegionPattern { get { return "#Region.*?#End Region"; } }
         public override string RegionStartPattern { get { return "#Region \"#"; } }
         public override string RegionHelperStartPattern { get { return "#Region \"#@"; } }
@@ -112,7 +102,7 @@ namespace RichEditDocumentServerAPIExample.CodeUtils
         protected override string[] DeleteLeadingWhiteSpacesFromSourceCode(string[] lines)
         {
             string[] result = base.DeleteLeadingWhiteSpacesFromSourceCode(lines);
-            return CodeExampleDemoUtils.DeleteLeadingWhiteSpaces(result, "\t\t");
+            return CodeExampleUtils.DeleteLeadingWhiteSpaces(result, "\t\t");
         }
         protected override bool ValidateRegionName(string[] lines, ref string regionName)
         {
@@ -124,10 +114,7 @@ namespace RichEditDocumentServerAPIExample.CodeUtils
         }
         protected override void SetExampleCode(string code, CodeExample newExample)
         {
-            if (isHelper)
-                newExample.CodeVbHelper = code;
-            else
-                newExample.CodeVB = code;
+            newExample.CodeVB = code;
         }
     }
     #endregion
@@ -140,10 +127,7 @@ namespace RichEditDocumentServerAPIExample.CodeUtils
 
         protected override void SetExampleCode(string code, CodeExample newExample)
         {
-            if (isHelper)
-                newExample.CodeCsHelper = code;
-            else
-                newExample.CodeCS = code;
+            newExample.CodeCS = code;
         }
     }
     #endregion

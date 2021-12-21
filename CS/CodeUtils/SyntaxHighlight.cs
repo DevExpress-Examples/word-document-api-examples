@@ -13,7 +13,6 @@ using DevExpress.XtraRichEdit.Export;
 using DevExpress.XtraRichEdit.Import;
 using DevExpress.XtraRichEdit.Internal;
 using DevExpress.XtraRichEdit.Services;
-using System.ComponentModel.Design;
 
 namespace RichEditDocumentServerAPIExample.CodeUtils
 {
@@ -49,22 +48,10 @@ namespace RichEditDocumentServerAPIExample.CodeUtils
             {
                 document.DefaultCharacterProperties.FontName = "Consolas";
                 document.DefaultCharacterProperties.FontSize = 10;
-                document.Sections[0].Page.Width = Units.InchesToDocumentsF(100);
-                document.Sections[0].LineNumbering.CountBy = 1;
-                document.Sections[0].LineNumbering.RestartType = LineNumberingRestart.Continuous;
-
-                //SizeF tabSize = innerControl.MeasureSingleLineString("    ", document.DefaultCharacterProperties);
-                //TabInfoCollection tabs = document.Paragraphs[0].BeginUpdateTabs(true);
-                //try {
-                //    for (int i = 1; i <= 30; i++) {
-                //        DevExpress.XtraRichEdit.API.Native.TabInfo tab = new DevExpress.XtraRichEdit.API.Native.TabInfo();
-                //        tab.Position = i * tabSize.Width;
-                //        tabs.Add(tab);
-                //    }
-                //}
-                //finally {
-                //    document.Paragraphs[0].EndUpdateTabs(tabs);
-                //}
+                document.Sections[0].Page.Width = Units.InchesToDocumentsF(20);
+                document.Sections[0].Margins.Top = Units.InchesToDocumentsF(0.2f);
+                document.Sections[0].Margins.Left = Units.InchesToDocumentsF(0.2f);
+                document.Sections[0].Margins.Right = Units.InchesToDocumentsF(0.2f);
             }
             finally
             {
@@ -100,7 +87,7 @@ namespace RichEditDocumentServerAPIExample.CodeUtils
             TokenCollection tokens = Parse(editor.Text);
             HighlightSyntax(tokens);
         }
-        private TokenCollection Parse(string code)
+        TokenCollection Parse(string code)
         {
             if (string.IsNullOrEmpty(code))
             {
@@ -114,7 +101,7 @@ namespace RichEditDocumentServerAPIExample.CodeUtils
             return tokenizer.GetTokens(code);
         }
 
-        private ITokenCategoryHelper CreateTokenizer()
+        ITokenCategoryHelper CreateTokenizer()
         {
             string fileName = editor.Options.DocumentSaveOptions.CurrentFileName;
             string extenstion;
@@ -137,7 +124,7 @@ namespace RichEditDocumentServerAPIExample.CodeUtils
             }
         }
 
-        private void HighlightSyntax(TokenCollection tokens)
+        void HighlightSyntax(TokenCollection tokens)
         {
             if (tokens == null || tokens.Count == 0)
             {
@@ -154,7 +141,7 @@ namespace RichEditDocumentServerAPIExample.CodeUtils
             document.ApplySyntaxHighlight(syntaxTokens);
             document.EndUpdateCharacters(cp);
         }
-        private void HighlightCategorizedToken(CategorizedToken token, List<SyntaxHighlightToken> syntaxTokens)
+        void HighlightCategorizedToken(CategorizedToken token, List<SyntaxHighlightToken> syntaxTokens)
         {
             Color backColor = editor.ActiveView.BackColor;
 
@@ -165,7 +152,7 @@ namespace RichEditDocumentServerAPIExample.CodeUtils
                 syntaxTokens.Add(syntaxToken);
             }
         }
-        private SyntaxHighlightToken SetTokenColor(Token token, SyntaxHighlightProperties foreColor, Color backColor)
+        SyntaxHighlightToken SetTokenColor(Token token, SyntaxHighlightProperties foreColor, Color backColor)
         {
             if (editor.Document.Paragraphs.Count < token.Range.Start.Line)
             {
@@ -185,7 +172,7 @@ namespace RichEditDocumentServerAPIExample.CodeUtils
 
     public class SyntaxHighlightInfo
     {
-        private readonly Dictionary<TokenCategory, SyntaxHighlightProperties> properties;
+        readonly Dictionary<TokenCategory, SyntaxHighlightProperties> properties;
 
         public SyntaxHighlightInfo()
         {
@@ -223,7 +210,7 @@ namespace RichEditDocumentServerAPIExample.CodeUtils
             Add(TokenCategory.HtmlString, DXColor.Blue);
             Add(TokenCategory.HtmlTagDelimiter, DXColor.Blue);
         }
-        private void Add(TokenCategory category, Color foreColor)
+        void Add(TokenCategory category, Color foreColor)
         {
             SyntaxHighlightProperties item = new SyntaxHighlightProperties();
             item.ForeColor = foreColor;
@@ -246,7 +233,7 @@ namespace RichEditDocumentServerAPIExample.CodeUtils
 
     public class CustomRichEditCommandFactoryService : IRichEditCommandFactoryService
     {
-        private readonly IRichEditCommandFactoryService service;
+        readonly IRichEditCommandFactoryService service;
 
         public CustomRichEditCommandFactoryService(IRichEditCommandFactoryService service)
         {
