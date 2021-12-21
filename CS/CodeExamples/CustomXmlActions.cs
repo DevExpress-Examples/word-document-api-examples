@@ -11,19 +11,27 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
 {
     class CustomXmlActions
     {
+        public static Action<RichEditDocumentServer> AddCustomXmlPartAction = AddCustomXmlPart;
+        public static Action<RichEditDocumentServer> AccessCustomXmlPartAction = AccessCustomXmlPart;
+        public static Action<RichEditDocumentServer> RemoveCustomXmlPartAction = RemoveCustomXmlPart;
         static void AddCustomXmlPart(RichEditDocumentServer wordProcessor)
         {
             #region #AddCustomXmlPart
+            // Access a document.
             Document document = wordProcessor.Document;
+            
+            // Append text to the document.
             document.AppendText("This document contains custom XML parts.");
+            
             // Add an empty custom XML part.
             ICustomXmlPart xmlItem = document.CustomXmlParts.Add();
+            
             // Populate the XML part with content.
             XmlElement elem = xmlItem.CustomXmlPartDocument.CreateElement("Employees");
             elem.InnerText = "Stephen Edwards";
             xmlItem.CustomXmlPartDocument.AppendChild(elem);
 
-            // Use a string to specify the content for a custom XML part.
+            // Specify the custom XML part content.
             string xmlString = @"<?xml version=""1.0"" encoding=""UTF-8""?>
                             <Employees>
                                 <FirstName>Stephen</FirstName>
@@ -46,17 +54,24 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
         static void AccessCustomXmlPart(RichEditDocumentServer wordProcessor)
         {
             #region #AccessCustomXmlPart
+            // Load a document from a file.
+            wordProcessor.LoadDocument("Documents\\Grimm.docx", DocumentFormat.OpenXml);
+
+            // Access a document.
             Document document = wordProcessor.Document;
-            // Load a document.
-            document.LoadDocument("Documents\\CustomXmlParts.docx");
-            // Access a custom XML file stored in the document.
-            XmlDocument xmlDoc = document.CustomXmlParts[0].CustomXmlPartDocument;
-            // Retrieve employee names from the XML file and display them in the document.
-            XmlNodeList nameList = xmlDoc.GetElementsByTagName("Name");
-            document.AppendText("Employee list:");
-            foreach (XmlNode name in nameList)
+
+            if (document.CustomXmlParts.Count > 0)
             {
-                document.AppendText("\r\n \u00B7 " + name.InnerText);
+                // Access a custom XML file stored in the document.
+                XmlDocument xmlDoc = document.CustomXmlParts[0].CustomXmlPartDocument;
+
+                // Retrieve employee names from the XML file and display them in the document.
+                XmlNodeList nameList = xmlDoc.GetElementsByTagName("Name");
+                document.AppendText("Employee list:");
+                foreach (XmlNode name in nameList)
+                {
+                    document.AppendText("\r\n \u00B7 " + name.InnerText);
+                }
             }
             #endregion #AccessCustomXmlPart
         }
@@ -64,7 +79,10 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
         static void RemoveCustomXmlPart(RichEditDocumentServer wordProcessor)
         {
             #region #RemoveCustomXmlPart
+            // Access a document.
             Document document = wordProcessor.Document;
+
+            // Append text to the document.
             document.AppendText("This document contains custom XML parts.");
 
             // Add the first custom XML part.

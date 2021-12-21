@@ -7,49 +7,59 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RichEditDocumentServerExample.CodeExamples
+namespace RichEditDocumentServerAPIExample.CodeExamples
 {
     class WatermarkActions
     {
+        public static Action<RichEditDocumentServer> CreateTextWatermarkAction = CreateTextWatermark;
+        public static Action<RichEditDocumentServer> CreateImageWatermarkAction = CreateImageWatermark;
         static void CreateTextWatermark(RichEditDocumentServer wordProcessor) 
         {
             #region #CreateTextWatermark
-            //Check whether the document sections have headers:
-            foreach (Section section in wordProcessor.Document.Sections)
+            // Access a document.
+            Document document = wordProcessor.Document;
+
+            // Check whether the document sections have headers.
+            foreach (Section section in document.Sections)
             {
                 if (!section.HasHeader(HeaderFooterType.Primary))
                 {
-                    //If not, create an empty header
+                    // Create an empty header.
                     SubDocument header = section.BeginUpdateHeader();
                     section.EndUpdateHeader(header);
                 }
             }
+
+            // Specify text watermark options.
             TextWatermarkOptions textWatermarkOptions = new TextWatermarkOptions();
             textWatermarkOptions.Color = System.Drawing.Color.LightGray;
             textWatermarkOptions.FontFamily = "Calibri";
             textWatermarkOptions.Layout = WatermarkLayout.Horizontal;
             textWatermarkOptions.Semitransparent = true;
 
-            wordProcessor.Document.WatermarkManager.SetText("CONFIDENTIAL", textWatermarkOptions);
+            // Add a text watermark to all document pages.
+            document.WatermarkManager.SetText("CONFIDENTIAL", textWatermarkOptions);
             #endregion #CreateTextWatermark
         }
         static void CreateImageWatermark(RichEditDocumentServer wordProcessor) 
         {
             #region #CreateImageWatermark
-            //Check whether the document sections have headers:
+            //Check whether the document sections have headers.
             foreach (Section section in wordProcessor.Document.Sections)
             {
                 if (!section.HasHeader(HeaderFooterType.Primary))
                 {
-                    //If not, create an empty header
+                    // Create an empty header.
                     SubDocument header = section.BeginUpdateHeader();
                     section.EndUpdateHeader(header);
                 }
             }
-
+            // Specify image watermark options.
             ImageWatermarkOptions imageWatermarkOptions = new ImageWatermarkOptions();
             imageWatermarkOptions.Washout = false;
             imageWatermarkOptions.Scale = 2;
+
+            // Add an image watermark to all document pages.
             wordProcessor.Document.WatermarkManager.SetImage(Image.FromFile("Documents//DevExpress.png"), imageWatermarkOptions);
             #endregion #CreateImageWatermark
 
