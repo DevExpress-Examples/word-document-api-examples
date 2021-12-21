@@ -42,7 +42,6 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             #endregion #HandleBeforeImportEvent
         }
 
-        #region #@HandleBeforeImportEvent
         class BeforeImportHelper
         {
             public static void BeforeImport(object sender, BeforeImportEventArgs e)
@@ -54,6 +53,5 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
                 }
             }
         }
-        #endregion #@HandleBeforeImportEvent
     }
 }
