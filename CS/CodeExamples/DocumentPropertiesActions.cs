@@ -71,7 +71,6 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             #endregion #CustomDocumentProperties
         }
 
-        #region #@CustomDocumentProperties
         class DocumentPropertyDisplayHelper
         {
            public static void OnCalculateDocumentVariable(object sender, CalculateDocumentVariableEventArgs e)
@@ -86,7 +85,6 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
                 e.Handled = true;
             }
         }
-        #endregion #@CustomDocumentProperties
 
 
     }
