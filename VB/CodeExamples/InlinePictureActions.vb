@@ -1,4 +1,4 @@
-﻿Imports System
+Imports System
 Imports System.Collections.Generic
 Imports System.Linq
 Imports System.Text
@@ -7,48 +7,52 @@ Imports DevExpress.XtraRichEdit.API.Native
 Imports DevExpress.XtraRichEdit
 
 Namespace RichEditDocumentServerAPIExample.CodeExamples
-	Friend Class InlinePicturesActions
-		Private Shared Sub ImageFromFile(ByVal wordProcessor As RichEditDocumentServer)
-'			#Region "#ImageFromFile"
-			Dim document As Document = wordProcessor.Document
-			Dim pos As DocumentPosition = document.Range.Start
-			document.Images.Insert(pos, DocumentImageSource.FromFile("Documents\beverages.png"))
-'			#End Region ' #ImageFromFile
-		End Sub
 
-		Private Shared Sub ImageCollection(ByVal wordProcessor As RichEditDocumentServer)
-'			#Region "#ImageCollection"
-			Dim document As Document = wordProcessor.Document
-			document.LoadDocument("Documents\Grimm.docx", DocumentFormat.OpenXml)
-			Dim images As ReadOnlyDocumentImageCollection = document.Images
-			' If the width of an image exceeds 50 millimeters, 
-			' the image is scaled proportionally to half its size.
-			For i As Integer = 0 To images.Count - 1
-				If images(i).Size.Width > DevExpress.Office.Utils.Units.MillimetersToDocumentsF(50) Then
-'INSTANT VB WARNING: Instant VB cannot determine whether both operands of this division are integer types - if they are then you should use the VB integer division operator:
-					images(i).ScaleX /= 2
-'INSTANT VB WARNING: Instant VB cannot determine whether both operands of this division are integer types - if they are then you should use the VB integer division operator:
-					images(i).ScaleY /= 2
-				End If
-			Next i
-'			#End Region ' #ImageCollection
-		End Sub
+    Friend Class InlinePicturesActions
 
-		Private Shared Sub SaveImageToFile(ByVal wordProcessor As RichEditDocumentServer)
-'			#Region "#SaveImageToFile"
-			Dim document As Document = wordProcessor.Document
-			document.LoadDocument("Documents\MovieRentals.docx", DocumentFormat.OpenXml)
-			Dim myRange As DocumentRange = document.CreateRange(0, 100)
-			Dim images As ReadOnlyDocumentImageCollection = document.Images.Get(myRange)
-			If images.Count > 0 Then
-				Dim myImage As DevExpress.Office.Utils.OfficeImage = images(0).Image
-				Dim image As System.Drawing.Image = myImage.NativeImage
-				Dim imageName As String = String.Format("Image_at_pos_{0}.png", images(0).Range.Start.ToInt())
-				image.Save(imageName)
-				System.Diagnostics.Process.Start("explorer.exe", "/select," & imageName)
-			End If
-'			#End Region ' #SaveImageToFile
-		End Sub
-	End Class
+        Public Shared ImageCollectionAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.InlinePicturesActions.ImageCollection
+
+        Public Shared SaveImageToFileAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.InlinePicturesActions.SaveImageToFile
+
+        Private Shared Sub ImageCollection(ByVal wordProcessor As DevExpress.XtraRichEdit.RichEditDocumentServer)
+#Region "#ImageCollection"
+            ' Load a document from a file.
+            wordProcessor.LoadDocument("Documents\Grimm.docx", DevExpress.XtraRichEdit.DocumentFormat.OpenXml)
+            ' Access a document.
+            Dim document As DevExpress.XtraRichEdit.API.Native.Document = wordProcessor.Document
+            ' Obtain all images contained in the document.
+            Dim images As DevExpress.XtraRichEdit.API.Native.ReadOnlyDocumentImageCollection = document.Images
+            ' If the image width exceeds 50 millimeters, 
+            ' scale the image proportionally to half its size.
+            For i As Integer = 0 To images.Count - 1
+                If images(CInt((i))).Size.Width > DevExpress.Office.Utils.Units.MillimetersToDocumentsF(50) Then
+                    images(CInt((i))).ScaleX /= 2
+                    images(CInt((i))).ScaleY /= 2
+                End If
+            Next
+#End Region  ' #ImageCollection
+        End Sub
+
+        Private Shared Sub SaveImageToFile(ByVal wordProcessor As DevExpress.XtraRichEdit.RichEditDocumentServer)
+#Region "#SaveImageToFile"
+            ' Load a document from a file.
+            wordProcessor.LoadDocument("Documents\Grimm.docx", DevExpress.XtraRichEdit.DocumentFormat.OpenXml)
+            ' Access a document.
+            Dim document As DevExpress.XtraRichEdit.API.Native.Document = wordProcessor.Document
+            ' Create a document range.
+            Dim myRange As DevExpress.XtraRichEdit.API.Native.DocumentRange = document.CreateRange(0, 100)
+            ' Obtain all images in the target range.
+            Dim images As DevExpress.XtraRichEdit.API.Native.ReadOnlyDocumentImageCollection = document.Images.[Get](myRange)
+            If images.Count > 0 Then
+                ' Save the first retrieved image as a PNG file.
+                Dim myImage As DevExpress.Office.Utils.OfficeImage = images(CInt((0))).Image
+                Dim image As System.Drawing.Image = myImage.NativeImage
+                Dim imageName As String = System.[String].Format("Image_at_pos_{0}.png", images(CInt((0))).Range.Start.ToInt())
+                image.Save(imageName)
+                ' Open the File Explorer and select the saved image.
+                System.Diagnostics.Process.Start("explorer.exe", "/select," & imageName)
+            End If
+#End Region  ' #SaveImageToFile
+        End Sub
+    End Class
 End Namespace
-
