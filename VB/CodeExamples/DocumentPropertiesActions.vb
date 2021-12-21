@@ -59,7 +59,6 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
 #End Region  ' #CustomDocumentProperties
         End Sub
 
-#Region "#@CustomDocumentProperties"
         Private Class DocumentPropertyDisplayHelper
 
             Public Shared Sub OnCalculateDocumentVariable(ByVal sender As Object, ByVal e As DevExpress.XtraRichEdit.CalculateDocumentVariableEventArgs)
@@ -70,6 +69,5 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
                 e.Handled = True
             End Sub
         End Class
-#End Region  ' #@CustomDocumentProperties
     End Module
 End Namespace
