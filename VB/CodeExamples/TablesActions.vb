@@ -116,7 +116,6 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
 #End Region  ' #ChangeTableColor
         End Sub
 
-#Region "#@ChangeTableColor"
         Private Class TableHelper
 
             Public Shared Sub ChangeCellColor(ByVal cell As DevExpress.XtraRichEdit.API.Native.TableCell, ByVal i As Integer, ByVal j As Integer)
@@ -131,7 +130,6 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
             End Sub
         End Class
 
-#End Region  ' #@ChangeTableColor
         Private Shared Sub CreateAndApplyTableStyle(ByVal wordProcessor As DevExpress.XtraRichEdit.RichEditDocumentServer)
 #Region "#CreateAndApplyTableStyle"
             ' Access a document.
@@ -231,7 +229,6 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
 #End Region  ' #ChangeColumnAppearance
         End Sub
 
-#Region "#@ChangeColumnAppearance"
         Private Class ChangeColumnAppearanceHelper
 
             Public Shared Sub ChangeColumnColor(ByVal row As DevExpress.XtraRichEdit.API.Native.TableRow, ByVal rowIndex As Integer)
@@ -240,7 +237,6 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
             End Sub
         End Class
 
-#End Region  ' #@ChangeColumnAppearance
         Private Shared Sub UseTableCellProcessor(ByVal wordProcessor As DevExpress.XtraRichEdit.RichEditDocumentServer)
 #Region "#UseTableCellProcessor"
             ' Access a document.
@@ -257,7 +253,6 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
 #End Region  ' #UseTableCellProcessor
         End Sub
 
-#Region "#@UseTableCellProcessor"
         Private Class UseTableCellProcessorHelper
 
             Public Shared Sub MakeMultiplicationCell(ByVal cell As DevExpress.XtraRichEdit.API.Native.TableCell, ByVal i As Integer, ByVal j As Integer)
@@ -267,7 +262,6 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
             End Sub
         End Class
 
-#End Region  ' #@UseTableCellProcessor
         Private Shared Sub MergeCells(ByVal wordProcessor As DevExpress.XtraRichEdit.RichEditDocumentServer)
 #Region "#MergeCells"
             ' Access a document.
