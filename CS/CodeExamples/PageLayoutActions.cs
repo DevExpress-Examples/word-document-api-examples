@@ -75,7 +75,7 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             document.Unit = DevExpress.Office.DocumentUnit.Inch;
             
             // Specify page layout settings for the first document section.
-            document.Sections[0].Page.PaperKind = System.Drawing.Printing.PaperKind.A6;
+            document.Sections[0].Page.PaperKind = DevExpress.Drawing.Printing.DXPaperKind.A6;
             document.Sections[0].Page.Landscape = true;
             document.Sections[0].Margins.Left = 2.0f;
             #endregion #PrintLayout

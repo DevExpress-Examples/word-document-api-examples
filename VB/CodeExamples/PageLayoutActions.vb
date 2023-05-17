@@ -62,7 +62,7 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
             ' Specify the document’s measure units.
             document.Unit = DevExpress.Office.DocumentUnit.Inch
             ' Specify page layout settings for the first document section.
-            document.Sections(CInt((0))).Page.PaperKind = System.Drawing.Printing.PaperKind.A6
+            document.Sections(CInt((0))).Page.PaperKind = DevExpress.Drawing.Printing.DXPaperKind.A6
             document.Sections(CInt((0))).Page.Landscape = True
             document.Sections(CInt((0))).Margins.Left = 2.0F
 #End Region  ' #PrintLayout
