@@ -11,28 +11,9 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
 {
     class RangeActions
     {
-        public static Action<RichEditDocumentServer> SelectTextInRangeAction = SelectTextInRange;
         public static Action<RichEditDocumentServer> InsertTextInRangeAction = InsertTextInRange;
         public static Action<RichEditDocumentServer> AppendTextToRangeAction = AppendTextToRange;
-        public static Action<RichEditDocumentServer> AppendToParagraphAction = AppendToParagraph;
-
-        static void SelectTextInRange(RichEditDocumentServer wordProcessor)
-        {
-            #region #SelectTextInRange
-            // Load a document from a file.
-            wordProcessor.LoadDocument("Documents\\Grimm.docx", DocumentFormat.OpenXml);
-
-            // Access a document.
-            Document document = wordProcessor.Document;
-
-            // Create a document range.
-            DocumentPosition myStart = document.CreatePosition(69);
-            DocumentRange myRange = document.CreateRange(myStart, 716);
-            
-            // Select text in the target range.
-            document.Selection = myRange;
-            #endregion #SelectTextInRange
-        }        
+        public static Action<RichEditDocumentServer> AppendToParagraphAction = AppendToParagraph;        
 
         static void InsertTextInRange(RichEditDocumentServer wordProcessor)
         {
@@ -44,22 +25,21 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             document.AppendText("ABCDEFGH");
 
             // Create the first document range.
-            DocumentRange r1 = document.CreateRange(1, 3);
+            DocumentRange range1 = document.CreateRange(1, 3);
 
             // Insert text into the first document range
             // and access the range of the inserted text.
-            DocumentPosition pos1 = document.CreatePosition(2);
-            DocumentRange r2 = document.InsertText(pos1, ">>NewText<<");
+            DocumentRange range2 = document.InsertText(range1.End, ">>NewText<<");
 
             // Output the start and end positions of the first document range. 
-            string s1 = String.Format("Range r1 starts at {0}, ends at {1}", r1.Start, r1.End);
+            string text1 = String.Format("Range range1 starts at {0}, ends at {1}", range1.Start, range1.End);
             document.Paragraphs.Append();
-            document.AppendText(s1);
+            document.AppendText(text1);
 
             // Output the start and end positions of the second document range. 
-            string s2 = String.Format("Range r2 starts at {0}, ends at {1}", r2.Start, r2.End);
+            string text2 = String.Format("Range range2 starts at {0}, ends at {1}", range2.Start, range2.End);
             document.Paragraphs.Append();
-            document.AppendText(s2);
+            document.AppendText(text2);
             #endregion #InsertTextInRange
         }
 

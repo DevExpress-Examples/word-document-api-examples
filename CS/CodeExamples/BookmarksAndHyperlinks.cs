@@ -25,16 +25,14 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             
             // Start to edit the document.
             document.BeginUpdate();
-
-            // Access the start position of the document range.
-            DocumentPosition pos = document.Range.Start;
             
-            // Create a bookmark at the document top.
-            document.Bookmarks.Create(wordProcessor.Document.CreateRange(pos, 0), "Top");
+            // Create a bookmark at the start document position.
+            document.Bookmarks.Create(document.CreateRange(document.Range.Start, 0), "Top");
 
             // Create a hyperlink that navigates to the created bookmark.
-            DocumentPosition pos1 = document.CreatePosition((wordProcessor.Document.Range.End).ToInt() + 25);
-            document.Hyperlinks.Create(wordProcessor.Document.InsertText(pos1, "get to the top"));
+            wordProcessor.Document.Paragraphs.Append();
+            DocumentRange hyperlinkRange = wordProcessor.Document.AppendText("get to the top");
+            document.Hyperlinks.Create(hyperlinkRange);
             document.Hyperlinks[0].Anchor = "Top";
         
             // Finalize to edit the document.
@@ -46,12 +44,10 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             #region #InsertHyperlink
             // Access a document.
             Document document = wordProcessor.Document;
-            
-            // Access the start position of the document range.
-            DocumentPosition hPos = wordProcessor.Document.Range.Start;
 
             // Create a hyperlink at the specified position.
-            document.Hyperlinks.Create(document.InsertText(hPos, "Follow me!"));
+            DocumentRange hyperlinkRange = document.InsertText(document.Range.Start, "Follow me!");
+            document.Hyperlinks.Create(hyperlinkRange);
 
             // Specify the URI to which the hyperlink navigates. 
             document.Hyperlinks[0].NavigateUri = "https://devexpress.com";

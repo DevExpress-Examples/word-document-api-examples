@@ -9,12 +9,12 @@ using DevExpress.XtraPrinting;
 using System.IO;
 using DevExpress.XtraRichEdit.Export;
 using DevExpress.XtraRichEdit.API.Native;
+using DevExpress.XtraRichEdit.Export.Html;
 
 namespace RichEditDocumentServerAPIExample.CodeExamples
 {
     class ExportActions
     {
-        public static Action<RichEditDocumentServer> SaveImageFromRangeAction = SaveImageFromRange;
         public static Action<RichEditDocumentServer> ExportRangeToHtmlAction = ExportRangeToHtml;
         public static Action<RichEditDocumentServer> ExportRangeToPlainTextAction = ExportRangeToPlainText;
         public static Action<RichEditDocumentServer> ExportToPDFAction = ExportToPDF;
@@ -22,36 +22,6 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
         public static Action<RichEditDocumentServer> ConvertHTMLtoDOCXAction = ConvertHTMLtoDOCX;
         public static Action<RichEditDocumentServer> ExportToHTMLAction = ExportToHTML;
         public static Action<RichEditDocumentServer> BeforeExportAction = BeforeExport;
-
-        static void SaveImageFromRange(RichEditDocumentServer wordProcessor)
-        {
-            #region #SaveImageFromRange
-            // Load a document from a file.
-            wordProcessor.LoadDocument("Documents\\Grimm.docx", DocumentFormat.OpenXml);
-
-            // Access a document.
-            DevExpress.XtraRichEdit.API.Native.Document document = wordProcessor.Document;
-
-            // Access the range of the document's third paragraph.
-            DocumentRange docRange = document.Paragraphs[2].Range;
-
-            // Obtain all images located in the target range.
-            ReadOnlyDocumentImageCollection docImageColl = document.Images.Get(docRange);
-            if (docImageColl.Count > 0)
-            {
-                // Access the first image of the document image collection.
-                DevExpress.Office.Utils.OfficeImage myImage = docImageColl[0].Image;
-
-                // Save the image in PNG format. 
-                System.Drawing.Image image = myImage.NativeImage;
-                string imageName = String.Format("Image_at_pos_{0}.png", docRange.Start.ToInt());
-                image.Save(imageName);
-
-                // Open the File Explorer and select the saved image.
-                System.Diagnostics.Process.Start("explorer.exe", "/select," + imageName);
-            }
-            #endregion #SaveImageFromRange
-        }
 
         static void ExportRangeToHtml(RichEditDocumentServer wordProcessor)
         {
@@ -65,10 +35,10 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             if (document.Paragraphs.Count > 2)
             {
                 // Access the range of the first three paragraphs.
-                DocumentRange r = document.CreateRange(document.Paragraphs[0].Range.Start, document.Paragraphs[0].Range.Length + document.Paragraphs[1].Range.Length + document.Paragraphs[2].Range.Length);
+                DocumentRange range = document.CreateRange(document.Paragraphs[0].Range.Start, document.Paragraphs[2].Range.End.ToInt()- document.Paragraphs[0].Range.Start.ToInt());
 
                 // Save text contained in the target range in HTML format.
-                string htmlText = document.GetHtmlText(r, null);
+                string htmlText = document.GetHtmlText(range, null);
                 System.IO.File.WriteAllText("test.html", htmlText);
 
                 // Show the result in a browser window.
@@ -169,7 +139,17 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             wordProcessor.LoadDocument("Documents\\Grimm.docx");
 
             // Handle the Before Export event.
-            wordProcessor.BeforeExport += BeforeExportHelper.BeforeExport;
+            wordProcessor.BeforeExport += (s, e) =>
+            {
+                // Specify the export options before a document is exported to HTML.
+                HtmlDocumentExporterOptions options = e.Options as HtmlDocumentExporterOptions;
+                if (options != null)
+                {
+                    options.CssPropertiesExportType = CssPropertiesExportType.Link;
+                    options.HtmlNumberingListExportFormat = HtmlNumberingListExportFormat.HtmlFormat;
+                    options.TargetUri = "Document_HTML.html";
+                }
+            };
 
             // Save the document as an HTML file.
             wordProcessor.SaveDocument("Document_HTML.html", DocumentFormat.Html);
@@ -178,22 +158,6 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             System.Diagnostics.Process.Start("Document_HTML.html");
             #endregion #HandleBeforeExportEvent
         }
-
-        class BeforeExportHelper
-        {
-            public static void BeforeExport(object sender, BeforeExportEventArgs e)
-            {
-                // Specify the export options before a document is exported to HTML.
-                DevExpress.XtraRichEdit.Export.HtmlDocumentExporterOptions options = e.Options as HtmlDocumentExporterOptions;
-                if (options != null)
-                {
-                    options.CssPropertiesExportType = DevExpress.XtraRichEdit.Export.Html.CssPropertiesExportType.Link;
-                    options.HtmlNumberingListExportFormat = DevExpress.XtraRichEdit.Export.Html.HtmlNumberingListExportFormat.HtmlFormat;
-                    options.TargetUri = "Document_HTML.html";
-                }
-            }
-        }
     }
-
 }
 

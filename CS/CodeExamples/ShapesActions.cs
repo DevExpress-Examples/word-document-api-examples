@@ -16,7 +16,6 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
         public static Action<RichEditDocumentServer> AddTextBoxAction = AddTextBox;
         public static Action<RichEditDocumentServer> InsertRichTextInTextBoxAction = InsertRichTextInTextBox;
         public static Action<RichEditDocumentServer> RotateAndResizeAction = RotateAndResize;
-        public static Action<RichEditDocumentServer> SelectShapeAction = SelectShape;
 
         static void AddFloatingPicture(RichEditDocumentServer wordProcessor)
         {
@@ -148,10 +147,10 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             // Append the second paragraph of the main document to the boxed text.
             DocumentRange newRange = boxedDocument.AppendDocumentContent(document.Paragraphs[1].Range);
             boxedDocument.Paragraphs.Insert(newRange.Start);
-            
+
             // Insert an image form the main document into the text box.
             boxedDocument.Images.Insert(boxedDocument.CreatePosition(appendPosition), document.Images[0].Image.NativeImage);
-            
+
             // Resize the image so that its size equals the image in the main document.
             boxedDocument.Images[0].Size = document.Images[0].Size;
             #endregion #InsertRichTextInTextBox
@@ -182,23 +181,6 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
                 }
             }
             #endregion #RotateAndResize
-        }
-
-        static void SelectShape(RichEditDocumentServer wordProcessor)
-        {
-            #region #SelectShape
-            // Load a document from a file.
-            wordProcessor.LoadDocument("Documents\\Grimm.docx", DocumentFormat.OpenXml);
-
-            // Access a document.
-            Document document = wordProcessor.Document;
-
-            if (document.Shapes.Count > 1)
-            {
-                // Select the second drawing object in the shape collection.
-                document.Selection = document.Shapes[1].Range;
-            }
-            #endregion #SelectShape
         }
     }
 }

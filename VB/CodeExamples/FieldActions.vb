@@ -17,7 +17,6 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
 
         Public Shared CreateFieldFromRangeAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.FieldActions.CreateFieldFromRange
 
-        Public Shared ShowFieldCodesAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.FieldActions.ShowFieldCodes
 
         Private Shared Sub InsertField(ByVal wordProcessor As DevExpress.XtraRichEdit.RichEditDocumentServer)
 #Region "#InsertField"
@@ -77,20 +76,6 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
             ' Update all fields in the main document body.
             document.Fields.Update()
 #End Region  ' #CreateFieldFromRange
-        End Sub
-
-        Private Shared Sub ShowFieldCodes(ByVal wordProcessor As DevExpress.XtraRichEdit.RichEditDocumentServer)
-#Region "#ShowFieldCodes"
-            ' Load a document from a file.
-            wordProcessor.LoadDocument("Documents\MailMergeSimple.docx", DevExpress.XtraRichEdit.DocumentFormat.OpenXml)
-            ' Access a document.
-            Dim document As DevExpress.XtraRichEdit.API.Native.Document = wordProcessor.Document
-            ' Check all fields in the main document body.
-            For i As Integer = 0 To document.Fields.Count - 1
-                ' Show field codes.
-                document.Fields(CInt((i))).ShowCodes = True
-            Next
-#End Region  ' #ShowFieldCodes
         End Sub
     End Class
 End Namespace

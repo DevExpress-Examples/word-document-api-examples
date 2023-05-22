@@ -22,8 +22,6 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
 
         Public Shared RotateAndResizeAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.ShapesActions.RotateAndResize
 
-        Public Shared SelectShapeAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.ShapesActions.SelectShape
-
         Private Shared Sub AddFloatingPicture(ByVal wordProcessor As DevExpress.XtraRichEdit.RichEditDocumentServer)
 #Region "#AddFloatingPicture"
             ' Access a document.
@@ -110,21 +108,27 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
 #Region "#InsertRichTextInTextBox"
             ' Load a document from a file.
             wordProcessor.LoadDocument("Documents\Grimm.docx", DevExpress.XtraRichEdit.DocumentFormat.OpenXml)
+
             ' Access a document.
-            Dim document As DevExpress.XtraRichEdit.API.Native.Document = wordProcessor.Document
+            Dim document As Document = wordProcessor.Document
+
             ' Access a text box.
-            Dim myTextBox As DevExpress.XtraRichEdit.API.Native.Shape = document.Shapes(0)
+            Dim myTextBox As Shape = document.Shapes(0)
+
             ' Allow text box resize to fit contents.
-            myTextBox.ShapeFormat.TextBox.HeightRule = DevExpress.XtraRichEdit.API.Native.TextBoxSizeRule.Auto
-            Dim boxedDocument As DevExpress.XtraRichEdit.API.Native.SubDocument = myTextBox.ShapeFormat.TextBox.Document
+            myTextBox.ShapeFormat.TextBox.HeightRule = TextBoxSizeRule.Auto
+            Dim boxedDocument As SubDocument = myTextBox.ShapeFormat.TextBox.Document
             Dim appendPosition As Integer = myTextBox.ShapeFormat.TextBox.Document.Range.[End].ToInt()
+
             ' Append the second paragraph of the main document to the boxed text.
-            Dim newRange As DevExpress.XtraRichEdit.API.Native.DocumentRange = boxedDocument.AppendDocumentContent(document.Paragraphs(CInt((1))).Range)
+            Dim newRange As DocumentRange = boxedDocument.AppendDocumentContent(document.Paragraphs(CInt((1))).Range)
             boxedDocument.Paragraphs.Insert(newRange.Start)
+
             ' Insert an image form the main document into the text box.
             boxedDocument.Images.Insert(boxedDocument.CreatePosition(appendPosition), document.Images(CInt((0))).Image.NativeImage)
+
             ' Resize the image so that its size equals the image in the main document.
-            boxedDocument.Images(CInt((0))).Size = document.Images(CInt((0))).Size
+            boxedDocument.Images(0).Size = document.Images(0).Size
 #End Region  ' #InsertRichTextInTextBox
         End Sub
 
@@ -146,19 +150,6 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
                 End If
             Next
 #End Region  ' #RotateAndResize
-        End Sub
-
-        Private Shared Sub SelectShape(ByVal wordProcessor As DevExpress.XtraRichEdit.RichEditDocumentServer)
-#Region "#SelectShape"
-            ' Load a document from a file.
-            wordProcessor.LoadDocument("Documents\Grimm.docx", DevExpress.XtraRichEdit.DocumentFormat.OpenXml)
-            ' Access a document.
-            Dim document As DevExpress.XtraRichEdit.API.Native.Document = wordProcessor.Document
-            If document.Shapes.Count > 1 Then
-                ' Select the second drawing object in the shape collection.
-                document.Selection = document.Shapes(CInt((1))).Range
-            End If
-#End Region  ' #SelectShape
         End Sub
     End Class
 End Namespace

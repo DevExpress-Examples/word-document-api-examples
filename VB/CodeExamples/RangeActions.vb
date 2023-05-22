@@ -11,48 +11,36 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
 
     Friend Class RangeActions
 
-        Public Shared SelectTextInRangeAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.RangeActions.SelectTextInRange
-
         Public Shared InsertTextInRangeAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.RangeActions.InsertTextInRange
 
         Public Shared AppendTextToRangeAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.RangeActions.AppendTextToRange
 
         Public Shared AppendToParagraphAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.RangeActions.AppendToParagraph
 
-        Private Shared Sub SelectTextInRange(ByVal wordProcessor As DevExpress.XtraRichEdit.RichEditDocumentServer)
-#Region "#SelectTextInRange"
-            ' Load a document from a file.
-            wordProcessor.LoadDocument("Documents\Grimm.docx", DevExpress.XtraRichEdit.DocumentFormat.OpenXml)
-            ' Access a document.
-            Dim document As DevExpress.XtraRichEdit.API.Native.Document = wordProcessor.Document
-            ' Create a document range.
-            Dim myStart As DevExpress.XtraRichEdit.API.Native.DocumentPosition = document.CreatePosition(69)
-            Dim myRange As DevExpress.XtraRichEdit.API.Native.DocumentRange = document.CreateRange(myStart, 716)
-            ' Select text in the target range.
-            document.Selection = myRange
-#End Region  ' #SelectTextInRange
-        End Sub
-
         Private Shared Sub InsertTextInRange(ByVal wordProcessor As DevExpress.XtraRichEdit.RichEditDocumentServer)
 #Region "#InsertTextInRange"
             ' Access a document.
-            Dim document As DevExpress.XtraRichEdit.API.Native.Document = wordProcessor.Document
+            Dim document As Document = wordProcessor.Document
+
             ' Append text to the document.
             document.AppendText("ABCDEFGH")
+
             ' Create the first document range.
-            Dim r1 As DevExpress.XtraRichEdit.API.Native.DocumentRange = document.CreateRange(1, 3)
+            Dim range1 As DocumentRange = document.CreateRange(1, 3)
+
             ' Insert text into the first document range
             ' and access the range of the inserted text.
-            Dim pos1 As DevExpress.XtraRichEdit.API.Native.DocumentPosition = document.CreatePosition(2)
-            Dim r2 As DevExpress.XtraRichEdit.API.Native.DocumentRange = document.InsertText(pos1, ">>NewText<<")
+            Dim range2 As DocumentRange = document.InsertText(range1.End, ">>NewText<<")
+
             ' Output the start and end positions of the first document range. 
-            Dim s1 As String = System.[String].Format("Range r1 starts at {0}, ends at {1}", r1.Start, r1.[End])
+            Dim text1 As String = String.Format("Range range1 starts at {0}, ends at {1}", range1.Start, range1.[End])
             document.Paragraphs.Append()
-            document.AppendText(s1)
+            document.AppendText(text1)
+
             ' Output the start and end positions of the second document range. 
-            Dim s2 As String = System.[String].Format("Range r2 starts at {0}, ends at {1}", r2.Start, r2.[End])
+            Dim text2 As String = String.Format("Range range2 starts at {0}, ends at {1}", range2.Start, range2.[End])
             document.Paragraphs.Append()
-            document.AppendText(s2)
+            document.AppendText(text2)
 #End Region  ' #InsertTextInRange
         End Sub
 

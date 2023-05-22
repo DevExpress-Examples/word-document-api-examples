@@ -67,7 +67,6 @@ namespace RichEditDocumentServerAPIExample.CodeUtils
             examples[4].Groups.Add(new RichEditExample("Set Custom Properties", string.Empty, string.Empty, DocumentPropertiesActions.CustomDocumentPropertiesAction, true));
 
             //Add nodes to the "Export" group of examples.
-            examples[5].Groups.Add(new RichEditExample("Save an Image from Range", string.Empty, string.Empty, ExportActions.SaveImageFromRangeAction, false));
             examples[5].Groups.Add(new RichEditExample("Export a Range to HTML", string.Empty, string.Empty, ExportActions.ExportRangeToHtmlAction, false));
             examples[5].Groups.Add(new RichEditExample("Export a Range to Plain Text", string.Empty, string.Empty, ExportActions.ExportRangeToPlainTextAction, false));
             examples[5].Groups.Add(new RichEditExample("Convert DOCX to PDF", string.Empty, string.Empty, ExportActions.ExportToPDFAction, false));
@@ -80,7 +79,6 @@ namespace RichEditDocumentServerAPIExample.CodeUtils
             examples[6].Groups.Add(new RichEditExample("Insert a Field", string.Empty, string.Empty, FieldActions.InsertFieldAction, true));
             examples[6].Groups.Add(new RichEditExample("Modify a Field", string.Empty, string.Empty, FieldActions.ModifyFieldCodeAction, true));
             examples[6].Groups.Add(new RichEditExample("Create a Field from a Range", string.Empty, string.Empty, FieldActions.CreateFieldFromRangeAction, true));
-            examples[6].Groups.Add(new RichEditExample("Show Field Codes", string.Empty, string.Empty, FieldActions.ShowFieldCodesAction, true)); //doesn't show field codes
 
             //Add nodes to the "Formatting" group of examples.
             examples[7].Groups.Add(new RichEditExample("Format Text", string.Empty, string.Empty, FormattingActions.FormatTextAction, true));
@@ -129,7 +127,6 @@ namespace RichEditDocumentServerAPIExample.CodeUtils
             examples[15].Groups.Add(new RichEditExample("Create Range Permissions", string.Empty, string.Empty, ProtectionActions.CreateRangePermissionsAction, false));
 
             //Add nodes to the "Ranges" group of examples.
-            examples[16].Groups.Add(new RichEditExample("Select Text in a Range", string.Empty, string.Empty, RangeActions.SelectTextInRangeAction, true));
             examples[16].Groups.Add(new RichEditExample("Insert Text in a Range", string.Empty, string.Empty, RangeActions.InsertTextInRangeAction, true));
             examples[16].Groups.Add(new RichEditExample("Append Text to a Range", string.Empty, string.Empty, RangeActions.AppendTextToRangeAction, true));
             examples[16].Groups.Add(new RichEditExample("Append Text to a Paragraph", string.Empty, string.Empty, RangeActions.AppendToParagraphAction, true));
@@ -141,7 +138,6 @@ namespace RichEditDocumentServerAPIExample.CodeUtils
             examples[17].Groups.Add(new RichEditExample("Add a Text Box", string.Empty, string.Empty, ShapesActions.AddTextBoxAction, true));
             examples[17].Groups.Add(new RichEditExample("Insert Rich Text in a TextBox", string.Empty, string.Empty, ShapesActions.InsertRichTextInTextBoxAction, true));
             examples[17].Groups.Add(new RichEditExample("Rotate and Resize Shapes", string.Empty, string.Empty, ShapesActions.RotateAndResizeAction, true));
-            examples[17].Groups.Add(new RichEditExample("Select a Shape", string.Empty, string.Empty, ShapesActions.SelectShapeAction, true));
 
             //Add nodes to the "Styles" group of examples.
             examples[18].Groups.Add(new RichEditExample("Create a New Character Style", string.Empty, string.Empty, StylesAction.CreateNewCharacterStyleAction, true));

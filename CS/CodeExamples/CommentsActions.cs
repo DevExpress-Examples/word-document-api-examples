@@ -51,15 +51,12 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
 
             if (document.Comments.Count > 1)
             {
-                // Find text ranges matched the string in the document range
-                // to which the parent comment relates.
-                DocumentRange[] resRanges = document.FindAll("trump", SearchOptions.None, document.Comments[1].Range);
-                if (resRanges.Length > 0)
-                {
-                    // Create a new comment nested in the parent comment.
-                    Comment newComment = document.Comments.Create("Vicars Anny", document.Comments[1]);
-                    newComment.Date = DateTime.Now;
-                }
+                // Create a new comment nested in the parent comment.
+                Comment newComment = document.Comments.Create("Vicars Anny", document.Comments[1]);
+                newComment.Date = DateTime.Now;
+                SubDocument commentDocument = newComment.BeginUpdate();
+                commentDocument.InsertText(commentDocument.Range.Start, "I agree");
+                newComment.EndUpdate(commentDocument);
             }
             #endregion #CreateNestedComment
         }
@@ -101,7 +98,7 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
                 comment.Name = "New Name";
                 comment.Date = DateTime.Now;
                 comment.Author = "New Author";
-                
+
                 // Finalize to edit the document.
                 document.EndUpdate();
             }
@@ -128,10 +125,11 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
                     SubDocument commentDocument = comment.BeginUpdate();
 
                     // Insert a text to the comment.
-                    commentDocument.InsertText(commentDocument.CreatePosition(0), "some text");
+                    commentDocument.Paragraphs.Insert(commentDocument.Range.Start);
+                    commentDocument.InsertText(commentDocument.Range.Start, "some text");
 
                     // Insert a table to the comment.
-                    commentDocument.Tables.Create(commentDocument.CreatePosition(9), 5, 4);
+                    commentDocument.Tables.Create(commentDocument.Range.End, 5, 4);
 
                     // Finalize to edit the comment.
                     comment.EndUpdate(commentDocument);

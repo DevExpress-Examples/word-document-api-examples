@@ -64,28 +64,21 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             document.CustomProperties["MyStringProperty"] = "The Final Answer";
             document.CustomProperties["MyBooleanProperty"] = true;
 
-            wordProcessor.CalculateDocumentVariable += DocumentPropertyDisplayHelper.OnCalculateDocumentVariable;
-            
-            // Update all fields in the main document body.
-            document.Fields.Update();
-            #endregion #CustomDocumentProperties
-        }
-
-        class DocumentPropertyDisplayHelper
-        {
-           public static void OnCalculateDocumentVariable(object sender, CalculateDocumentVariableEventArgs e)
+            wordProcessor.CalculateDocumentVariable += (s, e) =>
             {
                 if (e.Arguments.Count == 0 || e.VariableName != "CustomProperty")
                     return;
 
                 string name = e.Arguments[0].Value;
-                object customProperty = ((RichEditDocumentServer)sender).Document.CustomProperties[name];
+                object customProperty = ((RichEditDocumentServer)s).Document.CustomProperties[name];
                 if (customProperty != null)
                     e.Value = customProperty.ToString();
                 e.Handled = true;
-            }
+            };
+            
+            // Update all fields in the main document body.
+            document.Fields.Update();
+            #endregion #CustomDocumentProperties
         }
-
-
     }
 }

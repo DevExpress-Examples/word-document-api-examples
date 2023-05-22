@@ -14,7 +14,6 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
         public static Action<RichEditDocumentServer> InsertFieldAction = InsertField;
         public static Action<RichEditDocumentServer> ModifyFieldCodeAction = ModifyFieldCode;
         public static Action<RichEditDocumentServer> CreateFieldFromRangeAction = CreateFieldFromRange;
-        public static Action<RichEditDocumentServer> ShowFieldCodesAction = ShowFieldCodes;
 
         static void InsertField(RichEditDocumentServer wordProcessor)
         {
@@ -92,24 +91,6 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             // Update all fields in the main document body.
             document.Fields.Update();
             #endregion #CreateFieldFromRange
-        }
-
-        static void ShowFieldCodes(RichEditDocumentServer wordProcessor)
-        {
-            #region #ShowFieldCodes
-            // Load a document from a file.
-            wordProcessor.LoadDocument("Documents\\MailMergeSimple.docx", DocumentFormat.OpenXml);
-
-            // Access a document.
-            Document document = wordProcessor.Document;            
-
-            // Check all fields in the main document body.
-            for (int i = 0; i < document.Fields.Count; i++)
-            {
-                // Show field codes.
-                document.Fields[i].ShowCodes = true;
-            }
-            #endregion #ShowFieldCodes
         }
     }
 }

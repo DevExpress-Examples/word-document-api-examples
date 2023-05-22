@@ -9,12 +9,11 @@ Imports DevExpress.XtraPrinting
 Imports System.IO
 Imports DevExpress.XtraRichEdit.Export
 Imports DevExpress.XtraRichEdit.API.Native
+Imports Document = DevExpress.XtraRichEdit.API.Native.Document
 
 Namespace RichEditDocumentServerAPIExample.CodeExamples
 
     Friend Class ExportActions
-
-        Public Shared SaveImageFromRangeAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.ExportActions.SaveImageFromRange
 
         Public Shared ExportRangeToHtmlAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.ExportActions.ExportRangeToHtml
 
@@ -30,40 +29,17 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
 
         Public Shared BeforeExportAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.ExportActions.BeforeExport
 
-        Private Shared Sub SaveImageFromRange(ByVal wordProcessor As DevExpress.XtraRichEdit.RichEditDocumentServer)
-#Region "#SaveImageFromRange"
-            ' Load a document from a file.
-            wordProcessor.LoadDocument("Documents\Grimm.docx", DevExpress.XtraRichEdit.DocumentFormat.OpenXml)
-            ' Access a document.
-            Dim document As DevExpress.XtraRichEdit.API.Native.Document = wordProcessor.Document
-            ' Access the range of the document's third paragraph.
-            Dim docRange As DevExpress.XtraRichEdit.API.Native.DocumentRange = document.Paragraphs(CInt((2))).Range
-            ' Obtain all images located in the target range.
-            Dim docImageColl As DevExpress.XtraRichEdit.API.Native.ReadOnlyDocumentImageCollection = document.Images.[Get](docRange)
-            If docImageColl.Count > 0 Then
-                ' Access the first image of the document image collection.
-                Dim myImage As DevExpress.Office.Utils.OfficeImage = docImageColl(CInt((0))).Image
-                ' Save the image in PNG format. 
-                Dim image As System.Drawing.Image = myImage.NativeImage
-                Dim imageName As String = System.[String].Format("Image_at_pos_{0}.png", docRange.Start.ToInt())
-                image.Save(imageName)
-                ' Open the File Explorer and select the saved image.
-                System.Diagnostics.Process.Start("explorer.exe", "/select," & imageName)
-            End If
-#End Region  ' #SaveImageFromRange
-        End Sub
-
         Private Shared Sub ExportRangeToHtml(ByVal wordProcessor As DevExpress.XtraRichEdit.RichEditDocumentServer)
 #Region "#ExportRangeToHtml"
             ' Load a document from a file.
-            wordProcessor.LoadDocument("Documents\Grimm.docx", DevExpress.XtraRichEdit.DocumentFormat.OpenXml)
+            wordProcessor.LoadDocument("Documents\Grimm.docx", DocumentFormat.OpenXml)
             ' Access a document.
-            Dim document As DevExpress.XtraRichEdit.API.Native.Document = wordProcessor.Document
+            Dim document As Document = wordProcessor.Document
             If document.Paragraphs.Count > 2 Then
                 ' Access the range of the first three paragraphs.
-                Dim r As DevExpress.XtraRichEdit.API.Native.DocumentRange = document.CreateRange(document.Paragraphs(CInt((0))).Range.Start, document.Paragraphs(CInt((0))).Range.Length + document.Paragraphs(CInt((1))).Range.Length + document.Paragraphs(CInt((2))).Range.Length)
+                Dim range As DocumentRange = document.CreateRange(document.Paragraphs(CInt((0))).Range.Start, document.Paragraphs(2).Range.End.ToInt() - document.Paragraphs(0).Range.Start.ToInt())
                 ' Save text contained in the target range in HTML format.
-                Dim htmlText As String = document.GetHtmlText(r, Nothing)
+                Dim htmlText As String = document.GetHtmlText(range, Nothing)
                 System.IO.File.WriteAllText("test.html", htmlText)
                 ' Show the result in a browser window.
                 System.Diagnostics.Process.Start("test.html")
@@ -148,25 +124,22 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
             ' Load a document from a file.
             wordProcessor.LoadDocument("Documents\Grimm.docx")
             ' Handle the Before Export event.
-            AddHandler wordProcessor.BeforeExport, AddressOf RichEditDocumentServerAPIExample.CodeExamples.ExportActions.BeforeExportHelper.BeforeExport
+            AddHandler wordProcessor.BeforeExport,
+                Sub(s, e)
+                    ' Specify the export options before a document is exported to HTML.
+                    Dim options As HtmlDocumentExporterOptions = TryCast(e.Options, HtmlDocumentExporterOptions)
+                    If options IsNot Nothing Then
+                        options.CssPropertiesExportType = Html.CssPropertiesExportType.Link
+                        options.HtmlNumberingListExportFormat = Html.HtmlNumberingListExportFormat.HtmlFormat
+                        options.TargetUri = "Document_HTML.html"
+                    End If
+                End Sub
+            'RichEditDocumentServerAPIExample.CodeExamples.ExportActions.BeforeExportHelper.BeforeExport
             ' Save the document as an HTML file.
             wordProcessor.SaveDocument("Document_HTML.html", DevExpress.XtraRichEdit.DocumentFormat.Html)
             ' Show the resulting HTML file.
             System.Diagnostics.Process.Start("Document_HTML.html")
 #End Region  ' #HandleBeforeExportEvent
         End Sub
-
-        Private Class BeforeExportHelper
-
-            Public Shared Sub BeforeExport(ByVal sender As Object, ByVal e As DevExpress.XtraRichEdit.BeforeExportEventArgs)
-                ' Specify the export options before a document is exported to HTML.
-                Dim options As DevExpress.XtraRichEdit.Export.HtmlDocumentExporterOptions = TryCast(e.Options, DevExpress.XtraRichEdit.Export.HtmlDocumentExporterOptions)
-                If options IsNot Nothing Then
-                    options.CssPropertiesExportType = DevExpress.XtraRichEdit.Export.Html.CssPropertiesExportType.Link
-                    options.HtmlNumberingListExportFormat = DevExpress.XtraRichEdit.Export.Html.HtmlNumberingListExportFormat.HtmlFormat
-                    options.TargetUri = "Document_HTML.html"
-                End If
-            End Sub
-        End Class
     End Class
 End Namespace

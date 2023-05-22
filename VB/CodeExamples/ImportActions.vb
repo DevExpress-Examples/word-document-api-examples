@@ -33,20 +33,16 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
         Private Shared Sub BeforeImport(ByVal wordProcessor As DevExpress.XtraRichEdit.RichEditDocumentServer)
 #Region "#HandleBeforeImportEvent"
             ' Handle the Before Import event.
-            AddHandler wordProcessor.BeforeImport, AddressOf RichEditDocumentServerAPIExample.CodeExamples.ImportActions.BeforeImportHelper.BeforeImport
+            AddHandler wordProcessor.BeforeImport,
+                Sub(s, e)
+                    ' Specify the encoding before plain text is imported to the document.
+                    If e.DocumentFormat = DevExpress.XtraRichEdit.DocumentFormat.PlainText Then
+                        CType(e.Options, DevExpress.XtraRichEdit.Import.PlainTextDocumentImporterOptions).Encoding = System.Text.Encoding.GetEncoding(20866)
+                    End If
+                End Sub
             ' Load a document from a file.
             wordProcessor.LoadDocument("Documents\TerribleRevengeKOI8R.txt")
 #End Region  ' #HandleBeforeImportEvent
         End Sub
-
-        Private Class BeforeImportHelper
-
-            Public Shared Sub BeforeImport(ByVal sender As Object, ByVal e As DevExpress.XtraRichEdit.BeforeImportEventArgs)
-                ' Specify the encoding before plain text is imported to the document.
-                If e.DocumentFormat = DevExpress.XtraRichEdit.DocumentFormat.PlainText Then
-                    CType(e.Options, DevExpress.XtraRichEdit.Import.PlainTextDocumentImporterOptions).Encoding = System.Text.Encoding.GetEncoding(20866)
-                End If
-            End Sub
-        End Class
     End Class
 End Namespace

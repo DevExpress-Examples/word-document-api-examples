@@ -35,23 +35,18 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
         {
             #region #HandleBeforeImportEvent
             // Handle the Before Import event.
-            wordProcessor.BeforeImport += BeforeImportHelper.BeforeImport;
-
-            // Load a document from a file.
-            wordProcessor.LoadDocument("Documents\\TerribleRevengeKOI8R.txt");            
-            #endregion #HandleBeforeImportEvent
-        }
-
-        class BeforeImportHelper
-        {
-            public static void BeforeImport(object sender, BeforeImportEventArgs e)
+            wordProcessor.BeforeImport += (s, e) =>
             {
                 // Specify the encoding before plain text is imported to the document.
                 if (e.DocumentFormat == DocumentFormat.PlainText)
                 {
                     ((PlainTextDocumentImporterOptions)e.Options).Encoding = Encoding.GetEncoding(20866);
                 }
-            }
+            };
+
+            // Load a document from a file.
+            wordProcessor.LoadDocument("Documents\\TerribleRevengeKOI8R.txt");            
+            #endregion #HandleBeforeImportEvent
         }
     }
 }

@@ -120,36 +120,25 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             // Specify the amount of space between table cells.
             // The distance between cells is 4 mm.
             table.TableCellSpacing = 2;
-            
+
             // Change the color of empty space between cells.
             table.TableBackgroundColor = Color.Violet;
-            
-            // Change the cell background color.
-            table.ForEachCell(new TableCellProcessorDelegate(TableHelper.ChangeCellColor));
-            table.ForEachCell(new TableCellProcessorDelegate(TableHelper.ChangeCellBorderColor));
-            
+
+            // Change the cell borders and background color.
+            table.ForEachCell((cell, i, j) =>
+                {
+                    cell.BackgroundColor = Color.Yellow;
+                    cell.Borders.Bottom.LineColor = Color.Red;
+                    cell.Borders.Left.LineColor = Color.Red;
+                    cell.Borders.Right.LineColor = Color.Red;
+                    cell.Borders.Top.LineColor = Color.Red;
+                });
+
             // Finalize to modify the table.
             table.EndUpdate();
             #endregion #ChangeTableColor
 
         }
-        
-        class TableHelper
-        {
-            public static void ChangeCellColor(TableCell cell, int i, int j)
-            {
-                cell.BackgroundColor = System.Drawing.Color.Yellow;
-            }
-
-            public static void ChangeCellBorderColor(TableCell cell, int i, int j)
-            {
-                cell.Borders.Bottom.LineColor = System.Drawing.Color.Red;
-                cell.Borders.Left.LineColor = System.Drawing.Color.Red;
-                cell.Borders.Right.LineColor = System.Drawing.Color.Red;
-                cell.Borders.Top.LineColor = System.Drawing.Color.Red;
-            }
-        }
-        
         static void CreateAndApplyTableStyle(RichEditDocumentServer wordProcessor)
         {
             #region #CreateAndApplyTableStyle
@@ -180,7 +169,7 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             tStyleMain.CellBackgroundColor = System.Drawing.Color.LightBlue;
             tStyleMain.TableLayout = TableLayoutType.Fixed;
             tStyleMain.Name = "MyTableStyle";
-            
+
             // Add the style to the collection of styles.
             document.TableStyles.Add(tStyleMain);
 
@@ -201,10 +190,10 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             // Set the cell width to a fixed value. 
             table[1, 1].PreferredWidthType = WidthType.Fixed;
             table[1, 1].PreferredWidth = DevExpress.Office.Utils.Units.InchesToDocumentsF(1.5f);
-            
+
             // Apply the created style to the table.
             table.Style = tStyleMain;
-            
+
             // Finalize to edit the document.
             document.EndUpdate();
 
@@ -249,7 +238,7 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
 
             // Create a new table with four rows and columns at the document range's end position.
             Table table = document.Tables.Create(document.Range.End, 4, 4, AutoFitBehaviorType.AutoFitToWindow);
-            
+
             // Apply the created style to the table.
             table.Style = myNewStyle;
 
@@ -274,24 +263,20 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             table.BeginUpdate();
 
             // Change cell background color and vertical alignment in the third column.
-            table.ForEachRow(new TableRowProcessorDelegate(ChangeColumnAppearanceHelper.ChangeColumnColor));
-            
+            table.ForEachRow((row, rowIndex)=>
+            {
+                if (row.Cells.Count > 2)
+                {
+                    row[2].BackgroundColor = System.Drawing.Color.LightCyan;
+                    row[2].VerticalAlignment = TableCellVerticalAlignment.Center;
+                }
+            });
+
             // Finalize to modify the table.
             table.EndUpdate();
             #endregion #ChangeColumnAppearance
 
         }
-        
-        class ChangeColumnAppearanceHelper
-        {
-            public static void ChangeColumnColor(TableRow row, int rowIndex)
-            {
-                row[2].BackgroundColor = System.Drawing.Color.LightCyan;
-                row[2].VerticalAlignment = TableCellVerticalAlignment.Center;
-            }
-        }
-        
-
         static void UseTableCellProcessor(RichEditDocumentServer wordProcessor)
         {
             #region #UseTableCellProcessor
@@ -306,24 +291,18 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
 
             // Use the TableCellProcessorDelegate delegate to pass each table cell 
             // to the method that miltiplies numbers and output the result cells.
-            table.ForEachCell(new TableCellProcessorDelegate(UseTableCellProcessorHelper.MakeMultiplicationCell));
-            
-            // Finalize to modify the table.
-            table.EndUpdate();
-            #endregion #UseTableCellProcessor
-        }
-        
-        class UseTableCellProcessorHelper
-        {
-            public static void MakeMultiplicationCell(TableCell cell, int i, int j)
+            table.ForEachCell((cell, i, j)=>
             {
                 SubDocument doc = cell.Range.BeginUpdateDocument();
                 doc.InsertText(cell.Range.Start,
                     String.Format("{0}*{1} = {2}", i + 2, j + 2, (i + 2) * (j + 2)));
                 cell.Range.EndUpdateDocument(doc);
-            }
+            });
+
+            // Finalize to modify the table.
+            table.EndUpdate();
+            #endregion #UseTableCellProcessor
         }
-        
 
         static void MergeCells(RichEditDocumentServer wordProcessor)
         {
@@ -355,7 +334,7 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
 
             // Create a table with three rows and columns at the document range's start position.
             Table table = document.Tables.Create(document.Range.Start, 3, 3, AutoFitBehaviorType.FixedColumnWidth, 350);
-            
+
             // Split a cell vertically to three cells. 
             table.Cell(2, 1).Split(1, 3);
             #endregion #SplitCells
@@ -371,7 +350,7 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
 
             // Start to modify the table.
             tbl.BeginUpdate();
-            
+
             // Delete the third table row.
             tbl.Rows[2].Delete();
 
@@ -416,7 +395,7 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             table.MarginLeft = DevExpress.Office.Utils.Units.InchesToDocumentsF(0.3f);
             table.MarginTop = DevExpress.Office.Utils.Units.InchesToDocumentsF(0.3f);
             table.MarginRight = DevExpress.Office.Utils.Units.InchesToDocumentsF(0.3f);
-            
+
             // Finalize to modify the table.
             table.EndUpdate();
             #endregion #WrapTextAroundTable

@@ -45,14 +45,12 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
             ' Access a document.
             Dim document As DevExpress.XtraRichEdit.API.Native.Document = wordProcessor.Document
             If document.Comments.Count > 1 Then
-                ' Find text ranges matched the string in the document range
-                ' to which the parent comment relates.
-                Dim resRanges As DevExpress.XtraRichEdit.API.Native.DocumentRange() = document.FindAll("trump", DevExpress.XtraRichEdit.API.Native.SearchOptions.None, document.Comments(CInt((1))).Range)
-                If resRanges.Length > 0 Then
-                    ' Create a new comment nested in the parent comment.
-                    Dim newComment As DevExpress.XtraRichEdit.API.Native.Comment = document.Comments.Create("Vicars Anny", document.Comments(1))
-                    newComment.[Date] = System.DateTime.Now
-                End If
+                ' Create a new comment nested in the parent comment.
+                Dim newComment As DevExpress.XtraRichEdit.API.Native.Comment = document.Comments.Create("Vicars Anny", document.Comments(1))
+                newComment.[Date] = System.DateTime.Now
+                Dim commentDocument As SubDocument = newComment.BeginUpdate()
+                commentDocument.InsertText(commentDocument.Range.Start, "I agree")
+                newComment.EndUpdate(commentDocument)
             End If
 #End Region  ' #CreateNestedComment
         End Sub
@@ -105,9 +103,10 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
                     ' Start to edit the comment.
                     Dim commentDocument As DevExpress.XtraRichEdit.API.Native.SubDocument = comment.BeginUpdate()
                     ' Insert a text to the comment.
-                    commentDocument.InsertText(commentDocument.CreatePosition(0), "some text")
+                    commentDocument.Paragraphs.Insert(commentDocument.Range.Start)
+                    commentDocument.InsertText(commentDocument.Range.Start, "some text")
                     ' Insert a table to the comment.
-                    commentDocument.Tables.Create(commentDocument.CreatePosition(9), 5, 4)
+                    commentDocument.Tables.Create(commentDocument.Range.End, 5, 4)
                     ' Finalize to edit the comment.
                     comment.EndUpdate(commentDocument)
                 End If

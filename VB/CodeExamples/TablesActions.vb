@@ -81,7 +81,7 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
             ' Set the table width to a fixed value.
             table.TableLayout = DevExpress.XtraRichEdit.API.Native.TableLayoutType.Fixed
             table.PreferredWidthType = DevExpress.XtraRichEdit.API.Native.WidthType.Fixed
-            table.PreferredWidth = DevExpress.Office.Utils.Units.InchesToDocumentsF(4F)
+            table.PreferredWidth = DevExpress.Office.Utils.Units.InchesToDocumentsF(4.0F)
             ' Set the second row height to a fixed value. 
             table.Rows(CInt((1))).HeightType = DevExpress.XtraRichEdit.API.Native.HeightType.Exact
             table.Rows(CInt((1))).Height = DevExpress.Office.Utils.Units.InchesToDocumentsF(0.8F)
@@ -96,39 +96,39 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
         Private Shared Sub ChangeTableColor(ByVal wordProcessor As DevExpress.XtraRichEdit.RichEditDocumentServer)
 #Region "#ChangeTableColor"
             ' Access a document.
-            Dim document As DevExpress.XtraRichEdit.API.Native.Document = wordProcessor.Document
+            Dim document As Document = wordProcessor.Document
+
             ' Create a table with three rows and five columns at the document range's start position.
-            Dim table As DevExpress.XtraRichEdit.API.Native.Table = document.Tables.Create(document.Range.Start, 3, 5, DevExpress.XtraRichEdit.API.Native.AutoFitBehaviorType.AutoFitToWindow)
+            Dim table As Table = document.Tables.Create(document.Range.Start, 3, 5, AutoFitBehaviorType.AutoFitToWindow)
+
             ' Start to modify the table.
             table.BeginUpdate()
+
             ' Specify the document's measure units.
             document.Unit = DevExpress.Office.DocumentUnit.Millimeter
+
             ' Specify the amount of space between table cells.
             ' The distance between cells is 4 mm.
             table.TableCellSpacing = 2
+
             ' Change the color of empty space between cells.
-            table.TableBackgroundColor = System.Drawing.Color.Violet
-            ' Change the cell background color.
-            table.ForEachCell(New DevExpress.XtraRichEdit.API.Native.TableCellProcessorDelegate(AddressOf RichEditDocumentServerAPIExample.CodeExamples.TablesActions.TableHelper.ChangeCellColor))
-            table.ForEachCell(New DevExpress.XtraRichEdit.API.Native.TableCellProcessorDelegate(AddressOf RichEditDocumentServerAPIExample.CodeExamples.TablesActions.TableHelper.ChangeCellBorderColor))
+            table.TableBackgroundColor = Color.Violet
+
+            ' Change the cell borders and background color.
+            table.ForEachCell(
+                Sub(cell As TableCell, i As Integer, j As Integer)
+                    cell.BackgroundColor = Color.Yellow
+                    cell.Borders.Bottom.LineColor = Color.Red
+                    cell.Borders.Left.LineColor = Color.Red
+                    cell.Borders.Right.LineColor = Color.Red
+                    cell.Borders.Top.LineColor = Color.Red
+                End Sub
+                )
+
             ' Finalize to modify the table.
             table.EndUpdate()
 #End Region  ' #ChangeTableColor
         End Sub
-
-        Private Class TableHelper
-
-            Public Shared Sub ChangeCellColor(ByVal cell As DevExpress.XtraRichEdit.API.Native.TableCell, ByVal i As Integer, ByVal j As Integer)
-                cell.BackgroundColor = System.Drawing.Color.Yellow
-            End Sub
-
-            Public Shared Sub ChangeCellBorderColor(ByVal cell As DevExpress.XtraRichEdit.API.Native.TableCell, ByVal i As Integer, ByVal j As Integer)
-                cell.Borders.Bottom.LineColor = System.Drawing.Color.Red
-                cell.Borders.Left.LineColor = System.Drawing.Color.Red
-                cell.Borders.Right.LineColor = System.Drawing.Color.Red
-                cell.Borders.Top.LineColor = System.Drawing.Color.Red
-            End Sub
-        End Class
 
         Private Shared Sub CreateAndApplyTableStyle(ByVal wordProcessor As DevExpress.XtraRichEdit.RichEditDocumentServer)
 #Region "#CreateAndApplyTableStyle"
@@ -217,50 +217,52 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
         Private Shared Sub ChangeColumnAppearance(ByVal wordProcessor As DevExpress.XtraRichEdit.RichEditDocumentServer)
 #Region "#ChangeColumnAppearance"
             ' Access a document.
-            Dim document As DevExpress.XtraRichEdit.API.Native.Document = wordProcessor.Document
+            Dim document As Document = wordProcessor.Document
+
             ' Create a table with three rows and ten columns.
-            Dim table As DevExpress.XtraRichEdit.API.Native.Table = document.Tables.Create(document.Range.Start, 3, 10)
+            Dim table As Table = document.Tables.Create(document.Range.Start, 3, 10)
+
             ' Start to modify the table.
             table.BeginUpdate()
+
             ' Change cell background color and vertical alignment in the third column.
-            table.ForEachRow(New DevExpress.XtraRichEdit.API.Native.TableRowProcessorDelegate(AddressOf RichEditDocumentServerAPIExample.CodeExamples.TablesActions.ChangeColumnAppearanceHelper.ChangeColumnColor))
+            table.ForEachRow(
+                Sub(row As TableRow, rowIndex As Integer)
+                    If row.Cells.Count > 2 Then
+                        row(2).BackgroundColor = Color.LightCyan
+                        row(2).VerticalAlignment = TableCellVerticalAlignment.Center
+                    End If
+                End Sub)
+
             ' Finalize to modify the table.
             table.EndUpdate()
 #End Region  ' #ChangeColumnAppearance
         End Sub
 
-        Private Class ChangeColumnAppearanceHelper
-
-            Public Shared Sub ChangeColumnColor(ByVal row As DevExpress.XtraRichEdit.API.Native.TableRow, ByVal rowIndex As Integer)
-                row(CInt((2))).BackgroundColor = System.Drawing.Color.LightCyan
-                row(CInt((2))).VerticalAlignment = DevExpress.XtraRichEdit.API.Native.TableCellVerticalAlignment.Center
-            End Sub
-        End Class
-
-        Private Shared Sub UseTableCellProcessor(ByVal wordProcessor As DevExpress.XtraRichEdit.RichEditDocumentServer)
+        Private Shared Sub UseTableCellProcessor(ByVal wordProcessor As RichEditDocumentServer)
 #Region "#UseTableCellProcessor"
             ' Access a document.
-            Dim document As DevExpress.XtraRichEdit.API.Native.Document = wordProcessor.Document
+            Dim document As Document = wordProcessor.Document
+
             ' Create a table with eight rows and columns at the document range's start position.
-            Dim table As DevExpress.XtraRichEdit.API.Native.Table = document.Tables.Create(document.Range.Start, 8, 8)
+            Dim table As Table = document.Tables.Create(document.Range.Start, 8, 8)
+
             ' Start to modify the table.
             table.BeginUpdate()
+
             ' Use the TableCellProcessorDelegate delegate to pass each table cell 
             ' to the method that miltiplies numbers and output the result cells.
-            table.ForEachCell(New DevExpress.XtraRichEdit.API.Native.TableCellProcessorDelegate(AddressOf RichEditDocumentServerAPIExample.CodeExamples.TablesActions.UseTableCellProcessorHelper.MakeMultiplicationCell))
+            table.ForEachCell(
+                Sub(cell As TableCell, i As Integer, j As Integer)
+                    Dim doc As SubDocument = cell.Range.BeginUpdateDocument()
+                    doc.InsertText(cell.Range.Start, String.Format("{0}*{1} = {2}", i + 2, j + 2, (i + 2) * (j + 2)))
+                    cell.Range.EndUpdateDocument(doc)
+                End Sub)
+
             ' Finalize to modify the table.
             table.EndUpdate()
 #End Region  ' #UseTableCellProcessor
         End Sub
-
-        Private Class UseTableCellProcessorHelper
-
-            Public Shared Sub MakeMultiplicationCell(ByVal cell As DevExpress.XtraRichEdit.API.Native.TableCell, ByVal i As Integer, ByVal j As Integer)
-                Dim doc As DevExpress.XtraRichEdit.API.Native.SubDocument = cell.Range.BeginUpdateDocument()
-                doc.InsertText(cell.Range.Start, System.[String].Format("{0}*{1} = {2}", i + 2, j + 2, (i + 2) * (j + 2)))
-                cell.Range.EndUpdateDocument(doc)
-            End Sub
-        End Class
 
         Private Shared Sub MergeCells(ByVal wordProcessor As DevExpress.XtraRichEdit.RichEditDocumentServer)
 #Region "#MergeCells"
@@ -323,7 +325,7 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
             ' Specify vertical alignment.
             table.RelativeVerticalPosition = DevExpress.XtraRichEdit.API.Native.TableRelativeVerticalPosition.Paragraph
             table.VerticalAlignment = DevExpress.XtraRichEdit.API.Native.TableVerticalAlignment.None
-            table.OffsetYRelative = DevExpress.Office.Utils.Units.InchesToDocumentsF(2F)
+            table.OffsetYRelative = DevExpress.Office.Utils.Units.InchesToDocumentsF(2.0F)
             ' Specify horizontal alignment.
             table.RelativeHorizontalPosition = DevExpress.XtraRichEdit.API.Native.TableRelativeHorizontalPosition.Margin
             table.HorizontalAlignment = DevExpress.XtraRichEdit.API.Native.TableHorizontalAlignment.Center

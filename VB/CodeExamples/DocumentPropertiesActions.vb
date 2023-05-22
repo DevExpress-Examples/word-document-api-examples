@@ -53,21 +53,17 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
             document.CustomProperties("MyNumericProperty") = 123.45
             document.CustomProperties("MyStringProperty") = "The Final Answer"
             document.CustomProperties("MyBooleanProperty") = True
-            AddHandler wordProcessor.CalculateDocumentVariable, AddressOf RichEditDocumentServerAPIExample.CodeExamples.DocumentPropertiesActions.DocumentPropertyDisplayHelper.OnCalculateDocumentVariable
+            AddHandler wordProcessor.CalculateDocumentVariable,
+                Sub(s, e)
+                    If e.Arguments.Count = 0 OrElse e.VariableName <> "CustomProperty" Then Return
+                    Dim name As String = e.Arguments(0).Value
+                    Dim customProperty As Object = (CType(s, RichEditDocumentServer)).Document.CustomProperties(name)
+                    If customProperty IsNot Nothing Then e.Value = customProperty.ToString()
+                    e.Handled = True
+                End Sub
             ' Update all fields in the main document body.
             document.Fields.Update()
 #End Region  ' #CustomDocumentProperties
         End Sub
-
-        Private Class DocumentPropertyDisplayHelper
-
-            Public Shared Sub OnCalculateDocumentVariable(ByVal sender As Object, ByVal e As DevExpress.XtraRichEdit.CalculateDocumentVariableEventArgs)
-                If e.Arguments.Count = 0 OrElse Not Equals(e.VariableName, "CustomProperty") Then Return
-                Dim name As String = e.Arguments(CInt((0))).Value
-                Dim customProperty As Object = CType(sender, DevExpress.XtraRichEdit.RichEditDocumentServer).Document.CustomProperties(name)
-                If customProperty IsNot Nothing Then e.Value = customProperty.ToString()
-                e.Handled = True
-            End Sub
-        End Class
     End Module
 End Namespace

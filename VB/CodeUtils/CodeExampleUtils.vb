@@ -58,7 +58,6 @@ Namespace RichEditDocumentServerAPIExample.CodeUtils
             examples(4).Groups.Add(New RichEditExample("Set Built-in Properties", String.Empty, String.Empty, StandardDocumentPropertiesAction, True))
             examples(4).Groups.Add(New RichEditExample("Set Custom Properties", String.Empty, String.Empty, CustomDocumentPropertiesAction, True))
             'Add nodes to the "Export" group of examples.
-            examples(5).Groups.Add(New RichEditExample("Save an Image from Range", String.Empty, String.Empty, ExportActions.SaveImageFromRangeAction, False))
             examples(5).Groups.Add(New RichEditExample("Export a Range to HTML", String.Empty, String.Empty, ExportActions.ExportRangeToHtmlAction, False))
             examples(5).Groups.Add(New RichEditExample("Export a Range to Plain Text", String.Empty, String.Empty, ExportActions.ExportRangeToPlainTextAction, False))
             examples(5).Groups.Add(New RichEditExample("Convert DOCX to PDF", String.Empty, String.Empty, ExportActions.ExportToPDFAction, False))
@@ -70,7 +69,6 @@ Namespace RichEditDocumentServerAPIExample.CodeUtils
             examples(6).Groups.Add(New RichEditExample("Insert a Field", String.Empty, String.Empty, FieldActions.InsertFieldAction, True))
             examples(6).Groups.Add(New RichEditExample("Modify a Field", String.Empty, String.Empty, FieldActions.ModifyFieldCodeAction, True))
             examples(6).Groups.Add(New RichEditExample("Create a Field from a Range", String.Empty, String.Empty, FieldActions.CreateFieldFromRangeAction, True))
-            examples(6).Groups.Add(New RichEditExample("Show Field Codes", String.Empty, String.Empty, FieldActions.ShowFieldCodesAction, True)) 'doesn't show field codes
             'Add nodes to the "Formatting" group of examples.
             examples(7).Groups.Add(New RichEditExample("Format Text", String.Empty, String.Empty, FormattingActions.FormatTextAction, True))
             examples(7).Groups.Add(New RichEditExample("Change Spacing", String.Empty, String.Empty, FormattingActions.ChangeSpacingAction, True))
@@ -109,7 +107,6 @@ Namespace RichEditDocumentServerAPIExample.CodeUtils
             examples(15).Groups.Add(New RichEditExample("Unprotect a Document", String.Empty, String.Empty, UnprotectDocumentAction, False))
             examples(15).Groups.Add(New RichEditExample("Create Range Permissions", String.Empty, String.Empty, CreateRangePermissionsAction, False))
             'Add nodes to the "Ranges" group of examples.
-            examples(16).Groups.Add(New RichEditExample("Select Text in a Range", String.Empty, String.Empty, RangeActions.SelectTextInRangeAction, True))
             examples(16).Groups.Add(New RichEditExample("Insert Text in a Range", String.Empty, String.Empty, RangeActions.InsertTextInRangeAction, True))
             examples(16).Groups.Add(New RichEditExample("Append Text to a Range", String.Empty, String.Empty, RangeActions.AppendTextToRangeAction, True))
             examples(16).Groups.Add(New RichEditExample("Append Text to a Paragraph", String.Empty, String.Empty, RangeActions.AppendToParagraphAction, True))
@@ -120,7 +117,6 @@ Namespace RichEditDocumentServerAPIExample.CodeUtils
             examples(17).Groups.Add(New RichEditExample("Add a Text Box", String.Empty, String.Empty, ShapesActions.AddTextBoxAction, True))
             examples(17).Groups.Add(New RichEditExample("Insert Rich Text in a TextBox", String.Empty, String.Empty, ShapesActions.InsertRichTextInTextBoxAction, True))
             examples(17).Groups.Add(New RichEditExample("Rotate and Resize Shapes", String.Empty, String.Empty, ShapesActions.RotateAndResizeAction, True))
-            examples(17).Groups.Add(New RichEditExample("Select a Shape", String.Empty, String.Empty, ShapesActions.SelectShapeAction, True))
             'Add nodes to the "Styles" group of examples.
             examples(18).Groups.Add(New RichEditExample("Create a New Character Style", String.Empty, String.Empty, StylesAction.CreateNewCharacterStyleAction, True))
             examples(18).Groups.Add(New RichEditExample("Create a New Paragraph Style", String.Empty, String.Empty, StylesAction.CreateNewParagraphStyleAction, True))

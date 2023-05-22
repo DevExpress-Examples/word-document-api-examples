@@ -23,14 +23,13 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
             Dim document As DevExpress.XtraRichEdit.API.Native.Document = wordProcessor.Document
             ' Start to edit the document.
             document.BeginUpdate()
-            ' Access the start position of the document range.
-            Dim pos As DevExpress.XtraRichEdit.API.Native.DocumentPosition = document.Range.Start
-            ' Create a bookmark at the document top.
-            document.Bookmarks.Create(wordProcessor.Document.CreateRange(pos, 0), "Top")
+            ' Create a bookmark at the start document position.
+            document.Bookmarks.Create(document.CreateRange(document.Range.Start, 0), "Top")
             ' Create a hyperlink that navigates to the created bookmark.
-            Dim pos1 As DevExpress.XtraRichEdit.API.Native.DocumentPosition = document.CreatePosition((wordProcessor.Document.Range.[End]).ToInt() + 25)
-            document.Hyperlinks.Create(wordProcessor.Document.InsertText(pos1, "get to the top"))
-            document.Hyperlinks(CInt((0))).Anchor = "Top"
+            document.Paragraphs.Append()
+            Dim hyperlinkRange As DocumentRange = wordProcessor.Document.AppendText("get to the top")
+            document.Hyperlinks.Create(hyperlinkRange)
+            document.Hyperlinks(0).Anchor = "Top"
             ' Finalize to edit the document.
             document.EndUpdate()
 #End Region  ' #InsertBookmark
@@ -39,15 +38,14 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
         Private Sub InsertHyperlink(ByVal wordProcessor As DevExpress.XtraRichEdit.RichEditDocumentServer)
 #Region "#InsertHyperlink"
             ' Access a document.
-            Dim document As DevExpress.XtraRichEdit.API.Native.Document = wordProcessor.Document
-            ' Access the start position of the document range.
-            Dim hPos As DevExpress.XtraRichEdit.API.Native.DocumentPosition = wordProcessor.Document.Range.Start
+            Dim document As Document = wordProcessor.Document
             ' Create a hyperlink at the specified position.
-            document.Hyperlinks.Create(document.InsertText(hPos, "Follow me!"))
+            Dim hyperlinkRange As DocumentRange = document.InsertText(document.Range.Start, "Follow me!")
+            document.Hyperlinks.Create(hyperlinkRange)
             ' Specify the URI to which the hyperlink navigates. 
-            document.Hyperlinks(CInt((0))).NavigateUri = "https://devexpress.com"
+            document.Hyperlinks(0).NavigateUri = "https://devexpress.com"
             ' Specify the hyperlink tooltip.
-            document.Hyperlinks(CInt((0))).ToolTip = "DevExpress"
+            document.Hyperlinks(0).ToolTip = "DevExpress"
 #End Region  ' #InsertHyperlink
         End Sub
     End Module
