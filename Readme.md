@@ -22,7 +22,8 @@ This example demonstrates how to use the Word Processing Document API to execute
 - Create character, paragraph, and linked styles 
 - Import formatted text to a document 
 - Add checkbox form fields to a document 
-- Embed arbitrary XML data (custom XML parts) in a document 
+- Embed arbitrary XML data (custom XML parts) in a document
+- Create, edit, and remove content controls
 
 The application’s form contains the list of supported operations and the editor that displays the code of these operations. A user can select an operation to view its code and click the **Run** button to open the resulting document in Microsoft Word. 
 
@@ -43,7 +44,7 @@ The application’s form contains the list of supported operations and the edito
 - [Document Conversion](http://docs.devexpress.com/OfficeFileAPI/119981/word-processing-document-api/examples/document-conversion) 
 - [Fields](http://docs.devexpress.com/OfficeFileAPI/15280/word-processing-document-api/fields) 
 - [Formatting](http://docs.devexpress.com/OfficeFileAPI/400460/word-processing-document-api/text-formatting) 
-- [Checkbox Form Fields](http://docs.devexpress.com/OfficeFileAPI/120712/word-processing-document-api/word-processing-document/checkboxes) 
+- [Content Controls](https://docs.devexpress.com/OfficeFileAPI/404731/word-processing-document-api/word-processing-document/content-controls?v=23.2)
 - [Headers and Footers](http://docs.devexpress.com/OfficeFileAPI/15310/word-processing-document-api/word-processing-document/headers-and-footers) 
 - [Import and Export](http://docs.devexpress.com/OfficeFileAPI/15441/word-processing-document-api/import-and-export) 
 - [Lists](http://docs.devexpress.com/OfficeFileAPI/15314/word-processing-document-api/word-processing-document/lists) 
