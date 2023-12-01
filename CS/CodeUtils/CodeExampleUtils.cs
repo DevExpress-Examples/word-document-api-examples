@@ -16,6 +16,7 @@ namespace RichEditDocumentServerAPIExample.CodeUtils
             examples.Add(new RichEditNode("Basic Actions"));
             examples.Add(new RichEditNode("Bookmarks and Hyperlinks"));
             examples.Add(new RichEditNode("Comments Actions"));
+            examples.Add(new RichEditNode("Content Controls Actions"));
             examples.Add(new RichEditNode("Custom Xml Actions"));
             examples.Add(new RichEditNode("Document Properties Actions"));
             examples.Add(new RichEditNode("Export Actions"));
@@ -57,109 +58,117 @@ namespace RichEditDocumentServerAPIExample.CodeUtils
             examples[2].Groups.Add(new RichEditExample("Edit Comment Properties", string.Empty, string.Empty, CommentsActions.EditCommentPropertiesAction, true));
             examples[2].Groups.Add(new RichEditExample("Edit Comment Content", string.Empty, string.Empty, CommentsActions.EditCommentContentAction, true));
 
+            //Add nodes to the "Content Controls" group of examples.
+            examples[3].Groups.Add(new RichEditExample("Create Content Controls", string.Empty, string.Empty, ContentControlsActions.CreateContentControlsAction, true));
+            examples[3].Groups.Add(new RichEditExample("Change Content Control Parameters", string.Empty, string.Empty, ContentControlsActions.ChangeContentControlsAction, true));
+            examples[3].Groups.Add(new RichEditExample("Remove Content Controls", string.Empty, string.Empty, ContentControlsActions.RemoveContentControlsAction, true));
+
+
+
+
             //Add nodes to the "Custom XML parts" group of examples.
-            examples[3].Groups.Add(new RichEditExample("Add a Custom Xml Part", string.Empty, string.Empty, CustomXmlActions.AddCustomXmlPartAction, true));
-            examples[3].Groups.Add(new RichEditExample("Access a Custom Xml Part", string.Empty, string.Empty, CustomXmlActions.AccessCustomXmlPartAction, true));
-            examples[3].Groups.Add(new RichEditExample("Remove a Custom Xml Part", string.Empty, string.Empty, CustomXmlActions.RemoveCustomXmlPartAction, true));
+            examples[4].Groups.Add(new RichEditExample("Add a Custom Xml Part", string.Empty, string.Empty, CustomXmlActions.AddCustomXmlPartAction, true));
+            examples[4].Groups.Add(new RichEditExample("Access a Custom Xml Part", string.Empty, string.Empty, CustomXmlActions.AccessCustomXmlPartAction, true));
+            examples[4].Groups.Add(new RichEditExample("Remove a Custom Xml Part", string.Empty, string.Empty, CustomXmlActions.RemoveCustomXmlPartAction, true));
 
             //Add nodes to the "Document Properties" group of examples.
-            examples[4].Groups.Add(new RichEditExample("Set Built-in Properties", string.Empty, string.Empty, DocumentPropertiesActions.StandardDocumentPropertiesAction, true));
-            examples[4].Groups.Add(new RichEditExample("Set Custom Properties", string.Empty, string.Empty, DocumentPropertiesActions.CustomDocumentPropertiesAction, true));
+            examples[5].Groups.Add(new RichEditExample("Set Built-in Properties", string.Empty, string.Empty, DocumentPropertiesActions.StandardDocumentPropertiesAction, true));
+            examples[5].Groups.Add(new RichEditExample("Set Custom Properties", string.Empty, string.Empty, DocumentPropertiesActions.CustomDocumentPropertiesAction, true));
 
             //Add nodes to the "Export" group of examples.
-            examples[5].Groups.Add(new RichEditExample("Export a Range to HTML", string.Empty, string.Empty, ExportActions.ExportRangeToHtmlAction, false));
-            examples[5].Groups.Add(new RichEditExample("Export a Range to Plain Text", string.Empty, string.Empty, ExportActions.ExportRangeToPlainTextAction, false));
-            examples[5].Groups.Add(new RichEditExample("Convert DOCX to PDF", string.Empty, string.Empty, ExportActions.ExportToPDFAction, false));
-            examples[5].Groups.Add(new RichEditExample("Convert HTML to PDF", string.Empty, string.Empty, ExportActions.ConvertHTMLtoPDFAction, false));
-            examples[5].Groups.Add(new RichEditExample("Convert HTML to DOCX", string.Empty, string.Empty, ExportActions.ConvertHTMLtoDOCXAction, false));
-            examples[5].Groups.Add(new RichEditExample("Convert DOCX to HTML", string.Empty, string.Empty, ExportActions.ExportToHTMLAction, false));
-            examples[5].Groups.Add(new RichEditExample("Handle the Before Export Event", string.Empty, string.Empty, ExportActions.BeforeExportAction, false));
+            examples[6].Groups.Add(new RichEditExample("Export a Range to HTML", string.Empty, string.Empty, ExportActions.ExportRangeToHtmlAction, false));
+            examples[6].Groups.Add(new RichEditExample("Export a Range to Plain Text", string.Empty, string.Empty, ExportActions.ExportRangeToPlainTextAction, false));
+            examples[6].Groups.Add(new RichEditExample("Convert DOCX to PDF", string.Empty, string.Empty, ExportActions.ExportToPDFAction, false));
+            examples[6].Groups.Add(new RichEditExample("Convert HTML to PDF", string.Empty, string.Empty, ExportActions.ConvertHTMLtoPDFAction, false));
+            examples[6].Groups.Add(new RichEditExample("Convert HTML to DOCX", string.Empty, string.Empty, ExportActions.ConvertHTMLtoDOCXAction, false));
+            examples[6].Groups.Add(new RichEditExample("Convert DOCX to HTML", string.Empty, string.Empty, ExportActions.ExportToHTMLAction, false));
+            examples[6].Groups.Add(new RichEditExample("Handle the Before Export Event", string.Empty, string.Empty, ExportActions.BeforeExportAction, false));
 
             //Add nodes to the "Fields" group of examples.
-            examples[6].Groups.Add(new RichEditExample("Insert a Field", string.Empty, string.Empty, FieldActions.InsertFieldAction, true));
-            examples[6].Groups.Add(new RichEditExample("Modify a Field", string.Empty, string.Empty, FieldActions.ModifyFieldCodeAction, true));
-            examples[6].Groups.Add(new RichEditExample("Create a Field from a Range", string.Empty, string.Empty, FieldActions.CreateFieldFromRangeAction, true));
+            examples[7].Groups.Add(new RichEditExample("Insert a Field", string.Empty, string.Empty, FieldActions.InsertFieldAction, true));
+            examples[7].Groups.Add(new RichEditExample("Modify a Field", string.Empty, string.Empty, FieldActions.ModifyFieldCodeAction, true));
+            examples[7].Groups.Add(new RichEditExample("Create a Field from a Range", string.Empty, string.Empty, FieldActions.CreateFieldFromRangeAction, true));
 
             //Add nodes to the "Formatting" group of examples.
-            examples[7].Groups.Add(new RichEditExample("Format Text", string.Empty, string.Empty, FormattingActions.FormatTextAction, true));
-            examples[7].Groups.Add(new RichEditExample("Change Spacing", string.Empty, string.Empty, FormattingActions.ChangeSpacingAction, true));
-            examples[7].Groups.Add(new RichEditExample("Reset Character Formatting", string.Empty, string.Empty, FormattingActions.ResetCharacterFormattingAction, true));
-            examples[7].Groups.Add(new RichEditExample("Format a Paragraph", string.Empty, string.Empty, FormattingActions.FormatParagraphAction, true));
-            examples[7].Groups.Add(new RichEditExample("Reset Paragraph Formatting", string.Empty, string.Empty, FormattingActions.ResetParagraphFormattingAction, true));
+            examples[8].Groups.Add(new RichEditExample("Format Text", string.Empty, string.Empty, FormattingActions.FormatTextAction, true));
+            examples[8].Groups.Add(new RichEditExample("Change Spacing", string.Empty, string.Empty, FormattingActions.ChangeSpacingAction, true));
+            examples[8].Groups.Add(new RichEditExample("Reset Character Formatting", string.Empty, string.Empty, FormattingActions.ResetCharacterFormattingAction, true));
+            examples[8].Groups.Add(new RichEditExample("Format a Paragraph", string.Empty, string.Empty, FormattingActions.FormatParagraphAction, true));
+            examples[8].Groups.Add(new RichEditExample("Reset Paragraph Formatting", string.Empty, string.Empty, FormattingActions.ResetParagraphFormattingAction, true));
 
             //Add nodes to the "Form Fields" group of examples.
-            examples[8].Groups.Add(new RichEditExample("Insert a CheckBox", string.Empty, string.Empty, FormFieldsActions.InsertCheckBoxAction, true));
+            examples[9].Groups.Add(new RichEditExample("Insert a CheckBox", string.Empty, string.Empty, FormFieldsActions.InsertCheckBoxAction, true));
 
             //Add nodes to the "Headers and Footers" group of examples.
-            examples[9].Groups.Add(new RichEditExample("Create a Header", string.Empty, string.Empty, HeadersAndFootersActions.CreateHeaderAction, true));
-            examples[9].Groups.Add(new RichEditExample("Modify a Header", string.Empty, string.Empty, HeadersAndFootersActions.ModifyHeaderAction, true));
+            examples[10].Groups.Add(new RichEditExample("Create a Header", string.Empty, string.Empty, HeadersAndFootersActions.CreateHeaderAction, true));
+            examples[10].Groups.Add(new RichEditExample("Modify a Header", string.Empty, string.Empty, HeadersAndFootersActions.ModifyHeaderAction, true));
 
             //Add nodes to the "Import" group of examples.
-            examples[10].Groups.Add(new RichEditExample("Import RTF Text", string.Empty, string.Empty, ImportActions.ImportRtfTextAction, true));
-            examples[10].Groups.Add(new RichEditExample("Handle the Before Import Event", string.Empty, string.Empty, ImportActions.BeforeImportAction, true));
+            examples[11].Groups.Add(new RichEditExample("Import RTF Text", string.Empty, string.Empty, ImportActions.ImportRtfTextAction, true));
+            examples[11].Groups.Add(new RichEditExample("Handle the Before Import Event", string.Empty, string.Empty, ImportActions.BeforeImportAction, true));
 
             //Add nodes to the "Inline Pictures" group of examples.
-            examples[11].Groups.Add(new RichEditExample("Access an Image Collection", string.Empty, string.Empty, InlinePicturesActions.ImageCollectionAction, true));
-            examples[11].Groups.Add(new RichEditExample("Save an Image to a File", string.Empty, string.Empty, InlinePicturesActions.SaveImageToFileAction, false));
+            examples[12].Groups.Add(new RichEditExample("Access an Image Collection", string.Empty, string.Empty, InlinePicturesActions.ImageCollectionAction, true));
+            examples[12].Groups.Add(new RichEditExample("Save an Image to a File", string.Empty, string.Empty, InlinePicturesActions.SaveImageToFileAction, false));
 
             //Add nodes to the "Lists" group of examples.
-            examples[12].Groups.Add(new RichEditExample("Create a Bulleted List", string.Empty, string.Empty, ListsActions.CreateBulletedListAction, true));
-            examples[12].Groups.Add(new RichEditExample("Create a Numbered List", string.Empty, string.Empty, ListsActions.CreateNumberedListAction, true));
-            examples[12].Groups.Add(new RichEditExample("Create a Multilevel List", string.Empty, string.Empty, ListsActions.CreateMultilevelListAction, true));
+            examples[13].Groups.Add(new RichEditExample("Create a Bulleted List", string.Empty, string.Empty, ListsActions.CreateBulletedListAction, true));
+            examples[13].Groups.Add(new RichEditExample("Create a Numbered List", string.Empty, string.Empty, ListsActions.CreateNumberedListAction, true));
+            examples[13].Groups.Add(new RichEditExample("Create a Multilevel List", string.Empty, string.Empty, ListsActions.CreateMultilevelListAction, true));
 
             //Add nodes to the "Notes" group of examples.
-            examples[13].Groups.Add(new RichEditExample("Insert Footnotes", string.Empty, string.Empty, NotesActions.InsertFootnotesAction, true));
-            examples[13].Groups.Add(new RichEditExample("Insert Endnotes", string.Empty, string.Empty, NotesActions.InsertEndnotesAction, true));
-            examples[13].Groups.Add(new RichEditExample("Edit a Footnote", string.Empty, string.Empty, NotesActions.EditFootnoteAction, true));
-            examples[13].Groups.Add(new RichEditExample("Edit an Endnote", string.Empty, string.Empty, NotesActions.EditEndnoteAction, true));
-            examples[13].Groups.Add(new RichEditExample("Edit a Separator", string.Empty, string.Empty, NotesActions.EditSeparatorAction, true));
-            examples[13].Groups.Add(new RichEditExample("Remove Notes", string.Empty, string.Empty, NotesActions.RemoveNotesAction, true));
+            examples[14].Groups.Add(new RichEditExample("Insert Footnotes", string.Empty, string.Empty, NotesActions.InsertFootnotesAction, true));
+            examples[14].Groups.Add(new RichEditExample("Insert Endnotes", string.Empty, string.Empty, NotesActions.InsertEndnotesAction, true));
+            examples[14].Groups.Add(new RichEditExample("Edit a Footnote", string.Empty, string.Empty, NotesActions.EditFootnoteAction, true));
+            examples[14].Groups.Add(new RichEditExample("Edit an Endnote", string.Empty, string.Empty, NotesActions.EditEndnoteAction, true));
+            examples[14].Groups.Add(new RichEditExample("Edit a Separator", string.Empty, string.Empty, NotesActions.EditSeparatorAction, true));
+            examples[14].Groups.Add(new RichEditExample("Remove Notes", string.Empty, string.Empty, NotesActions.RemoveNotesAction, true));
 
             //Add nodes to the "Page Layout" group of examples.
-            examples[14].Groups.Add(new RichEditExample("Add Line Numbering", string.Empty, string.Empty, PageLayoutActions.LineNumberingAction, true));
-            examples[14].Groups.Add(new RichEditExample("Create Columns", string.Empty, string.Empty, PageLayoutActions.CreateColumnsAction, true));
-            examples[14].Groups.Add(new RichEditExample("Adjust Page Layout", string.Empty, string.Empty, PageLayoutActions.PrintLayoutAction, true));
-            examples[14].Groups.Add(new RichEditExample("Set Tab Stops", string.Empty, string.Empty, PageLayoutActions.TabStopsAction, true));
+            examples[15].Groups.Add(new RichEditExample("Add Line Numbering", string.Empty, string.Empty, PageLayoutActions.LineNumberingAction, true));
+            examples[15].Groups.Add(new RichEditExample("Create Columns", string.Empty, string.Empty, PageLayoutActions.CreateColumnsAction, true));
+            examples[15].Groups.Add(new RichEditExample("Adjust Page Layout", string.Empty, string.Empty, PageLayoutActions.PrintLayoutAction, true));
+            examples[15].Groups.Add(new RichEditExample("Set Tab Stops", string.Empty, string.Empty, PageLayoutActions.TabStopsAction, true));
 
             //Add nodes to the "Protection" group of examples.
-            examples[15].Groups.Add(new RichEditExample("Protect a Document", string.Empty, string.Empty, ProtectionActions.ProtectDocumentAction, false));
-            examples[15].Groups.Add(new RichEditExample("Unprotect a Document", string.Empty, string.Empty, ProtectionActions.UnprotectDocumentAction, false));
-            examples[15].Groups.Add(new RichEditExample("Create Range Permissions", string.Empty, string.Empty, ProtectionActions.CreateRangePermissionsAction, false));
+            examples[16].Groups.Add(new RichEditExample("Protect a Document", string.Empty, string.Empty, ProtectionActions.ProtectDocumentAction, false));
+            examples[16].Groups.Add(new RichEditExample("Unprotect a Document", string.Empty, string.Empty, ProtectionActions.UnprotectDocumentAction, false));
+            examples[16].Groups.Add(new RichEditExample("Create Range Permissions", string.Empty, string.Empty, ProtectionActions.CreateRangePermissionsAction, false));
 
             //Add nodes to the "Ranges" group of examples.
-            examples[16].Groups.Add(new RichEditExample("Insert Text in a Range", string.Empty, string.Empty, RangeActions.InsertTextInRangeAction, true));
-            examples[16].Groups.Add(new RichEditExample("Append Text to a Range", string.Empty, string.Empty, RangeActions.AppendTextToRangeAction, true));
-            examples[16].Groups.Add(new RichEditExample("Append Text to a Paragraph", string.Empty, string.Empty, RangeActions.AppendToParagraphAction, true));
+            examples[17].Groups.Add(new RichEditExample("Insert Text in a Range", string.Empty, string.Empty, RangeActions.InsertTextInRangeAction, true));
+            examples[17].Groups.Add(new RichEditExample("Append Text to a Range", string.Empty, string.Empty, RangeActions.AppendTextToRangeAction, true));
+            examples[17].Groups.Add(new RichEditExample("Append Text to a Paragraph", string.Empty, string.Empty, RangeActions.AppendToParagraphAction, true));
 
             //Add nodes to the "Shapes" group of examples.
-            examples[17].Groups.Add(new RichEditExample("Add a Floating Picture", string.Empty, string.Empty, ShapesActions.AddFloatingPictureAction, true));
-            examples[17].Groups.Add(new RichEditExample("Floating Picture Offset", string.Empty, string.Empty, ShapesActions.FloatingPictureOffsetAction, true));
-            examples[17].Groups.Add(new RichEditExample("Change Z-Order and Wrapping", string.Empty, string.Empty, ShapesActions.ChangeZorderAndWrappingAction, true));
-            examples[17].Groups.Add(new RichEditExample("Add a Text Box", string.Empty, string.Empty, ShapesActions.AddTextBoxAction, true));
-            examples[17].Groups.Add(new RichEditExample("Insert Rich Text in a TextBox", string.Empty, string.Empty, ShapesActions.InsertRichTextInTextBoxAction, true));
-            examples[17].Groups.Add(new RichEditExample("Rotate and Resize Shapes", string.Empty, string.Empty, ShapesActions.RotateAndResizeAction, true));
+            examples[18].Groups.Add(new RichEditExample("Add a Floating Picture", string.Empty, string.Empty, ShapesActions.AddFloatingPictureAction, true));
+            examples[18].Groups.Add(new RichEditExample("Floating Picture Offset", string.Empty, string.Empty, ShapesActions.FloatingPictureOffsetAction, true));
+            examples[18].Groups.Add(new RichEditExample("Change Z-Order and Wrapping", string.Empty, string.Empty, ShapesActions.ChangeZorderAndWrappingAction, true));
+            examples[18].Groups.Add(new RichEditExample("Add a Text Box", string.Empty, string.Empty, ShapesActions.AddTextBoxAction, true));
+            examples[18].Groups.Add(new RichEditExample("Insert Rich Text in a TextBox", string.Empty, string.Empty, ShapesActions.InsertRichTextInTextBoxAction, true));
+            examples[18].Groups.Add(new RichEditExample("Rotate and Resize Shapes", string.Empty, string.Empty, ShapesActions.RotateAndResizeAction, true));
 
             //Add nodes to the "Styles" group of examples.
-            examples[18].Groups.Add(new RichEditExample("Create a New Character Style", string.Empty, string.Empty, StylesAction.CreateNewCharacterStyleAction, true));
-            examples[18].Groups.Add(new RichEditExample("Create a New Paragraph Style", string.Empty, string.Empty, StylesAction.CreateNewParagraphStyleAction, true));
-            examples[18].Groups.Add(new RichEditExample("Create a New Linked Style", string.Empty, string.Empty, StylesAction.CreateNewLinkedStyleAction, false));
+            examples[19].Groups.Add(new RichEditExample("Create a New Character Style", string.Empty, string.Empty, StylesAction.CreateNewCharacterStyleAction, true));
+            examples[19].Groups.Add(new RichEditExample("Create a New Paragraph Style", string.Empty, string.Empty, StylesAction.CreateNewParagraphStyleAction, true));
+            examples[19].Groups.Add(new RichEditExample("Create a New Linked Style", string.Empty, string.Empty, StylesAction.CreateNewLinkedStyleAction, false));
 
             //Add nodes to the "Tables" group of examples.
-            examples[19].Groups.Add(new RichEditExample("Create a Table", string.Empty, string.Empty, TablesActions.CreateTableAction, true));
-            examples[19].Groups.Add(new RichEditExample("Create a Fixed Table", string.Empty, string.Empty, TablesActions.CreateFixedTableAction, true));
-            examples[19].Groups.Add(new RichEditExample("Change the Table Color", string.Empty, string.Empty, TablesActions.ChangeTableColorAction, true));
-            examples[19].Groups.Add(new RichEditExample("Create and Apply a Table Style", string.Empty, string.Empty, TablesActions.CreateAndApplyTableStyleAction, true));
-            examples[19].Groups.Add(new RichEditExample("Use a Conditional Style", string.Empty, string.Empty, TablesActions.UseConditionalStyleAction, true));
-            examples[19].Groups.Add(new RichEditExample("Change Column Appearance", string.Empty, string.Empty, TablesActions.ChangeColumnAppearanceAction, true));
-            examples[19].Groups.Add(new RichEditExample("Table Cell Processor", string.Empty, string.Empty, TablesActions.UseTableCellProcessorAction, true));
-            examples[19].Groups.Add(new RichEditExample("Merge Cells", string.Empty, string.Empty, TablesActions.MergeCellsAction, true));
-            examples[19].Groups.Add(new RichEditExample("Split Cells", string.Empty, string.Empty, TablesActions.SplitCellsAction, true));
-            examples[19].Groups.Add(new RichEditExample("Delete Table Elements", string.Empty, string.Empty, TablesActions.DeleteTableElementsAction, true));
-            examples[19].Groups.Add(new RichEditExample("Wrap Text Around a Table", string.Empty, string.Empty, TablesActions.WrapTextAroundTableAction, true));
+            examples[20].Groups.Add(new RichEditExample("Create a Table", string.Empty, string.Empty, TablesActions.CreateTableAction, true));
+            examples[20].Groups.Add(new RichEditExample("Create a Fixed Table", string.Empty, string.Empty, TablesActions.CreateFixedTableAction, true));
+            examples[20].Groups.Add(new RichEditExample("Change the Table Color", string.Empty, string.Empty, TablesActions.ChangeTableColorAction, true));
+            examples[20].Groups.Add(new RichEditExample("Create and Apply a Table Style", string.Empty, string.Empty, TablesActions.CreateAndApplyTableStyleAction, true));
+            examples[20].Groups.Add(new RichEditExample("Use a Conditional Style", string.Empty, string.Empty, TablesActions.UseConditionalStyleAction, true));
+            examples[20].Groups.Add(new RichEditExample("Change Column Appearance", string.Empty, string.Empty, TablesActions.ChangeColumnAppearanceAction, true));
+            examples[20].Groups.Add(new RichEditExample("Table Cell Processor", string.Empty, string.Empty, TablesActions.UseTableCellProcessorAction, true));
+            examples[20].Groups.Add(new RichEditExample("Merge Cells", string.Empty, string.Empty, TablesActions.MergeCellsAction, true));
+            examples[20].Groups.Add(new RichEditExample("Split Cells", string.Empty, string.Empty, TablesActions.SplitCellsAction, true));
+            examples[20].Groups.Add(new RichEditExample("Delete Table Elements", string.Empty, string.Empty, TablesActions.DeleteTableElementsAction, true));
+            examples[20].Groups.Add(new RichEditExample("Wrap Text Around a Table", string.Empty, string.Empty, TablesActions.WrapTextAroundTableAction, true));
 
             //Add nodes to the "Watermarks" group of examples.
-            examples[20].Groups.Add(new RichEditExample("Create a Text Watermark", string.Empty, string.Empty, WatermarkActions.CreateTextWatermarkAction, true));
-            examples[20].Groups.Add(new RichEditExample("Create an Image Watermark", string.Empty, string.Empty, WatermarkActions.CreateImageWatermarkAction, true));
+            examples[21].Groups.Add(new RichEditExample("Create a Text Watermark", string.Empty, string.Empty, WatermarkActions.CreateTextWatermarkAction, true));
+            examples[21].Groups.Add(new RichEditExample("Create an Image Watermark", string.Empty, string.Empty, WatermarkActions.CreateImageWatermarkAction, true));
 
             return examples;
             #endregion
