@@ -121,7 +121,7 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             // The distance between cells is 4 mm.
             table.TableCellSpacing = 2;
 
-            // Change the color of empty space between cells.
+            // Change the color of the space between cells.
             table.TableBackgroundColor = Color.Violet;
 
             // Change the cell borders and background color.
@@ -156,16 +156,16 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             tStyleMain.FontName = "Segoe Condensed";
             tStyleMain.FontSize = 14;
             tStyleMain.Alignment = ParagraphAlignment.Center;
-            tStyleMain.TableBorders.InsideHorizontalBorder.LineStyle = TableBorderLineStyle.Dotted;
-            tStyleMain.TableBorders.InsideVerticalBorder.LineStyle = TableBorderLineStyle.Dotted;
+            tStyleMain.TableBorders.InsideHorizontalBorder.LineStyle = BorderLineStyle.Dotted;
+            tStyleMain.TableBorders.InsideVerticalBorder.LineStyle = BorderLineStyle.Dotted;
             tStyleMain.TableBorders.Top.LineThickness = 1.5f;
-            tStyleMain.TableBorders.Top.LineStyle = TableBorderLineStyle.Double;
+            tStyleMain.TableBorders.Top.LineStyle = BorderLineStyle.Double;
             tStyleMain.TableBorders.Left.LineThickness = 1.5f;
-            tStyleMain.TableBorders.Left.LineStyle = TableBorderLineStyle.Double;
+            tStyleMain.TableBorders.Left.LineStyle = BorderLineStyle.Double;
             tStyleMain.TableBorders.Bottom.LineThickness = 1.5f;
-            tStyleMain.TableBorders.Bottom.LineStyle = TableBorderLineStyle.Double;
+            tStyleMain.TableBorders.Bottom.LineStyle = BorderLineStyle.Double;
             tStyleMain.TableBorders.Right.LineThickness = 1.5f;
-            tStyleMain.TableBorders.Right.LineStyle = TableBorderLineStyle.Double;
+            tStyleMain.TableBorders.Right.LineStyle = BorderLineStyle.Double;
             tStyleMain.CellBackgroundColor = System.Drawing.Color.LightBlue;
             tStyleMain.TableLayout = TableLayoutType.Fixed;
             tStyleMain.Name = "MyTableStyle";
@@ -236,7 +236,7 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             myNewStyleForEvenColumns.CellBackgroundColor = System.Windows.Forms.ControlPaint.LightLight(Color.PaleVioletRed);
             document.TableStyles.Add(myNewStyle);
 
-            // Create a new table with four rows and columns at the document range's end position.
+            // Create a new table with four rows and columns at the end position of the document range.
             Table table = document.Tables.Create(document.Range.End, 4, 4, AutoFitBehaviorType.AutoFitToWindow);
 
             // Apply the created style to the table.
@@ -290,7 +290,7 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             table.BeginUpdate();
 
             // Use the TableCellProcessorDelegate delegate to pass each table cell 
-            // to the method that miltiplies numbers and output the result cells.
+            // to the method that multiplies numbers and outputs the result cells.
             table.ForEachCell((cell, i, j)=>
             {
                 SubDocument doc = cell.Range.BeginUpdateDocument();
@@ -390,7 +390,7 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             table.RelativeHorizontalPosition = TableRelativeHorizontalPosition.Margin;
             table.HorizontalAlignment = TableHorizontalAlignment.Center;
 
-            // Set distance between the text and the table.
+            // Set the distance between the text and the table.
             table.MarginBottom = DevExpress.Office.Utils.Units.InchesToDocumentsF(0.3f);
             table.MarginLeft = DevExpress.Office.Utils.Units.InchesToDocumentsF(0.3f);
             table.MarginTop = DevExpress.Office.Utils.Units.InchesToDocumentsF(0.3f);
