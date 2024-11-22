@@ -111,7 +111,7 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
             ' The distance between cells is 4 mm.
             table.TableCellSpacing = 2
 
-            ' Change the color of empty space between cells.
+            ' Change the color of the space between cells.
             table.TableBackgroundColor = Color.Violet
 
             ' Change the cell borders and background color.
@@ -143,16 +143,16 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
             tStyleMain.FontName = "Segoe Condensed"
             tStyleMain.FontSize = 14
             tStyleMain.Alignment = DevExpress.XtraRichEdit.API.Native.ParagraphAlignment.Center
-            tStyleMain.TableBorders.InsideHorizontalBorder.LineStyle = DevExpress.XtraRichEdit.API.Native.TableBorderLineStyle.Dotted
-            tStyleMain.TableBorders.InsideVerticalBorder.LineStyle = DevExpress.XtraRichEdit.API.Native.TableBorderLineStyle.Dotted
+            tStyleMain.TableBorders.InsideHorizontalBorder.LineStyle = DevExpress.XtraRichEdit.API.Native.BorderLineStyle.Dotted
+            tStyleMain.TableBorders.InsideVerticalBorder.LineStyle = DevExpress.XtraRichEdit.API.Native.BorderLineStyle.Dotted
             tStyleMain.TableBorders.Top.LineThickness = 1.5F
-            tStyleMain.TableBorders.Top.LineStyle = DevExpress.XtraRichEdit.API.Native.TableBorderLineStyle.[Double]
+            tStyleMain.TableBorders.Top.LineStyle = DevExpress.XtraRichEdit.API.Native.BorderLineStyle.[Double]
             tStyleMain.TableBorders.Left.LineThickness = 1.5F
-            tStyleMain.TableBorders.Left.LineStyle = DevExpress.XtraRichEdit.API.Native.TableBorderLineStyle.[Double]
+            tStyleMain.TableBorders.Left.LineStyle = DevExpress.XtraRichEdit.API.Native.BorderLineStyle.[Double]
             tStyleMain.TableBorders.Bottom.LineThickness = 1.5F
-            tStyleMain.TableBorders.Bottom.LineStyle = DevExpress.XtraRichEdit.API.Native.TableBorderLineStyle.[Double]
+            tStyleMain.TableBorders.Bottom.LineStyle = DevExpress.XtraRichEdit.API.Native.BorderLineStyle.[Double]
             tStyleMain.TableBorders.Right.LineThickness = 1.5F
-            tStyleMain.TableBorders.Right.LineStyle = DevExpress.XtraRichEdit.API.Native.TableBorderLineStyle.[Double]
+            tStyleMain.TableBorders.Right.LineStyle = DevExpress.XtraRichEdit.API.Native.BorderLineStyle.[Double]
             tStyleMain.CellBackgroundColor = System.Drawing.Color.LightBlue
             tStyleMain.TableLayout = DevExpress.XtraRichEdit.API.Native.TableLayoutType.Fixed
             tStyleMain.Name = "MyTableStyle"
