@@ -22,9 +22,7 @@
     <Import Include="System" />
   </ItemGroup>
   <ItemGroup>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Documents\Grimm.docx">
+      <None Update="Documents\Grimm.docx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Documents\Grimm_Protected.docx">
