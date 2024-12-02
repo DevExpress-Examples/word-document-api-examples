@@ -96,6 +96,7 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             pos.EndUpdateDocument(doc);
             #endregion #AppendToParagraph
         }
+
     }
 }
 

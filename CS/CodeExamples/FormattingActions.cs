@@ -11,6 +11,7 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
         public static Action<RichEditDocumentServer> ChangeSpacingAction = ChangeSpacing;
         public static Action<RichEditDocumentServer> ResetCharacterFormattingAction = ResetCharacterFormatting;
         public static Action<RichEditDocumentServer> FormatParagraphAction = FormatParagraph;
+        public static Action<RichEditDocumentServer> FormatParagraphBordersAction = FormatParagraphBorders;
         public static Action<RichEditDocumentServer> ResetParagraphFormattingAction = ResetParagraphFormatting;
 
 
@@ -25,16 +26,16 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
 
             // Append text to the document.
             document.AppendText("Normal\nFormatted\nNormal");
-            
+
             // Finalize to edit the document.
             document.EndUpdate();
-            
+
             // Access the range of the document's second paragraph.
             DocumentRange range = document.Paragraphs[1].Range;
 
             // Start to modify character formatting of the target range.
             CharacterProperties cp = document.BeginUpdateCharacters(range);
-            
+
             // Specify character formatting options.
             cp.FontName = "Comic Sans MS";
             cp.FontSize = 18;
@@ -42,13 +43,14 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             cp.BackColor = Color.Snow;
             cp.Underline = UnderlineType.DoubleWave;
             cp.UnderlineColor = Color.Red;
-            
+            cp.SmallCaps = true;
+
             // Finalize to modify character formatting.
             document.EndUpdateCharacters(cp);
             #endregion #FormatText
         }
 
-        static void ChangeSpacing(RichEditDocumentServer wordProcessor) 
+        static void ChangeSpacing(RichEditDocumentServer wordProcessor)
         {
             #region #ChangeCharacterSpacing
             // Access a document.
@@ -59,7 +61,7 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
 
             // Append text to the document.
             document.AppendText("Normal\nFormatted\nNormal");
-            
+
             // Finalize to edit the document.
             document.EndUpdate();
 
@@ -68,7 +70,7 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
 
             // Start to modify character formatting of the target range.
             CharacterProperties cp = document.BeginUpdateCharacters(range);
-            
+
             // Change character spacing and scaling.
             cp.Scale = 150;
             cp.Spacing = -2;
@@ -87,7 +89,7 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             wordProcessor.LoadDocument("Documents\\Grimm.docx", DocumentFormat.OpenXml);
 
             // Access a document.
-            Document document = wordProcessor.Document;            
+            Document document = wordProcessor.Document;
 
             // Access the range of the document's first paragraph.
             DocumentRange range = document.Paragraphs[0].Range;
@@ -114,7 +116,7 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
 
             // Append text to the document.
             document.AppendText("Modified Paragraph\nNormal\nNormal");
-            
+
             // Finalize to edit the document.
             document.EndUpdate();
 
@@ -134,7 +136,7 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             // Set the paragraph’s left indent to 0.5 document unit.
             // Default unit is 1/300 of an inch (a document unit).
             pp.LeftIndent = DevExpress.Office.Utils.Units.InchesToDocumentsF(0.5f);
-            
+
             // Start to modify tab stops in the paragraph.
             TabInfoCollection tbiColl = pp.BeginUpdateTabs(true);
 
@@ -146,10 +148,10 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
 
             // Set the tab stop position to 1.5 document unit.
             tbi.Position = DevExpress.Office.Utils.Units.InchesToDocumentsF(1.5f);
-            
+
             // Add the tab stop to the collection of tab stops.
             tbiColl.Add(tbi);
-            
+
             // Finalize to modify tab stops in the paragraph.
             pp.EndUpdateTabs(tbiColl);
 
@@ -157,6 +159,42 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             document.EndUpdateParagraphs(pp);
             #endregion #FormatParagraph
         }
+
+        static void FormatParagraphBorders(RichEditDocumentServer wordProcessor)
+        {
+            #region #FormatParagraphBorders
+            // Access a document.
+            Document document = wordProcessor.Document;
+
+            // Start to edit the document.
+            document.BeginUpdate();
+
+            // Append text to the document.
+            document.AppendText(String.Format("Modified Paragraph" + 
+                Environment.NewLine + "Normal" + Environment.NewLine + "Normal"));
+
+            // Finalize to edit the document.
+            document.EndUpdate();
+
+            // Obtain the first and last paragraph ranges
+            Paragraph firstParagraph = document.Paragraphs[0];
+            Paragraph thirdParagraph = document.Paragraphs[2];
+            DocumentRange paragraphRange = document.CreateRange(firstParagraph.Range.Start,
+                            thirdParagraph.Range.End.ToInt() - firstParagraph.Range.Start.ToInt());
+
+            // Start to edit the paragraph.
+            ParagraphProperties pp = document.BeginUpdateParagraphs(paragraphRange);
+            SetBorder(pp.Borders.HorizontalBorder);
+            SetBorder(pp.Borders.BottomBorder);
+            SetBorder(pp.Borders.TopBorder);
+            SetBorder(pp.Borders.LeftBorder);
+            SetBorder(pp.Borders.RightBorder);
+
+            // Finalize to edit the paragraph.
+            document.EndUpdateParagraphs(pp);
+            #endregion #FormatParagraphBorders
+        }
+
         static void ResetParagraphFormatting(RichEditDocumentServer wordProcessor)
         {
             #region #ResetParagraphFormatting
@@ -168,17 +206,24 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
 
             // Access the range of the document's first paragraph.
             DocumentRange range = document.Paragraphs[0].Range;
-            
+
             // Start to edit the paragraph.
             ParagraphProperties cp = document.BeginUpdateParagraphs(range);
 
             // Set alignmment and first line indent of the target paragraph to default values.   
             // Other paragraph properties remain intact.
             cp.Reset(ParagraphPropertiesMask.Alignment | ParagraphPropertiesMask.FirstLineIndent);
-            
+
             // Finalize to edit the paragraph.
             document.EndUpdateParagraphs(cp);
             #endregion #ResetParagraphFormatting
+        }
+
+        static void SetBorder(ParagraphBorder border)
+        {
+            border.LineWidth = 2f;
+            border.LineStyle = BorderLineStyle.Thick;
+            border.LineColor = Color.SteelBlue;
         }
     }
 }

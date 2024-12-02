@@ -35,6 +35,7 @@ namespace RichEditDocumentServerAPIExample.CodeUtils
             examples.Add(new RichEditNode("Styles Actions"));
             examples.Add(new RichEditNode("Tables Actions"));
             examples.Add(new RichEditNode("Watermark Actions"));
+            examples.Add(new RichEditNode("Vba Macros Actions"));
 
             #endregion
 
@@ -94,7 +95,10 @@ namespace RichEditDocumentServerAPIExample.CodeUtils
             examples[8].Groups.Add(new RichEditExample("Change Spacing", string.Empty, string.Empty, FormattingActions.ChangeSpacingAction, true));
             examples[8].Groups.Add(new RichEditExample("Reset Character Formatting", string.Empty, string.Empty, FormattingActions.ResetCharacterFormattingAction, true));
             examples[8].Groups.Add(new RichEditExample("Format a Paragraph", string.Empty, string.Empty, FormattingActions.FormatParagraphAction, true));
+            examples[8].Groups.Add(new RichEditExample("Format Paragraph Borders", string.Empty, string.Empty, FormattingActions.FormatParagraphBordersAction, true));
             examples[8].Groups.Add(new RichEditExample("Reset Paragraph Formatting", string.Empty, string.Empty, FormattingActions.ResetParagraphFormattingAction, true));
+
+
 
             //Add nodes to the "Form Fields" group of examples.
             examples[9].Groups.Add(new RichEditExample("Insert a CheckBox", string.Empty, string.Empty, FormFieldsActions.InsertCheckBoxAction, true));
@@ -129,6 +133,7 @@ namespace RichEditDocumentServerAPIExample.CodeUtils
             examples[15].Groups.Add(new RichEditExample("Create Columns", string.Empty, string.Empty, PageLayoutActions.CreateColumnsAction, true));
             examples[15].Groups.Add(new RichEditExample("Adjust Page Layout", string.Empty, string.Empty, PageLayoutActions.PrintLayoutAction, true));
             examples[15].Groups.Add(new RichEditExample("Set Tab Stops", string.Empty, string.Empty, PageLayoutActions.TabStopsAction, true));
+            examples[15].Groups.Add(new RichEditExample("Set Page Borders", string.Empty, string.Empty, PageLayoutActions.PageBordersAction, true));
 
             //Add nodes to the "Protection" group of examples.
             examples[16].Groups.Add(new RichEditExample("Protect a Document", string.Empty, string.Empty, ProtectionActions.ProtectDocumentAction, false));
@@ -169,6 +174,10 @@ namespace RichEditDocumentServerAPIExample.CodeUtils
             //Add nodes to the "Watermarks" group of examples.
             examples[21].Groups.Add(new RichEditExample("Create a Text Watermark", string.Empty, string.Empty, WatermarkActions.CreateTextWatermarkAction, true));
             examples[21].Groups.Add(new RichEditExample("Create an Image Watermark", string.Empty, string.Empty, WatermarkActions.CreateImageWatermarkAction, true));
+
+            //Add nodes to the "VBA Macros" group of examples.
+            examples[22].Groups.Add(new RichEditExample("Obtain VBA Macros", string.Empty, string.Empty, VbaMacrosActions.ObtainVbaMacrosAction, true));
+            examples[22].Groups.Add(new RichEditExample("Clear VBA Modules", string.Empty, string.Empty, VbaMacrosActions.ClearVbaModulesAction, true));
 
             return examples;
             #endregion
@@ -232,7 +241,7 @@ namespace RichEditDocumentServerAPIExample.CodeUtils
         }
         public static string GetExamplePath(string exampleFolderName)
         {
-            string examplesPath2 = Path.Combine(Directory.GetCurrentDirectory() + "\\..\\..\\", exampleFolderName);
+            string examplesPath2 = Path.Combine(Directory.GetCurrentDirectory() + "\\..\\..\\..\\", exampleFolderName);
             if (Directory.Exists(examplesPath2))
                 return examplesPath2;
             string examplesPathInInsallation = GetRelativeDirectoryPath(exampleFolderName);

@@ -124,7 +124,7 @@ namespace RichEditDocumentServerAPIExample
                 try
                 {
                     wordProcessor.SaveDocument("Result.docx", DocumentFormat.OpenXml);
-                    Process.Start("Result.docx");
+                    Process.Start(new ProcessStartInfo("Result.docx") { UseShellExecute = true });
                 }
                 catch (Exception)
                 {

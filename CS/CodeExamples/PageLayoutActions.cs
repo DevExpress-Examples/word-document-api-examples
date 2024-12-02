@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DevExpress.XtraRichEdit;
 using DevExpress.XtraRichEdit.API.Native;
-using DevExpress.XtraRichEdit;
+using System;
 
 namespace RichEditDocumentServerAPIExample.CodeExamples
 {
@@ -14,6 +10,7 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
         public static Action<RichEditDocumentServer> CreateColumnsAction = CreateColumns;
         public static Action<RichEditDocumentServer> PrintLayoutAction = PrintLayout;
         public static Action<RichEditDocumentServer> TabStopsAction = TabStops;
+        public static Action<RichEditDocumentServer> PageBordersAction = CreatePageBorders;
 
         static void LineNumbering(RichEditDocumentServer wordProcessor)
         {
@@ -56,7 +53,7 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             // Create a uniform column layout. 
             SectionColumnCollection sectionColumnsLayout =
                 firstSection.Columns.CreateUniformColumns(firstSection.Page, 0.2f, 3);
-            
+
             // Apply the column layout to the section.
             firstSection.Columns.SetColumns(sectionColumnsLayout);
             #endregion #CreateColumns
@@ -73,7 +70,7 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
 
             // Specify the document’s measure units.
             document.Unit = DevExpress.Office.DocumentUnit.Inch;
-            
+
             // Specify page layout settings for the first document section.
             document.Sections[0].Page.PaperKind = DevExpress.Drawing.Printing.DXPaperKind.A6;
             document.Sections[0].Page.Landscape = true;
@@ -92,7 +89,7 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
 
             // Specify the document’s measure units.
             document.Unit = DevExpress.Office.DocumentUnit.Inch;
-            
+
             // Start to modify tab stops in the first paragraph.
             TabInfoCollection tabs = document.Paragraphs[0].BeginUpdateTabs(true);
 
@@ -109,12 +106,12 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
 
             // Create the second tab stop.
             TabInfo tab2 = new TabInfo();
-            
+
             // Specify the tab stop settings.
             tab2.Position = 5.5f;
             tab2.Alignment = TabAlignmentType.Decimal;
             tab2.Leader = TabLeaderType.EqualSign;
-            
+
             // Add the tab stop to the collection of tab stops.
             tabs.Add(tab2);
 
@@ -122,5 +119,46 @@ namespace RichEditDocumentServerAPIExample.CodeExamples
             document.Paragraphs[0].EndUpdateTabs(tabs);
             #endregion #TabStops
         }
+
+        static void CreatePageBorders(RichEditDocumentServer wordProcessor)
+        {
+            #region #CreatePageBorders
+            Document document = wordProcessor.Document;
+            // Generate a document with two sections and multiple pages in each section.
+            document.AppendText("\f\f\f");
+            document.Paragraphs.Append();
+            document.AppendSection();
+            document.AppendText("\f\f");
+
+            Section firstSection = document.Sections[0];
+            SectionPageBorders pageBorders1 = firstSection.PageBorders;
+
+            // Set page borders for the first page of the first section.
+            SetPageBorders(pageBorders1.LeftBorder, BorderLineStyle.Single, 1f, System.Drawing.Color.Red);
+            SetPageBorders(pageBorders1.TopBorder, BorderLineStyle.Single, 1f, System.Drawing.Color.Red);
+            SetPageBorders(pageBorders1.RightBorder, BorderLineStyle.Single, 1f, System.Drawing.Color.Red);
+            SetPageBorders(pageBorders1.BottomBorder, BorderLineStyle.Single, 1f, System.Drawing.Color.Red);
+            pageBorders1.AppliesTo = PageBorderAppliesTo.FirstPage;
+
+            Section secondSection = document.Sections[1];
+            SectionPageBorders pageBorders2 = secondSection.PageBorders;
+
+            // Set page borders for all pages of the second section.
+            SetPageBorders(pageBorders2.LeftBorder, BorderLineStyle.Double, 1.5f, System.Drawing.Color.Green);
+            SetPageBorders(pageBorders2.TopBorder, BorderLineStyle.Double, 1.5f, System.Drawing.Color.Green);
+            SetPageBorders(pageBorders2.RightBorder, BorderLineStyle.Double, 1.5f, System.Drawing.Color.Green);
+            SetPageBorders(pageBorders2.BottomBorder, BorderLineStyle.Double, 1.5f, System.Drawing.Color.Green);
+            pageBorders2.AppliesTo = PageBorderAppliesTo.AllPages;
+            pageBorders2.ZOrder = PageBorderZOrder.Back;
+        }
+        static void SetPageBorders(PageBorder border, BorderLineStyle lineStyle,
+            float borderWidth, System.Drawing.Color color)
+        {
+            border.LineStyle = lineStyle;
+            border.LineWidth = borderWidth;
+            border.LineColor = color;
+        }
+        #endregion #CreatePageBorders
     }
+
 }
