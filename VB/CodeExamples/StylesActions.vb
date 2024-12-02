@@ -10,11 +10,11 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
 
     Friend Class StylesAction
 
-        Public Shared CreateNewCharacterStyleAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.StylesAction.CreateNewCharacterStyle
+        Public Shared CreateNewCharacterStyleAction As Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf CreateNewCharacterStyle
 
-        Public Shared CreateNewParagraphStyleAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.StylesAction.CreateNewParagraphStyle
+        Public Shared CreateNewParagraphStyleAction As Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf CreateNewParagraphStyle
 
-        Public Shared CreateNewLinkedStyleAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.StylesAction.CreateNewLinkedStyle
+        Public Shared CreateNewLinkedStyleAction As Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf CreateNewLinkedStyle
 
         Private Shared Sub CreateNewCharacterStyle(ByVal wordProcessor As DevExpress.XtraRichEdit.RichEditDocumentServer)
 #Region "#CreateNewCharacterStyle"
@@ -38,7 +38,7 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
             End If
 
             ' Access the range of the first paragraph.
-            Dim myRange As DevExpress.XtraRichEdit.API.Native.DocumentRange = document.Paragraphs(CInt((0))).Range
+            Dim myRange As DevExpress.XtraRichEdit.API.Native.DocumentRange = document.Paragraphs(0).Range
             ' Access character formatting of the target range.
             Dim charProps As DevExpress.XtraRichEdit.API.Native.CharacterProperties = document.BeginUpdateCharacters(myRange)
             ' Apply the created character style to the target range.
@@ -69,7 +69,7 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
 
             If document.Paragraphs.Count > 2 Then
                 ' Apply the created paragraph style to the third document paragraph.
-                document.Paragraphs(CInt((2))).Style = pstyle
+                document.Paragraphs(2).Style = pstyle
             End If
 #End Region  ' #CreateNewParagraphStyle
         End Sub

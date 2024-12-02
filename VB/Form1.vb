@@ -1,8 +1,4 @@
-Imports System
-Imports System.Collections.Generic
 Imports System.Diagnostics
-Imports System.IO
-Imports System.Windows.Forms
 Imports DevExpress.XtraRichEdit
 Imports DevExpress.XtraTab
 Imports DevExpress.XtraTreeList
@@ -31,13 +27,13 @@ Namespace RichEditDocumentServerAPIExample
         End Sub
 
         Private Sub InitExamples()
-            Dim examplePath As String = GetExamplePath("CodeExamples")
-            Dim examplesCS As Dictionary(Of String, FileInfo) = GatherExamplesFromProject(examplePath, ExampleLanguage.Csharp)
-            Dim examplesVB As Dictionary(Of String, FileInfo) = GatherExamplesFromProject(examplePath, ExampleLanguage.VB)
+            Dim examplePath As String = CodeExampleUtils.GetExamplePath("CodeExamples")
+            Dim examplesCS As Dictionary(Of String, FileInfo) = CodeExampleUtils.GatherExamplesFromProject(examplePath, ExampleLanguage.Csharp)
+            Dim examplesVB As Dictionary(Of String, FileInfo) = CodeExampleUtils.GatherExamplesFromProject(examplePath, ExampleLanguage.VB)
             DisableTabs(examplesCS.Count, examplesVB.Count)
             Dim actualExamples As Dictionary(Of String, FileInfo)
             Dim exampleFinder As ExampleFinder
-            If examplesCS.Count <> 0 Then
+            If examplesCS.Count IsNot 0 Then
                 actualExamples = examplesCS
                 exampleFinder = New ExampleFinderCSharp()
             Else
@@ -45,11 +41,11 @@ Namespace RichEditDocumentServerAPIExample
                 exampleFinder = New ExampleFinderVB()
             End If
 
-            richEditExamples = FindExamples(actualExamples, exampleFinder)
+            richEditExamples = CodeExampleUtils.FindExamples(actualExamples, exampleFinder)
         End Sub
 
         Private Sub InitCurrentExampleLanguage()
-            Dim currentLanguage As ExampleLanguage = DetectExampleLanguage("RichEditDocumentServerAPIExample")
+            Dim currentLanguage As ExampleLanguage = CodeExampleUtils.DetectExampleLanguage("RichEditDocumentServerAPIExample")
             codeEditor.CurrentExampleLanguage = currentLanguage
             xtraTabControl1.SelectedTabPageIndex = If(currentLanguage = ExampleLanguage.Csharp, 0, 1)
         End Sub
@@ -62,7 +58,7 @@ Namespace RichEditDocumentServerAPIExample
         Private Sub ShowExamplesInTreeList(ByVal treeList As TreeList)
 #Region "InitializeTreeList"
             treeList.OptionsPrint.UsePrintStyles = True
-            AddHandler treeList.FocusedNodeChanged, New FocusedNodeChangedEventHandler(AddressOf OnNewExampleSelected)
+            treeList.FocusedNodeChanged += New FocusedNodeChangedEventHandler(AddressOf Me.OnNewExampleSelected)
             treeList.OptionsView.ShowColumns = False
             treeList.OptionsView.ShowIndicator = False
 #End Region
@@ -86,19 +82,19 @@ Namespace RichEditDocumentServerAPIExample
             Dim codeExample As RichEditExample = TryCast(TryCast(sender, TreeList).GetDataRecordByNode(e.Node), RichEditExample)
             If codeExample Is Nothing Then Return
             codeEditor.ShowExample(codeExample)
-            codeExampleNameLbl.Text = ConvertStringToHumanReadableForm(codeExample.Name)
+            codeExampleNameLbl.Text = CodeExampleUtils.ConvertStringToHumanReadableForm(codeExample.Name)
         End Sub
 
         Private Sub DisableTabs(ByVal examplesCSCount As Integer, ByVal examplesVBCount As Integer)
-            If examplesCSCount = 0 Then
+            If examplesCSCount Is 0 Then
                 For Each t As XtraTabPage In xtraTabControl1.TabPages
-                    If Equals(t.Tag.ToString(), "CS") Then t.PageEnabled = False
+                    If t.Tag.ToString() Is "CS" Then t.PageEnabled = False
                 Next
             End If
 
-            If examplesVBCount = 0 Then
+            If examplesVBCount Is 0 Then
                 For Each t As XtraTabPage In xtraTabControl1.TabPages
-                    If Equals(t.Tag.ToString(), "VB") Then t.PageEnabled = False
+                    If t.Tag.ToString() Is "VB" Then t.PageEnabled = False
                 Next
             End If
         End Sub
@@ -117,7 +113,7 @@ Namespace RichEditDocumentServerAPIExample
             If example.SaveResult Then
                 Try
                     wordProcessor.SaveDocument("Result.docx", DocumentFormat.OpenXml)
-                    Call Process.Start("Result.docx")
+                    Process.Start(New ProcessStartInfo("Result.docx") With {.UseShellExecute = True})
                 Catch __unusedException1__ As Exception
                     MessageBox.Show("Close the Result.docx file.")
                 End Try

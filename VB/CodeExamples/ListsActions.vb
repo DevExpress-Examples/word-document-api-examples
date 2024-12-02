@@ -10,11 +10,11 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
 
     Friend Class ListsActions
 
-        Public Shared CreateBulletedListAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.ListsActions.CreateBulletedList
+        Public Shared CreateBulletedListAction As Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf CreateBulletedList
 
-        Public Shared CreateNumberedListAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.ListsActions.CreateNumberedList
+        Public Shared CreateNumberedListAction As Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf CreateNumberedList
 
-        Public Shared CreateMultilevelListAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.ListsActions.CreateMultilevelList
+        Public Shared CreateMultilevelListAction As Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf CreateMultilevelList
 
         Private Shared Sub CreateBulletedList(ByVal wordProcessor As DevExpress.XtraRichEdit.RichEditDocumentServer)
 #Region "#CreateBulletedList"

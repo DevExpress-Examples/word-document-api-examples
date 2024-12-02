@@ -10,9 +10,9 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
 
     Friend Class InlinePicturesActions
 
-        Public Shared ImageCollectionAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.InlinePicturesActions.ImageCollection
+        Public Shared ImageCollectionAction As Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf ImageCollection
 
-        Public Shared SaveImageToFileAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.InlinePicturesActions.SaveImageToFile
+        Public Shared SaveImageToFileAction As Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf SaveImageToFile
 
         Private Shared Sub ImageCollection(ByVal wordProcessor As DevExpress.XtraRichEdit.RichEditDocumentServer)
 #Region "#ImageCollection"
@@ -25,9 +25,9 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
             ' If the image width exceeds 50 millimeters, 
             ' scale the image proportionally to half its size.
             For i As Integer = 0 To images.Count - 1
-                If images(CInt((i))).Size.Width > DevExpress.Office.Utils.Units.MillimetersToDocumentsF(50) Then
-                    images(CInt((i))).ScaleX /= 2
-                    images(CInt((i))).ScaleY /= 2
+                If images(i).Size.Width > DevExpress.Office.Utils.Units.MillimetersToDocumentsF(50) Then
+                    images(i).ScaleX /= 2
+                    images(i).ScaleY /= 2
                 End If
             Next
 #End Region  ' #ImageCollection
@@ -45,9 +45,9 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
             Dim images As DevExpress.XtraRichEdit.API.Native.ReadOnlyDocumentImageCollection = document.Images.[Get](myRange)
             If images.Count > 0 Then
                 ' Save the first retrieved image as a PNG file.
-                Dim myImage As DevExpress.Office.Utils.OfficeImage = images(CInt((0))).Image
+                Dim myImage As DevExpress.Office.Utils.OfficeImage = images(0).Image
                 Dim image As System.Drawing.Image = myImage.NativeImage
-                Dim imageName As String = System.[String].Format("Image_at_pos_{0}.png", images(CInt((0))).Range.Start.ToInt())
+                Dim imageName As String = [String].Format("Image_at_pos_{0}.png", images(0).Range.Start.ToInt())
                 image.Save(imageName)
                 ' Open the File Explorer and select the saved image.
                 System.Diagnostics.Process.Start("explorer.exe", "/select," & imageName)

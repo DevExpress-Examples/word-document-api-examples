@@ -6,17 +6,17 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
 
     Public Module NotesActions
 
-        Public InsertFootnotesAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.NotesActions.InsertFootnotes
+        Public InsertFootnotesAction As Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf InsertFootnotes
 
-        Public InsertEndnotesAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.NotesActions.InsertEndnotes
+        Public InsertEndnotesAction As Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf InsertEndnotes
 
-        Public EditFootnoteAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.NotesActions.EditFootnote
+        Public EditFootnoteAction As Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf EditFootnote
 
-        Public EditEndnoteAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.NotesActions.EditEndnote
+        Public EditEndnoteAction As Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf EditEndnote
 
-        Public EditSeparatorAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.NotesActions.EditSeparator
+        Public EditSeparatorAction As Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf EditSeparator
 
-        Public RemoveNotesAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.NotesActions.RemoveNotes
+        Public RemoveNotesAction As Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RemoveNotes
 
         Private Sub InsertFootnotes(ByVal wordProcessor As DevExpress.XtraRichEdit.RichEditDocumentServer)
 #Region "#InsertFootnotes"
@@ -26,10 +26,10 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
             Dim document As DevExpress.XtraRichEdit.API.Native.Document = wordProcessor.Document
             If document.Paragraphs.Count > 5 Then
                 ' Insert a footnote at the end of the sixth paragraph.
-                Dim footnotePosition As DevExpress.XtraRichEdit.API.Native.DocumentPosition = document.CreatePosition(document.Paragraphs(CInt((5))).Range.[End].ToInt() - 1)
+                Dim footnotePosition As DevExpress.XtraRichEdit.API.Native.DocumentPosition = document.CreatePosition(document.Paragraphs(5).Range.[End].ToInt() - 1)
                 document.Footnotes.Insert(footnotePosition)
                 ' Insert a footnote at the end of the eighth paragraph with a custom mark.
-                Dim footnoteWithCustomMarkPosition As DevExpress.XtraRichEdit.API.Native.DocumentPosition = document.CreatePosition(document.Paragraphs(CInt((7))).Range.[End].ToInt() - 1)
+                Dim footnoteWithCustomMarkPosition As DevExpress.XtraRichEdit.API.Native.DocumentPosition = document.CreatePosition(document.Paragraphs(7).Range.[End].ToInt() - 1)
                 document.Footnotes.Insert(footnoteWithCustomMarkPosition, "º")
             End If
 #End Region  ' #InsertFootnotes 
@@ -42,10 +42,10 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
             ' Access a document.
             Dim document As DevExpress.XtraRichEdit.API.Native.Document = wordProcessor.Document
             ' Insert an endnote at the end of the last paragraph.
-            Dim endnotePosition As DevExpress.XtraRichEdit.API.Native.DocumentPosition = document.CreatePosition(document.Paragraphs(CInt((document.Paragraphs.Count - 1))).Range.[End].ToInt() - 1)
+            Dim endnotePosition As DevExpress.XtraRichEdit.API.Native.DocumentPosition = document.CreatePosition(document.Paragraphs(document.Paragraphs.Count - 1).Range.[End].ToInt() - 1)
             document.Endnotes.Insert(endnotePosition)
             ' Insert an endnote at the end of the second last paragraph with a custom mark.
-            Dim endnoteWithCustomMarkPosition As DevExpress.XtraRichEdit.API.Native.DocumentPosition = document.CreatePosition(document.Paragraphs(CInt((document.Paragraphs.Count - 2))).Range.[End].ToInt() - 1)
+            Dim endnoteWithCustomMarkPosition As DevExpress.XtraRichEdit.API.Native.DocumentPosition = document.CreatePosition(document.Paragraphs(document.Paragraphs.Count - 2).Range.[End].ToInt() - 1)
             document.Endnotes.Insert(endnoteWithCustomMarkPosition, "`")
 #End Region  ' #InsertEndnotes
         End Sub
@@ -57,7 +57,7 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
             ' Access a document.
             Dim document As DevExpress.XtraRichEdit.API.Native.Document = wordProcessor.Document
             ' Access the first footnote content.
-            Dim footnote As DevExpress.XtraRichEdit.API.Native.SubDocument = document.Footnotes(CInt((0))).BeginUpdate()
+            Dim footnote As DevExpress.XtraRichEdit.API.Native.SubDocument = document.Footnotes(0).BeginUpdate()
             ' Exclude the reference mark and the space after it from the range that is edited.
             Dim noteTextRange As DevExpress.XtraRichEdit.API.Native.DocumentRange = footnote.CreateRange(footnote.Range.Start.ToInt() + 2, footnote.Range.Length - 2)
             ' Clear the range.
@@ -65,7 +65,7 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
             ' Change the footnote text.
             footnote.AppendText("the text is removed")
             ' Finalize to update the endnote.
-            document.Footnotes(CInt((0))).EndUpdate(footnote)
+            document.Footnotes(0).EndUpdate(footnote)
 #End Region  ' #EditFootnote
         End Sub
 
@@ -76,7 +76,7 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
             ' Access a document.
             Dim document As DevExpress.XtraRichEdit.API.Native.Document = wordProcessor.Document
             ' Access the first endnote content.
-            Dim endnote As DevExpress.XtraRichEdit.API.Native.SubDocument = document.Endnotes(CInt((0))).BeginUpdate()
+            Dim endnote As DevExpress.XtraRichEdit.API.Native.SubDocument = document.Endnotes(0).BeginUpdate()
             ' Exclude the reference mark and the space after it from the range that is edited.
             Dim noteTextRange As DevExpress.XtraRichEdit.API.Native.DocumentRange = endnote.CreateRange(endnote.Range.Start.ToInt() + 2, endnote.Range.Length - 2)
             ' Access the endnote's character formatting.
@@ -87,7 +87,7 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
             ' Finalize to update character formatting.
             endnote.EndUpdateCharacters(characterProperties)
             ' Finalize to update the endnote.
-            document.Endnotes(CInt((0))).EndUpdate(endnote)
+            document.Endnotes(0).EndUpdate(endnote)
 #End Region  ' #EditEndnote
         End Sub
 
@@ -121,7 +121,7 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
             If document.Footnotes.Count > 0 Then document.Footnotes.RemoveAt(0)
             ' Remove all custom endnotes.
             For i As Integer = document.Endnotes.Count - 1 To 0 Step -1
-                If document.Endnotes(CInt((i))).IsCustom Then document.Endnotes.Remove(document.Endnotes(i))
+                If document.Endnotes(i).IsCustom Then document.Endnotes.Remove(document.Endnotes(i))
             Next
 #End Region  ' #RemoveNotes
         End Sub

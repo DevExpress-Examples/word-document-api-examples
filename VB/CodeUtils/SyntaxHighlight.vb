@@ -1,6 +1,4 @@
-Imports System.Collections.Generic
 Imports System.Drawing
-Imports System.IO
 Imports DevExpress.CodeParser
 Imports DevExpress.Office.Internal
 Imports DevExpress.Office.Utils
@@ -72,7 +70,7 @@ Namespace RichEditDocumentServerAPIExample.CodeUtils
         End Sub
 
         Private Sub ExecuteCore()
-            Dim tokens As TokenCollection = Parse(editor.Text)
+            Dim tokens As TokenCollection = Me.Parse(editor.Text)
             HighlightSyntax(tokens)
         End Sub
 
@@ -92,7 +90,7 @@ Namespace RichEditDocumentServerAPIExample.CodeUtils
         Private Function CreateTokenizer() As ITokenCategoryHelper
             Dim fileName As String = editor.Options.DocumentSaveOptions.CurrentFileName
             Dim extenstion As String
-            If String.IsNullOrEmpty(fileName) Then
+            If [String].IsNullOrEmpty(fileName) Then
                 extenstion = fileExtensionToHightlight
             Else
                 extenstion = Path.GetExtension(fileName)
@@ -107,7 +105,7 @@ Namespace RichEditDocumentServerAPIExample.CodeUtils
         End Function
 
         Private Sub HighlightSyntax(ByVal tokens As TokenCollection)
-            If tokens Is Nothing OrElse tokens.Count = 0 Then
+            If tokens Is Nothing OrElse tokens.Count Is 0 Then
                 Return
             End If
 
@@ -115,7 +113,7 @@ Namespace RichEditDocumentServerAPIExample.CodeUtils
             Dim cp As CharacterProperties = document.BeginUpdateCharacters(0, 1)
             Dim syntaxTokens As List(Of SyntaxHighlightToken) = New List(Of SyntaxHighlightToken)(tokens.Count)
             For Each token As Token In tokens
-                HighlightCategorizedToken(CType(token, CategorizedToken), syntaxTokens)
+                Me.HighlightCategorizedToken(CType(token, CategorizedToken), syntaxTokens)
             Next
 
             document.ApplySyntaxHighlight(syntaxTokens)
@@ -125,7 +123,7 @@ Namespace RichEditDocumentServerAPIExample.CodeUtils
         Private Sub HighlightCategorizedToken(ByVal token As CategorizedToken, ByVal syntaxTokens As List(Of SyntaxHighlightToken))
             Dim backColor As Color = editor.ActiveView.BackColor
             Dim highlightProperties As SyntaxHighlightProperties = syntaxHighlightInfo.CalculateTokenCategoryHighlight(token.Category)
-            Dim syntaxToken As SyntaxHighlightToken = SetTokenColor(token, highlightProperties, backColor)
+            Dim syntaxToken As SyntaxHighlightToken = Me.SetTokenColor(token, highlightProperties, backColor)
             If syntaxToken IsNot Nothing Then
                 syntaxTokens.Add(syntaxToken)
             End If
@@ -138,7 +136,7 @@ Namespace RichEditDocumentServerAPIExample.CodeUtils
 
             Dim paragraphStart As Integer = DocumentHelper.GetParagraphStart(editor.Document.Paragraphs(token.Range.Start.Line - 1))
             Dim tokenStart As Integer = paragraphStart + token.Range.Start.Offset - 1
-            If token.Range.End.Line <> token.Range.Start.Line Then
+            If token.Range.End.Line IsNot token.Range.Start.Line Then
                 paragraphStart = DocumentHelper.GetParagraphStart(editor.Document.Paragraphs(token.Range.End.Line - 1))
             End If
 

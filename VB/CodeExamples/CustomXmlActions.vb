@@ -11,11 +11,11 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
 
     Friend Class CustomXmlActions
 
-        Public Shared AddCustomXmlPartAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.CustomXmlActions.AddCustomXmlPart
+        Public Shared AddCustomXmlPartAction As Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf AddCustomXmlPart
 
-        Public Shared AccessCustomXmlPartAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.CustomXmlActions.AccessCustomXmlPart
+        Public Shared AccessCustomXmlPartAction As Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf AccessCustomXmlPart
 
-        Public Shared RemoveCustomXmlPartAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.CustomXmlActions.RemoveCustomXmlPart
+        Public Shared RemoveCustomXmlPartAction As Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RemoveCustomXmlPart
 
         Private Shared Sub AddCustomXmlPart(ByVal wordProcessor As DevExpress.XtraRichEdit.RichEditDocumentServer)
 #Region "#AddCustomXmlPart"
@@ -26,7 +26,7 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
             ' Add an empty custom XML part.
             Dim xmlItem As DevExpress.XtraRichEdit.API.Native.ICustomXmlPart = document.CustomXmlParts.Add()
             ' Populate the XML part with content.
-            Dim elem As System.Xml.XmlElement = xmlItem.CustomXmlPartDocument.CreateElement("Employees")
+            Dim elem As XmlElement = xmlItem.CustomXmlPartDocument.CreateElement("Employees")
             elem.InnerText = "Stephen Edwards"
             xmlItem.CustomXmlPartDocument.AppendChild(elem)
             ' Specify the custom XML part content.
@@ -42,7 +42,7 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
                             </Employees>"
             document.CustomXmlParts.Insert(1, xmlString)
             ' Add a custom XML part from a file.
-            Dim xmlDoc As System.Xml.XmlDocument = New System.Xml.XmlDocument()
+            Dim xmlDoc As XmlDocument = New XmlDocument()
             xmlDoc.Load("Documents\Employees.xml")
             document.CustomXmlParts.Add(xmlDoc)
 #End Region  ' #AddCustomXmlPart
@@ -56,11 +56,11 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
             Dim document As DevExpress.XtraRichEdit.API.Native.Document = wordProcessor.Document
             If document.CustomXmlParts.Count > 0 Then
                 ' Access a custom XML file stored in the document.
-                Dim xmlDoc As System.Xml.XmlDocument = document.CustomXmlParts(CInt((0))).CustomXmlPartDocument
+                Dim xmlDoc As XmlDocument = document.CustomXmlParts(0).CustomXmlPartDocument
                 ' Retrieve employee names from the XML file and display them in the document.
-                Dim nameList As System.Xml.XmlNodeList = xmlDoc.GetElementsByTagName("Name")
+                Dim nameList As XmlNodeList = xmlDoc.GetElementsByTagName("Name")
                 document.AppendText("Employee list:")
-                For Each name As System.Xml.XmlNode In nameList
+                For Each name As XmlNode In nameList
                     document.AppendText(Global.Microsoft.VisualBasic.Constants.vbCrLf & " · " & name.InnerText)
                 Next
             End If

@@ -10,7 +10,7 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
 
     Friend Class FormFieldsActions
 
-        Public Shared InsertCheckBoxAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.FormFieldsActions.InsertCheckBox
+        Public Shared InsertCheckBoxAction As Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf InsertCheckBox
 
         Private Shared Sub InsertCheckBox(ByVal wordProcessor As DevExpress.XtraRichEdit.RichEditDocumentServer)
 #Region "#InsertCheckbox"

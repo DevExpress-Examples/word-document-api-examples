@@ -10,17 +10,17 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
 
     Friend Class ShapesActions
 
-        Public Shared AddFloatingPictureAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.ShapesActions.AddFloatingPicture
+        Public Shared AddFloatingPictureAction As Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf AddFloatingPicture
 
-        Public Shared FloatingPictureOffsetAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.ShapesActions.FloatingPictureOffset
+        Public Shared FloatingPictureOffsetAction As Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf FloatingPictureOffset
 
-        Public Shared ChangeZorderAndWrappingAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.ShapesActions.ChangeZorderAndWrapping
+        Public Shared ChangeZorderAndWrappingAction As Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf ChangeZorderAndWrapping
 
-        Public Shared AddTextBoxAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.ShapesActions.AddTextBox
+        Public Shared AddTextBoxAction As Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf AddTextBox
 
-        Public Shared InsertRichTextInTextBoxAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.ShapesActions.InsertRichTextInTextBox
+        Public Shared InsertRichTextInTextBoxAction As Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf InsertRichTextInTextBox
 
-        Public Shared RotateAndResizeAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.ShapesActions.RotateAndResize
+        Public Shared RotateAndResizeAction As Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RotateAndResize
 
         Private Shared Sub AddFloatingPicture(ByVal wordProcessor As DevExpress.XtraRichEdit.RichEditDocumentServer)
 #Region "#AddFloatingPicture"
@@ -71,7 +71,7 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
                 ' Align the picture vertically.
                 myPicture.VerticalAlignment = DevExpress.XtraRichEdit.API.Native.ShapeVerticalAlignment.Top
                 ' Specify the picture position in the z-order.
-                myPicture.ZOrder = document.Shapes(CInt((0))).ZOrder - 1
+                myPicture.ZOrder = document.Shapes(0).ZOrder - 1
                 ' Display document text over the picture.
                 myPicture.TextWrapping = DevExpress.XtraRichEdit.API.Native.TextWrappingType.BehindText
             End If
@@ -108,25 +108,19 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
 #Region "#InsertRichTextInTextBox"
             ' Load a document from a file.
             wordProcessor.LoadDocument("Documents\Grimm.docx", DevExpress.XtraRichEdit.DocumentFormat.OpenXml)
-
             ' Access a document.
-            Dim document As Document = wordProcessor.Document
-
+            Dim document As DevExpress.XtraRichEdit.API.Native.Document = wordProcessor.Document
             ' Access a text box.
-            Dim myTextBox As Shape = document.Shapes(0)
-
+            Dim myTextBox As DevExpress.XtraRichEdit.API.Native.Shape = document.Shapes(0)
             ' Allow text box resize to fit contents.
-            myTextBox.ShapeFormat.TextBox.HeightRule = TextBoxSizeRule.Auto
-            Dim boxedDocument As SubDocument = myTextBox.ShapeFormat.TextBox.Document
+            myTextBox.ShapeFormat.TextBox.HeightRule = DevExpress.XtraRichEdit.API.Native.TextBoxSizeRule.Auto
+            Dim boxedDocument As DevExpress.XtraRichEdit.API.Native.SubDocument = myTextBox.ShapeFormat.TextBox.Document
             Dim appendPosition As Integer = myTextBox.ShapeFormat.TextBox.Document.Range.[End].ToInt()
-
             ' Append the second paragraph of the main document to the boxed text.
-            Dim newRange As DocumentRange = boxedDocument.AppendDocumentContent(document.Paragraphs(CInt((1))).Range)
+            Dim newRange As DevExpress.XtraRichEdit.API.Native.DocumentRange = boxedDocument.AppendDocumentContent(document.Paragraphs(1).Range)
             boxedDocument.Paragraphs.Insert(newRange.Start)
-
             ' Insert an image form the main document into the text box.
-            boxedDocument.Images.Insert(boxedDocument.CreatePosition(appendPosition), document.Images(CInt((0))).Image.NativeImage)
-
+            boxedDocument.Images.Insert(boxedDocument.CreatePosition(appendPosition), document.Images(0).Image.NativeImage)
             ' Resize the image so that its size equals the image in the main document.
             boxedDocument.Images(0).Size = document.Images(0).Size
 #End Region  ' #InsertRichTextInTextBox
@@ -141,7 +135,7 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
             ' Check all shapes in the document.
             For Each s As DevExpress.XtraRichEdit.API.Native.Shape In document.Shapes
                 ' Rotate pictures.
-                If s.Type = DevExpress.XtraRichEdit.API.Native.ShapeType.Picture Then
+                If s.Type Is DevExpress.XtraRichEdit.API.Native.ShapeType.Picture Then
                     ' Resize text boxes.
                     s.RotationAngle = 45
                 Else

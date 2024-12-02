@@ -11,9 +11,9 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
 
     Friend Class WatermarkActions
 
-        Public Shared CreateTextWatermarkAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.WatermarkActions.CreateTextWatermark
+        Public Shared CreateTextWatermarkAction As Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf CreateTextWatermark
 
-        Public Shared CreateImageWatermarkAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.WatermarkActions.CreateImageWatermark
+        Public Shared CreateImageWatermarkAction As Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf CreateImageWatermark
 
         Private Shared Sub CreateTextWatermark(ByVal wordProcessor As DevExpress.XtraRichEdit.RichEditDocumentServer)
 #Region "#CreateTextWatermark"

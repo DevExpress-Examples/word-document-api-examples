@@ -1,6 +1,3 @@
-Imports System
-Imports System.Collections.Generic
-Imports System.IO
 Imports System.Text.RegularExpressions
 
 Namespace RichEditDocumentServerAPIExample.CodeUtils
@@ -23,7 +20,7 @@ Namespace RichEditDocumentServerAPIExample.CodeUtils
                 code = sr.ReadToEnd()
             End Using
 
-            Dim foundExamples As List(Of CodeExample) = ParseSouceFileAndFindRegionsWithExamples(groupName, code)
+            Dim foundExamples As List(Of CodeExample) = Me.ParseSouceFileAndFindRegionsWithExamples(groupName, code)
             Return foundExamples
         End Function
 
@@ -34,11 +31,11 @@ Namespace RichEditDocumentServerAPIExample.CodeUtils
                 Dim lines As String() = match.ToString().Split(New String() {Microsoft.VisualBasic.Constants.vbCrLf, Microsoft.VisualBasic.Constants.vbLf}, StringSplitOptions.None)
                 If lines.Length <= 2 Then Continue For
                 lines = DeleteLeadingWhiteSpacesFromSourceCode(lines)
-                Dim regionName As String = String.Empty
-                Dim regionIsValid As Boolean = ValidateRegionName(lines, regionName)
+                Dim regionName As String = [String].Empty
+                Dim regionIsValid As Boolean = Me.ValidateRegionName(lines, regionName)
                 If Not regionIsValid Then Continue For
                 Dim exampleCode As String = String.Join(Microsoft.VisualBasic.Constants.vbCrLf, lines, 1, lines.Length - 2)
-                result.Add(CreateRichEditExample(groupName, regionName, exampleCode))
+                result.Add(Me.CreateRichEditExample(groupName, regionName, exampleCode))
             Next
 
             Return result
@@ -46,34 +43,34 @@ Namespace RichEditDocumentServerAPIExample.CodeUtils
 
         Protected Function CreateRichEditExample(ByVal exampleGroup As String, ByVal regionName As String, ByVal exampleCode As String) As CodeExample
             Dim result As CodeExample = New CodeExample()
-            SetExampleCode(exampleCode, result)
+            Me.SetExampleCode(exampleCode, result)
             result.RegionName = regionName
-            result.HumanReadableGroupName = ConvertStringToHumanReadableForm(exampleGroup)
+            result.HumanReadableGroupName = CodeExampleUtils.ConvertStringToHumanReadableForm(exampleGroup)
             Return result
         End Function
 
         Protected MustOverride Sub SetExampleCode(ByVal exampleCode As String, ByVal newExample As CodeExample)
 
         Protected Overridable Function DeleteLeadingWhiteSpacesFromSourceCode(ByVal lines As String()) As String()
-            Return DeleteLeadingWhiteSpaces(lines, "        ")
+            Return CodeExampleUtils.DeleteLeadingWhiteSpaces(lines, "        ")
         End Function
 
         Protected Overridable Function ValidateRegionName(ByVal lines As String(), ByRef regionName As String) As Boolean
             Dim keepHashMark As Integer = 0 ' "#example" if value is -1 or "example" if value will be 0
             Dim region As String = lines(0)
             Dim regionIndex As Integer = region.IndexOf(RegionHelperStartPattern)
-            If regionIndex = 0 Then
-                regionName = ConvertStringToHumanReadableForm(region.Substring(regionIndex + RegionHelperStartPattern.Length + keepHashMark))
+            If regionIndex Is 0 Then
+                regionName = CodeExampleUtils.ConvertStringToHumanReadableForm(region.Substring(regionIndex + RegionHelperStartPattern.Length + keepHashMark))
             End If
 
             If regionIndex < 0 Then
                 regionIndex = region.IndexOf(RegionStartPattern)
                 If regionIndex < 0 Then
-                    regionName = String.Empty
+                    regionName = [String].Empty
                     Return False
                 End If
 
-                regionName = ConvertStringToHumanReadableForm(region.Substring(regionIndex + RegionStartPattern.Length + keepHashMark))
+                regionName = CodeExampleUtils.ConvertStringToHumanReadableForm(region.Substring(regionIndex + RegionStartPattern.Length + keepHashMark))
             End If
 
             Return True

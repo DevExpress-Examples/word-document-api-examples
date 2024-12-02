@@ -6,9 +6,9 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
 
     Friend Class HeadersAndFootersActions
 
-        Public Shared CreateHeaderAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.HeadersAndFootersActions.CreateHeader
+        Public Shared CreateHeaderAction As Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf CreateHeader
 
-        Public Shared ModifyHeaderAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.HeadersAndFootersActions.ModifyHeader
+        Public Shared ModifyHeaderAction As Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf ModifyHeader
 
         Private Shared Sub CreateHeader(ByVal wordProcessor As DevExpress.XtraRichEdit.RichEditDocumentServer)
 #Region "#CreateHeader"

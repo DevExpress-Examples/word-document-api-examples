@@ -1,5 +1,3 @@
-Imports System.Collections.Generic
-Imports System.IO
 Imports System.Text
 Imports RichEditDocumentServerAPIExample.CodeExamples
 
@@ -14,6 +12,7 @@ Namespace RichEditDocumentServerAPIExample.CodeUtils
             examples.Add(New RichEditNode("Basic Actions"))
             examples.Add(New RichEditNode("Bookmarks and Hyperlinks"))
             examples.Add(New RichEditNode("Comments Actions"))
+            examples.Add(New RichEditNode("Content Controls Actions"))
             examples.Add(New RichEditNode("Custom Xml Actions"))
             examples.Add(New RichEditNode("Document Properties Actions"))
             examples.Add(New RichEditNode("Export Actions"))
@@ -32,6 +31,7 @@ Namespace RichEditDocumentServerAPIExample.CodeUtils
             examples.Add(New RichEditNode("Styles Actions"))
             examples.Add(New RichEditNode("Tables Actions"))
             examples.Add(New RichEditNode("Watermark Actions"))
+            examples.Add(New RichEditNode("Vba Macros Actions"))
 #End Region
 #Region "ExampleNodes"
             'Add nodes to the "Basic Actions" group of examples.
@@ -50,92 +50,101 @@ Namespace RichEditDocumentServerAPIExample.CodeUtils
             examples(2).Groups.Add(New RichEditExample("Delete a Comment", String.Empty, String.Empty, CommentsActions.DeleteCommentAction, True))
             examples(2).Groups.Add(New RichEditExample("Edit Comment Properties", String.Empty, String.Empty, CommentsActions.EditCommentPropertiesAction, True))
             examples(2).Groups.Add(New RichEditExample("Edit Comment Content", String.Empty, String.Empty, CommentsActions.EditCommentContentAction, True))
+            'Add nodes to the "Content Controls" group of examples.
+            examples(3).Groups.Add(New RichEditExample("Create Content Controls", String.Empty, String.Empty, ContentControlsActions.CreateContentControlsAction, True))
+            examples(3).Groups.Add(New RichEditExample("Change Content Control Parameters", String.Empty, String.Empty, ContentControlsActions.ChangeContentControlsAction, True))
+            examples(3).Groups.Add(New RichEditExample("Remove Content Controls", String.Empty, String.Empty, ContentControlsActions.RemoveContentControlsAction, True))
             'Add nodes to the "Custom XML parts" group of examples.
-            examples(3).Groups.Add(New RichEditExample("Add a Custom Xml Part", String.Empty, String.Empty, CustomXmlActions.AddCustomXmlPartAction, True))
-            examples(3).Groups.Add(New RichEditExample("Access a Custom Xml Part", String.Empty, String.Empty, CustomXmlActions.AccessCustomXmlPartAction, True))
-            examples(3).Groups.Add(New RichEditExample("Remove a Custom Xml Part", String.Empty, String.Empty, CustomXmlActions.RemoveCustomXmlPartAction, True))
+            examples(4).Groups.Add(New RichEditExample("Add a Custom Xml Part", String.Empty, String.Empty, CustomXmlActions.AddCustomXmlPartAction, True))
+            examples(4).Groups.Add(New RichEditExample("Access a Custom Xml Part", String.Empty, String.Empty, CustomXmlActions.AccessCustomXmlPartAction, True))
+            examples(4).Groups.Add(New RichEditExample("Remove a Custom Xml Part", String.Empty, String.Empty, CustomXmlActions.RemoveCustomXmlPartAction, True))
             'Add nodes to the "Document Properties" group of examples.
-            examples(4).Groups.Add(New RichEditExample("Set Built-in Properties", String.Empty, String.Empty, StandardDocumentPropertiesAction, True))
-            examples(4).Groups.Add(New RichEditExample("Set Custom Properties", String.Empty, String.Empty, CustomDocumentPropertiesAction, True))
+            examples(5).Groups.Add(New RichEditExample("Set Built-in Properties", String.Empty, String.Empty, StandardDocumentPropertiesAction, True))
+            examples(5).Groups.Add(New RichEditExample("Set Custom Properties", String.Empty, String.Empty, CustomDocumentPropertiesAction, True))
             'Add nodes to the "Export" group of examples.
-            examples(5).Groups.Add(New RichEditExample("Export a Range to HTML", String.Empty, String.Empty, ExportActions.ExportRangeToHtmlAction, False))
-            examples(5).Groups.Add(New RichEditExample("Export a Range to Plain Text", String.Empty, String.Empty, ExportActions.ExportRangeToPlainTextAction, False))
-            examples(5).Groups.Add(New RichEditExample("Convert DOCX to PDF", String.Empty, String.Empty, ExportActions.ExportToPDFAction, False))
-            examples(5).Groups.Add(New RichEditExample("Convert HTML to PDF", String.Empty, String.Empty, ExportActions.ConvertHTMLtoPDFAction, False))
-            examples(5).Groups.Add(New RichEditExample("Convert HTML to DOCX", String.Empty, String.Empty, ExportActions.ConvertHTMLtoDOCXAction, False))
-            examples(5).Groups.Add(New RichEditExample("Convert DOCX to HTML", String.Empty, String.Empty, ExportActions.ExportToHTMLAction, False))
-            examples(5).Groups.Add(New RichEditExample("Handle the Before Export Event", String.Empty, String.Empty, ExportActions.BeforeExportAction, False))
+            examples(6).Groups.Add(New RichEditExample("Export a Range to HTML", String.Empty, String.Empty, ExportActions.ExportRangeToHtmlAction, False))
+            examples(6).Groups.Add(New RichEditExample("Export a Range to Plain Text", String.Empty, String.Empty, ExportActions.ExportRangeToPlainTextAction, False))
+            examples(6).Groups.Add(New RichEditExample("Convert DOCX to PDF", String.Empty, String.Empty, ExportActions.ExportToPDFAction, False))
+            examples(6).Groups.Add(New RichEditExample("Convert HTML to PDF", String.Empty, String.Empty, ExportActions.ConvertHTMLtoPDFAction, False))
+            examples(6).Groups.Add(New RichEditExample("Convert HTML to DOCX", String.Empty, String.Empty, ExportActions.ConvertHTMLtoDOCXAction, False))
+            examples(6).Groups.Add(New RichEditExample("Convert DOCX to HTML", String.Empty, String.Empty, ExportActions.ExportToHTMLAction, False))
+            examples(6).Groups.Add(New RichEditExample("Handle the Before Export Event", String.Empty, String.Empty, ExportActions.BeforeExportAction, False))
             'Add nodes to the "Fields" group of examples.
-            examples(6).Groups.Add(New RichEditExample("Insert a Field", String.Empty, String.Empty, FieldActions.InsertFieldAction, True))
-            examples(6).Groups.Add(New RichEditExample("Modify a Field", String.Empty, String.Empty, FieldActions.ModifyFieldCodeAction, True))
-            examples(6).Groups.Add(New RichEditExample("Create a Field from a Range", String.Empty, String.Empty, FieldActions.CreateFieldFromRangeAction, True))
+            examples(7).Groups.Add(New RichEditExample("Insert a Field", String.Empty, String.Empty, FieldActions.InsertFieldAction, True))
+            examples(7).Groups.Add(New RichEditExample("Modify a Field", String.Empty, String.Empty, FieldActions.ModifyFieldCodeAction, True))
+            examples(7).Groups.Add(New RichEditExample("Create a Field from a Range", String.Empty, String.Empty, FieldActions.CreateFieldFromRangeAction, True))
             'Add nodes to the "Formatting" group of examples.
-            examples(7).Groups.Add(New RichEditExample("Format Text", String.Empty, String.Empty, FormattingActions.FormatTextAction, True))
-            examples(7).Groups.Add(New RichEditExample("Change Spacing", String.Empty, String.Empty, FormattingActions.ChangeSpacingAction, True))
-            examples(7).Groups.Add(New RichEditExample("Reset Character Formatting", String.Empty, String.Empty, FormattingActions.ResetCharacterFormattingAction, True))
-            examples(7).Groups.Add(New RichEditExample("Format a Paragraph", String.Empty, String.Empty, FormattingActions.FormatParagraphAction, True))
-            examples(7).Groups.Add(New RichEditExample("Reset Paragraph Formatting", String.Empty, String.Empty, FormattingActions.ResetParagraphFormattingAction, True))
+            examples(8).Groups.Add(New RichEditExample("Format Text", String.Empty, String.Empty, FormattingActions.FormatTextAction, True))
+            examples(8).Groups.Add(New RichEditExample("Change Spacing", String.Empty, String.Empty, FormattingActions.ChangeSpacingAction, True))
+            examples(8).Groups.Add(New RichEditExample("Reset Character Formatting", String.Empty, String.Empty, FormattingActions.ResetCharacterFormattingAction, True))
+            examples(8).Groups.Add(New RichEditExample("Format a Paragraph", String.Empty, String.Empty, FormattingActions.FormatParagraphAction, True))
+            examples(8).Groups.Add(New RichEditExample("Format Paragraph Borders", String.Empty, String.Empty, FormattingActions.FormatParagraphBordersAction, True))
+            examples(8).Groups.Add(New RichEditExample("Reset Paragraph Formatting", String.Empty, String.Empty, FormattingActions.ResetParagraphFormattingAction, True))
             'Add nodes to the "Form Fields" group of examples.
-            examples(8).Groups.Add(New RichEditExample("Insert a CheckBox", String.Empty, String.Empty, FormFieldsActions.InsertCheckBoxAction, True))
+            examples(9).Groups.Add(New RichEditExample("Insert a CheckBox", String.Empty, String.Empty, FormFieldsActions.InsertCheckBoxAction, True))
             'Add nodes to the "Headers and Footers" group of examples.
-            examples(9).Groups.Add(New RichEditExample("Create a Header", String.Empty, String.Empty, HeadersAndFootersActions.CreateHeaderAction, True))
-            examples(9).Groups.Add(New RichEditExample("Modify a Header", String.Empty, String.Empty, HeadersAndFootersActions.ModifyHeaderAction, True))
+            examples(10).Groups.Add(New RichEditExample("Create a Header", String.Empty, String.Empty, HeadersAndFootersActions.CreateHeaderAction, True))
+            examples(10).Groups.Add(New RichEditExample("Modify a Header", String.Empty, String.Empty, HeadersAndFootersActions.ModifyHeaderAction, True))
             'Add nodes to the "Import" group of examples.
-            examples(10).Groups.Add(New RichEditExample("Import RTF Text", String.Empty, String.Empty, ImportActions.ImportRtfTextAction, True))
-            examples(10).Groups.Add(New RichEditExample("Handle the Before Import Event", String.Empty, String.Empty, ImportActions.BeforeImportAction, True))
+            examples(11).Groups.Add(New RichEditExample("Import RTF Text", String.Empty, String.Empty, ImportActions.ImportRtfTextAction, True))
+            examples(11).Groups.Add(New RichEditExample("Handle the Before Import Event", String.Empty, String.Empty, ImportActions.BeforeImportAction, True))
             'Add nodes to the "Inline Pictures" group of examples.
-            examples(11).Groups.Add(New RichEditExample("Access an Image Collection", String.Empty, String.Empty, InlinePicturesActions.ImageCollectionAction, True))
-            examples(11).Groups.Add(New RichEditExample("Save an Image to a File", String.Empty, String.Empty, InlinePicturesActions.SaveImageToFileAction, False))
+            examples(12).Groups.Add(New RichEditExample("Access an Image Collection", String.Empty, String.Empty, InlinePicturesActions.ImageCollectionAction, True))
+            examples(12).Groups.Add(New RichEditExample("Save an Image to a File", String.Empty, String.Empty, InlinePicturesActions.SaveImageToFileAction, False))
             'Add nodes to the "Lists" group of examples.
-            examples(12).Groups.Add(New RichEditExample("Create a Bulleted List", String.Empty, String.Empty, ListsActions.CreateBulletedListAction, True))
-            examples(12).Groups.Add(New RichEditExample("Create a Numbered List", String.Empty, String.Empty, ListsActions.CreateNumberedListAction, True))
-            examples(12).Groups.Add(New RichEditExample("Create a Multilevel List", String.Empty, String.Empty, ListsActions.CreateMultilevelListAction, True))
+            examples(13).Groups.Add(New RichEditExample("Create a Bulleted List", String.Empty, String.Empty, ListsActions.CreateBulletedListAction, True))
+            examples(13).Groups.Add(New RichEditExample("Create a Numbered List", String.Empty, String.Empty, ListsActions.CreateNumberedListAction, True))
+            examples(13).Groups.Add(New RichEditExample("Create a Multilevel List", String.Empty, String.Empty, ListsActions.CreateMultilevelListAction, True))
             'Add nodes to the "Notes" group of examples.
-            examples(13).Groups.Add(New RichEditExample("Insert Footnotes", String.Empty, String.Empty, InsertFootnotesAction, True))
-            examples(13).Groups.Add(New RichEditExample("Insert Endnotes", String.Empty, String.Empty, InsertEndnotesAction, True))
-            examples(13).Groups.Add(New RichEditExample("Edit a Footnote", String.Empty, String.Empty, EditFootnoteAction, True))
-            examples(13).Groups.Add(New RichEditExample("Edit an Endnote", String.Empty, String.Empty, EditEndnoteAction, True))
-            examples(13).Groups.Add(New RichEditExample("Edit a Separator", String.Empty, String.Empty, EditSeparatorAction, True))
-            examples(13).Groups.Add(New RichEditExample("Remove Notes", String.Empty, String.Empty, RemoveNotesAction, True))
+            examples(14).Groups.Add(New RichEditExample("Insert Footnotes", String.Empty, String.Empty, InsertFootnotesAction, True))
+            examples(14).Groups.Add(New RichEditExample("Insert Endnotes", String.Empty, String.Empty, InsertEndnotesAction, True))
+            examples(14).Groups.Add(New RichEditExample("Edit a Footnote", String.Empty, String.Empty, EditFootnoteAction, True))
+            examples(14).Groups.Add(New RichEditExample("Edit an Endnote", String.Empty, String.Empty, EditEndnoteAction, True))
+            examples(14).Groups.Add(New RichEditExample("Edit a Separator", String.Empty, String.Empty, EditSeparatorAction, True))
+            examples(14).Groups.Add(New RichEditExample("Remove Notes", String.Empty, String.Empty, RemoveNotesAction, True))
             'Add nodes to the "Page Layout" group of examples.
-            examples(14).Groups.Add(New RichEditExample("Add Line Numbering", String.Empty, String.Empty, PageLayoutActions.LineNumberingAction, True))
-            examples(14).Groups.Add(New RichEditExample("Create Columns", String.Empty, String.Empty, PageLayoutActions.CreateColumnsAction, True))
-            examples(14).Groups.Add(New RichEditExample("Adjust Page Layout", String.Empty, String.Empty, PageLayoutActions.PrintLayoutAction, True))
-            examples(14).Groups.Add(New RichEditExample("Set Tab Stops", String.Empty, String.Empty, PageLayoutActions.TabStopsAction, True))
+            examples(15).Groups.Add(New RichEditExample("Add Line Numbering", String.Empty, String.Empty, PageLayoutActions.LineNumberingAction, True))
+            examples(15).Groups.Add(New RichEditExample("Create Columns", String.Empty, String.Empty, PageLayoutActions.CreateColumnsAction, True))
+            examples(15).Groups.Add(New RichEditExample("Adjust Page Layout", String.Empty, String.Empty, PageLayoutActions.PrintLayoutAction, True))
+            examples(15).Groups.Add(New RichEditExample("Set Tab Stops", String.Empty, String.Empty, PageLayoutActions.TabStopsAction, True))
+            examples(15).Groups.Add(New RichEditExample("Set Page Borders", String.Empty, String.Empty, PageLayoutActions.PageBordersAction, True))
             'Add nodes to the "Protection" group of examples.
-            examples(15).Groups.Add(New RichEditExample("Protect a Document", String.Empty, String.Empty, ProtectDocumentAction, False))
-            examples(15).Groups.Add(New RichEditExample("Unprotect a Document", String.Empty, String.Empty, UnprotectDocumentAction, False))
-            examples(15).Groups.Add(New RichEditExample("Create Range Permissions", String.Empty, String.Empty, CreateRangePermissionsAction, False))
+            examples(16).Groups.Add(New RichEditExample("Protect a Document", String.Empty, String.Empty, ProtectDocumentAction, False))
+            examples(16).Groups.Add(New RichEditExample("Unprotect a Document", String.Empty, String.Empty, UnprotectDocumentAction, False))
+            examples(16).Groups.Add(New RichEditExample("Create Range Permissions", String.Empty, String.Empty, CreateRangePermissionsAction, False))
             'Add nodes to the "Ranges" group of examples.
-            examples(16).Groups.Add(New RichEditExample("Insert Text in a Range", String.Empty, String.Empty, RangeActions.InsertTextInRangeAction, True))
-            examples(16).Groups.Add(New RichEditExample("Append Text to a Range", String.Empty, String.Empty, RangeActions.AppendTextToRangeAction, True))
-            examples(16).Groups.Add(New RichEditExample("Append Text to a Paragraph", String.Empty, String.Empty, RangeActions.AppendToParagraphAction, True))
+            examples(17).Groups.Add(New RichEditExample("Insert Text in a Range", String.Empty, String.Empty, RangeActions.InsertTextInRangeAction, True))
+            examples(17).Groups.Add(New RichEditExample("Append Text to a Range", String.Empty, String.Empty, RangeActions.AppendTextToRangeAction, True))
+            examples(17).Groups.Add(New RichEditExample("Append Text to a Paragraph", String.Empty, String.Empty, RangeActions.AppendToParagraphAction, True))
             'Add nodes to the "Shapes" group of examples.
-            examples(17).Groups.Add(New RichEditExample("Add a Floating Picture", String.Empty, String.Empty, ShapesActions.AddFloatingPictureAction, True))
-            examples(17).Groups.Add(New RichEditExample("Floating Picture Offset", String.Empty, String.Empty, ShapesActions.FloatingPictureOffsetAction, True))
-            examples(17).Groups.Add(New RichEditExample("Change Z-Order and Wrapping", String.Empty, String.Empty, ShapesActions.ChangeZorderAndWrappingAction, True))
-            examples(17).Groups.Add(New RichEditExample("Add a Text Box", String.Empty, String.Empty, ShapesActions.AddTextBoxAction, True))
-            examples(17).Groups.Add(New RichEditExample("Insert Rich Text in a TextBox", String.Empty, String.Empty, ShapesActions.InsertRichTextInTextBoxAction, True))
-            examples(17).Groups.Add(New RichEditExample("Rotate and Resize Shapes", String.Empty, String.Empty, ShapesActions.RotateAndResizeAction, True))
+            examples(18).Groups.Add(New RichEditExample("Add a Floating Picture", String.Empty, String.Empty, ShapesActions.AddFloatingPictureAction, True))
+            examples(18).Groups.Add(New RichEditExample("Floating Picture Offset", String.Empty, String.Empty, ShapesActions.FloatingPictureOffsetAction, True))
+            examples(18).Groups.Add(New RichEditExample("Change Z-Order and Wrapping", String.Empty, String.Empty, ShapesActions.ChangeZorderAndWrappingAction, True))
+            examples(18).Groups.Add(New RichEditExample("Add a Text Box", String.Empty, String.Empty, ShapesActions.AddTextBoxAction, True))
+            examples(18).Groups.Add(New RichEditExample("Insert Rich Text in a TextBox", String.Empty, String.Empty, ShapesActions.InsertRichTextInTextBoxAction, True))
+            examples(18).Groups.Add(New RichEditExample("Rotate and Resize Shapes", String.Empty, String.Empty, ShapesActions.RotateAndResizeAction, True))
             'Add nodes to the "Styles" group of examples.
-            examples(18).Groups.Add(New RichEditExample("Create a New Character Style", String.Empty, String.Empty, StylesAction.CreateNewCharacterStyleAction, True))
-            examples(18).Groups.Add(New RichEditExample("Create a New Paragraph Style", String.Empty, String.Empty, StylesAction.CreateNewParagraphStyleAction, True))
-            examples(18).Groups.Add(New RichEditExample("Create a New Linked Style", String.Empty, String.Empty, StylesAction.CreateNewLinkedStyleAction, False))
+            examples(19).Groups.Add(New RichEditExample("Create a New Character Style", String.Empty, String.Empty, StylesAction.CreateNewCharacterStyleAction, True))
+            examples(19).Groups.Add(New RichEditExample("Create a New Paragraph Style", String.Empty, String.Empty, StylesAction.CreateNewParagraphStyleAction, True))
+            examples(19).Groups.Add(New RichEditExample("Create a New Linked Style", String.Empty, String.Empty, StylesAction.CreateNewLinkedStyleAction, False))
             'Add nodes to the "Tables" group of examples.
-            examples(19).Groups.Add(New RichEditExample("Create a Table", String.Empty, String.Empty, TablesActions.CreateTableAction, True))
-            examples(19).Groups.Add(New RichEditExample("Create a Fixed Table", String.Empty, String.Empty, TablesActions.CreateFixedTableAction, True))
-            examples(19).Groups.Add(New RichEditExample("Change the Table Color", String.Empty, String.Empty, TablesActions.ChangeTableColorAction, True))
-            examples(19).Groups.Add(New RichEditExample("Create and Apply a Table Style", String.Empty, String.Empty, TablesActions.CreateAndApplyTableStyleAction, True))
-            examples(19).Groups.Add(New RichEditExample("Use a Conditional Style", String.Empty, String.Empty, TablesActions.UseConditionalStyleAction, True))
-            examples(19).Groups.Add(New RichEditExample("Change Column Appearance", String.Empty, String.Empty, TablesActions.ChangeColumnAppearanceAction, True))
-            examples(19).Groups.Add(New RichEditExample("Table Cell Processor", String.Empty, String.Empty, TablesActions.UseTableCellProcessorAction, True))
-            examples(19).Groups.Add(New RichEditExample("Merge Cells", String.Empty, String.Empty, TablesActions.MergeCellsAction, True))
-            examples(19).Groups.Add(New RichEditExample("Split Cells", String.Empty, String.Empty, TablesActions.SplitCellsAction, True))
-            examples(19).Groups.Add(New RichEditExample("Delete Table Elements", String.Empty, String.Empty, TablesActions.DeleteTableElementsAction, True))
-            examples(19).Groups.Add(New RichEditExample("Wrap Text Around a Table", String.Empty, String.Empty, TablesActions.WrapTextAroundTableAction, True))
+            examples(20).Groups.Add(New RichEditExample("Create a Table", String.Empty, String.Empty, TablesActions.CreateTableAction, True))
+            examples(20).Groups.Add(New RichEditExample("Create a Fixed Table", String.Empty, String.Empty, TablesActions.CreateFixedTableAction, True))
+            examples(20).Groups.Add(New RichEditExample("Change the Table Color", String.Empty, String.Empty, TablesActions.ChangeTableColorAction, True))
+            examples(20).Groups.Add(New RichEditExample("Create and Apply a Table Style", String.Empty, String.Empty, TablesActions.CreateAndApplyTableStyleAction, True))
+            examples(20).Groups.Add(New RichEditExample("Use a Conditional Style", String.Empty, String.Empty, TablesActions.UseConditionalStyleAction, True))
+            examples(20).Groups.Add(New RichEditExample("Change Column Appearance", String.Empty, String.Empty, TablesActions.ChangeColumnAppearanceAction, True))
+            examples(20).Groups.Add(New RichEditExample("Table Cell Processor", String.Empty, String.Empty, TablesActions.UseTableCellProcessorAction, True))
+            examples(20).Groups.Add(New RichEditExample("Merge Cells", String.Empty, String.Empty, TablesActions.MergeCellsAction, True))
+            examples(20).Groups.Add(New RichEditExample("Split Cells", String.Empty, String.Empty, TablesActions.SplitCellsAction, True))
+            examples(20).Groups.Add(New RichEditExample("Delete Table Elements", String.Empty, String.Empty, TablesActions.DeleteTableElementsAction, True))
+            examples(20).Groups.Add(New RichEditExample("Wrap Text Around a Table", String.Empty, String.Empty, TablesActions.WrapTextAroundTableAction, True))
             'Add nodes to the "Watermarks" group of examples.
-            examples(20).Groups.Add(New RichEditExample("Create a Text Watermark", String.Empty, String.Empty, WatermarkActions.CreateTextWatermarkAction, True))
-            examples(20).Groups.Add(New RichEditExample("Create an Image Watermark", String.Empty, String.Empty, WatermarkActions.CreateImageWatermarkAction, True))
+            examples(21).Groups.Add(New RichEditExample("Create a Text Watermark", String.Empty, String.Empty, WatermarkActions.CreateTextWatermarkAction, True))
+            examples(21).Groups.Add(New RichEditExample("Create an Image Watermark", String.Empty, String.Empty, WatermarkActions.CreateImageWatermarkAction, True))
+            'Add nodes to the "VBA Macros" group of examples.
+            examples(22).Groups.Add(New RichEditExample("Obtain VBA Macros", String.Empty, String.Empty, ObtainVbaMacrosAction, True))
+            examples(22).Groups.Add(New RichEditExample("Clear VBA Modules", String.Empty, String.Empty, ClearVbaModulesAction, True))
             Return examples
 #End Region
         End Function
@@ -154,7 +163,7 @@ Namespace RichEditDocumentServerAPIExample.CodeUtils
             Return ".cs"
         End Function
 
-        Public Function DeleteLeadingWhiteSpaces(ByVal lines As String(), ByVal stringToDelete As String) As String()
+        Public Function DeleteLeadingWhiteSpaces(ByVal lines As String(), ByVal stringToDelete As [String]) As String()
             Dim result As String() = New String(lines.Length - 1) {}
             Dim stringToDeleteLength As Integer = stringToDelete.Length
             For i As Integer = 0 To lines.Length - 1
@@ -166,7 +175,7 @@ Namespace RichEditDocumentServerAPIExample.CodeUtils
         End Function
 
         Public Function ConvertStringToHumanReadableForm(ByVal exampleName As String) As String
-            Dim result As String = SplitCamelCase(exampleName)
+            Dim result As String = CodeExampleUtils.SplitCamelCase(exampleName)
             result = result.Replace(" In ", " in ")
             result = result.Replace(" And ", " and ")
             result = result.Replace(" To ", " to ")
@@ -179,7 +188,7 @@ Namespace RichEditDocumentServerAPIExample.CodeUtils
 
         Private Function SplitCamelCase(ByVal exampleName As String) As String
             Dim length As Integer = exampleName.Length
-            If length = 1 Then Return exampleName
+            If length Is 1 Then Return exampleName
             Dim result As StringBuilder = New StringBuilder(length * 2)
             For position As Integer = 0 To length - 1 - 1
                 Dim current As Char = exampleName(position)
@@ -195,9 +204,9 @@ Namespace RichEditDocumentServerAPIExample.CodeUtils
         End Function
 
         Public Function GetExamplePath(ByVal exampleFolderName As String) As String
-            Dim examplesPath2 As String = Path.Combine(Directory.GetCurrentDirectory() & "\..\..\", exampleFolderName)
+            Dim examplesPath2 As String = Path.Combine(Directory.GetCurrentDirectory() & "\..\..\..\", exampleFolderName)
             If Directory.Exists(examplesPath2) Then Return examplesPath2
-            Dim examplesPathInInsallation As String = GetRelativeDirectoryPath(exampleFolderName)
+            Dim examplesPathInInsallation As String = CodeExampleUtils.GetRelativeDirectoryPath(exampleFolderName)
             Return examplesPathInInsallation
         End Function
 
@@ -206,7 +215,7 @@ Namespace RichEditDocumentServerAPIExample.CodeUtils
             Dim path As String = System.Windows.Forms.Application.StartupPath
             Dim s As String = "\"
             For i As Integer = 0 To 10
-                If Directory.Exists(path & s & name) Then
+                If System.IO.Directory.Exists(path & s & name) Then
                     Return path & s & name
                 Else
                     s += "..\"
@@ -221,9 +230,9 @@ Namespace RichEditDocumentServerAPIExample.CodeUtils
             For Each sourceCodeItem As KeyValuePair(Of String, FileInfo) In examples
                 Dim key As String = sourceCodeItem.Key
                 Dim foundExamples As List(Of CodeExample) = exampleFinder.Process(examples(key))
-                If foundExamples.Count = 0 Then Continue For
+                If foundExamples.Count Is 0 Then Continue For
                 For Each node As RichEditNode In richEditExamples
-                    If Equals(node.Name, foundExamples(0).HumanReadableGroupName) AndAlso node.Groups.Count = foundExamples.Count Then
+                    If node.Name Is foundExamples(0).HumanReadableGroupName AndAlso node.Groups.Count Is foundExamples.Count Then
                         Dim i As Integer = 0
                         For Each example As RichEditExample In node.Groups
                             example.CodeCS = foundExamples(i).CodeCS
@@ -240,9 +249,9 @@ Namespace RichEditDocumentServerAPIExample.CodeUtils
         Public Function DetectExampleLanguage(ByVal solutionFileNameWithoutExtenstion As String) As ExampleLanguage
             Dim projectPath As String = Directory.GetCurrentDirectory() & "\..\..\"
             Dim csproject As String() = Directory.GetFiles(projectPath, "*.csproj")
-            If csproject.Length <> 0 AndAlso csproject(0).EndsWith(solutionFileNameWithoutExtenstion & ".csproj") Then Return ExampleLanguage.Csharp
+            If csproject.Length IsNot 0 AndAlso csproject(0).EndsWith(solutionFileNameWithoutExtenstion & ".csproj") Then Return ExampleLanguage.Csharp
             Dim vbproject As String() = Directory.GetFiles(projectPath, "*.vbproj")
-            If vbproject.Length <> 0 AndAlso vbproject(0).EndsWith(solutionFileNameWithoutExtenstion & ".vbproj") Then Return ExampleLanguage.VB
+            If vbproject.Length IsNot 0 AndAlso vbproject(0).EndsWith(solutionFileNameWithoutExtenstion & ".vbproj") Then Return ExampleLanguage.VB
             Return ExampleLanguage.Csharp
         End Function
     End Module

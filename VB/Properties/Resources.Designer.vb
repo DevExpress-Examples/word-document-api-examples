@@ -36,7 +36,7 @@ Namespace RichEditDocumentServerAPIExample.Properties
         Friend Shared ReadOnly Property ResourceManager As Global.System.Resources.ResourceManager
             Get
                 If(RichEditDocumentServerAPIExample.Properties.Resources.resourceMan Is Nothing) Then
-                    Dim temp As Global.System.Resources.ResourceManager = New Global.System.Resources.ResourceManager("Resources", GetType(RichEditDocumentServerAPIExample.Properties.Resources).Assembly)
+                    Dim temp As Global.System.Resources.ResourceManager = New Global.System.Resources.ResourceManager("RichEditDocumentServer.Properties.Resources", GetType(RichEditDocumentServerAPIExample.Properties.Resources).Assembly)
                     RichEditDocumentServerAPIExample.Properties.Resources.resourceMan = temp
                 End If
 

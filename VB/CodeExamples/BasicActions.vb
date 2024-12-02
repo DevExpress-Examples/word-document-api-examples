@@ -6,17 +6,17 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
 
     Public Module BasicActions
 
-        Public CreateNewDocumentAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.BasicActions.CreateNewDocument
+        Public CreateNewDocumentAction As Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf CreateNewDocument
 
-        Public LoadDocumentAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.BasicActions.LoadDocument
+        Public LoadDocumentAction As Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf LoadDocument
 
-        Public MergeDocumentsAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.BasicActions.MergeDocuments
+        Public MergeDocumentsAction As Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf MergeDocuments
 
-        Public SplitDocumentAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.BasicActions.SplitDocument
+        Public SplitDocumentAction As Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf SplitDocument
 
-        Public SaveDocumentAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.BasicActions.SaveDocument
+        Public SaveDocumentAction As Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf SaveDocument
 
-        Public PrintDocumentAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.BasicActions.PrintDocument
+        Public PrintDocumentAction As Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf PrintDocument
 
         Private Sub CreateNewDocument(ByVal wordProcessor As DevExpress.XtraRichEdit.RichEditDocumentServer)
 #Region "#CreateDocument"
@@ -58,9 +58,9 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
                     ' Insert the page content to the instance.
                     tempWordProcessor.Document.AppendDocumentContent(mainBodyRange)
                     ' Delete the first empty paragraph.
-                    tempWordProcessor.Document.Delete(System.Linq.Enumerable.First(Of DevExpress.XtraRichEdit.API.Native.Paragraph)(tempWordProcessor.Document.Paragraphs).Range)
+                    tempWordProcessor.Document.Delete(tempWordProcessor.Document.Paragraphs.First().Range)
                     ' Save the document page as an RTF file.
-                    Dim fileName As String = System.[String].Format("doc{0}.rtf", i)
+                    Dim fileName As String = [String].Format("doc{0}.rtf", i)
                     tempWordProcessor.SaveDocument(fileName, DevExpress.XtraRichEdit.DocumentFormat.Rtf)
                 End Using
             Next

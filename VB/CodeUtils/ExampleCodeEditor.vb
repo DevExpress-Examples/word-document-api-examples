@@ -1,4 +1,3 @@
-Imports System
 Imports DevExpress.XtraRichEdit
 Imports DevExpress.XtraRichEdit.Internal
 
@@ -15,8 +14,8 @@ Namespace RichEditDocumentServerAPIExample.CodeUtils
         Public Sub New(ByVal codeEditorCs As IRichEditControl, ByVal codeEditorVb As IRichEditControl)
             Me.codeEditorCs = codeEditorCs
             Me.codeEditorVb = codeEditorVb
-            AddHandler Me.codeEditorCs.InnerControl.InitializeDocument, New EventHandler(AddressOf InitializeSyntaxHighlightForCs)
-            AddHandler Me.codeEditorVb.InnerControl.InitializeDocument, New EventHandler(AddressOf InitializeSyntaxHighlightForVb)
+            Me.codeEditorCs.InnerControl.InitializeDocument += New System.EventHandler(AddressOf Me.InitializeSyntaxHighlightForCs)
+            Me.codeEditorVb.InnerControl.InitializeDocument += New System.EventHandler(AddressOf Me.InitializeSyntaxHighlightForVb)
         End Sub
 
         Private Sub InitializeSyntaxHighlightForCs(ByVal sender As Object, ByVal e As EventArgs)

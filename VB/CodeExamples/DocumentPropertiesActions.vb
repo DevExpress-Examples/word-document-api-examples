@@ -10,9 +10,9 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
 
     Public Module DocumentPropertiesActions
 
-        Public StandardDocumentPropertiesAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.DocumentPropertiesActions.StandardDocumentProperties
+        Public StandardDocumentPropertiesAction As Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf StandardDocumentProperties
 
-        Public CustomDocumentPropertiesAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.DocumentPropertiesActions.CustomDocumentProperties
+        Public CustomDocumentPropertiesAction As Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf CustomDocumentProperties
 
         Private Sub StandardDocumentProperties(ByVal wordProcessor As DevExpress.XtraRichEdit.RichEditDocumentServer)
 #Region "#StandardDocumentProperties"
@@ -26,11 +26,11 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
             document.DocumentProperties.Category = "TestDoc"
             document.DocumentProperties.Description = "This code demonstrates API to modify and display standard document properties."
             ' Display the specified built-in properties in the document.
-            document.Fields.Create(document.AppendText(CStr((Global.Microsoft.VisualBasic.Constants.vbLf & "AUTHOR: "))).[End], "AUTHOR")
-            document.Fields.Create(document.AppendText(CStr((Global.Microsoft.VisualBasic.Constants.vbLf & "TITLE: "))).[End], "TITLE")
-            document.Fields.Create(document.AppendText(CStr((Global.Microsoft.VisualBasic.Constants.vbLf & "COMMENTS: "))).[End], "COMMENTS")
-            document.Fields.Create(document.AppendText(CStr((Global.Microsoft.VisualBasic.Constants.vbLf & "CREATEDATE: "))).[End], "CREATEDATE")
-            document.Fields.Create(document.AppendText(CStr((Global.Microsoft.VisualBasic.Constants.vbLf & "Category: "))).[End], "DOCPROPERTY Category")
+            document.Fields.Create(document.AppendText(Global.Microsoft.VisualBasic.Constants.vbLf & "AUTHOR: ").[End], "AUTHOR")
+            document.Fields.Create(document.AppendText(Global.Microsoft.VisualBasic.Constants.vbLf & "TITLE: ").[End], "TITLE")
+            document.Fields.Create(document.AppendText(Global.Microsoft.VisualBasic.Constants.vbLf & "COMMENTS: ").[End], "COMMENTS")
+            document.Fields.Create(document.AppendText(Global.Microsoft.VisualBasic.Constants.vbLf & "CREATEDATE: ").[End], "CREATEDATE")
+            document.Fields.Create(document.AppendText(Global.Microsoft.VisualBasic.Constants.vbLf & "Category: ").[End], "DOCPROPERTY Category")
             document.Fields.Update()
             ' Finalize to edit the document.
             document.EndUpdate()
@@ -44,23 +44,22 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
             ' Start to edit the document.
             document.BeginUpdate()
             ' Display the custom document properties in the document.
-            document.Fields.Create(document.AppendText(CStr((Global.Microsoft.VisualBasic.Constants.vbLf & "MyNumericProperty: "))).[End], "DOCVARIABLE CustomProperty MyNumericProperty")
-            document.Fields.Create(document.AppendText(CStr((Global.Microsoft.VisualBasic.Constants.vbLf & "MyStringProperty: "))).[End], "DOCVARIABLE CustomProperty MyStringProperty")
-            document.Fields.Create(document.AppendText(CStr((Global.Microsoft.VisualBasic.Constants.vbLf & "MyBooleanProperty: "))).[End], "DOCVARIABLE CustomProperty MyBooleanProperty")
+            document.Fields.Create(document.AppendText(Global.Microsoft.VisualBasic.Constants.vbLf & "MyNumericProperty: ").[End], "DOCVARIABLE CustomProperty MyNumericProperty")
+            document.Fields.Create(document.AppendText(Global.Microsoft.VisualBasic.Constants.vbLf & "MyStringProperty: ").[End], "DOCVARIABLE CustomProperty MyStringProperty")
+            document.Fields.Create(document.AppendText(Global.Microsoft.VisualBasic.Constants.vbLf & "MyBooleanProperty: ").[End], "DOCVARIABLE CustomProperty MyBooleanProperty")
             ' Finalize to edit the document.
             document.EndUpdate()
             ' Set the custom document properties.
             document.CustomProperties("MyNumericProperty") = 123.45
             document.CustomProperties("MyStringProperty") = "The Final Answer"
             document.CustomProperties("MyBooleanProperty") = True
-            AddHandler wordProcessor.CalculateDocumentVariable,
-                Sub(s, e)
-                    If e.Arguments.Count = 0 OrElse e.VariableName <> "CustomProperty" Then Return
-                    Dim name As String = e.Arguments(0).Value
-                    Dim customProperty As Object = (CType(s, RichEditDocumentServer)).Document.CustomProperties(name)
-                    If customProperty IsNot Nothing Then e.Value = customProperty.ToString()
-                    e.Handled = True
-                End Sub
+            wordProcessor.CalculateDocumentVariable += Function(s, e)
+                If e.Arguments.Count Is 0 OrElse e.VariableName IsNot "CustomProperty" Then Return
+                Dim name As String = e.Arguments(0).Value
+                Dim customProperty As Object = CType(s, DevExpress.XtraRichEdit.RichEditDocumentServer).Document.CustomProperties(name)
+                If customProperty IsNot Nothing Then e.Value = customProperty.ToString()
+                e.Handled = True
+            End Function
             ' Update all fields in the main document body.
             document.Fields.Update()
 #End Region  ' #CustomDocumentProperties

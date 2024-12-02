@@ -1,6 +1,6 @@
 Imports DevExpress.XtraEditors
-Imports System
-Imports System.Windows.Forms
+Imports System.Linq
+Imports System.Threading.Tasks
 
 Namespace RichEditDocumentServerAPIExample
 
@@ -11,10 +11,10 @@ Namespace RichEditDocumentServerAPIExample
         ''' </summary>
         <STAThread>
         Sub Main()
-            Call Application.EnableVisualStyles()
+            Application.EnableVisualStyles()
             Application.SetCompatibleTextRenderingDefault(False)
             Call WindowsFormsSettings.SetPerMonitorDpiAware()
-            Call Application.Run(New Form1())
+            Application.Run(New Form1())
         End Sub
     End Module
 End Namespace

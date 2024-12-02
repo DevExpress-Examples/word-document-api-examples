@@ -10,11 +10,11 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
 
     Public Module ProtectionActions
 
-        Public ProtectDocumentAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.ProtectionActions.ProtectDocument
+        Public ProtectDocumentAction As Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf ProtectDocument
 
-        Public UnprotectDocumentAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.ProtectionActions.UnprotectDocument
+        Public UnprotectDocumentAction As Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf UnprotectDocument
 
-        Public CreateRangePermissionsAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.ProtectionActions.CreateRangePermissions
+        Public CreateRangePermissionsAction As Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf CreateRangePermissions
 
         Private Sub ProtectDocument(ByVal wordProcessor As DevExpress.XtraRichEdit.RichEditDocumentServer)
             Call RichEditDocumentServerAPIExample.CodeExamples.ProtectionActions.UnprotectResultingDocument(wordProcessor)
@@ -28,9 +28,9 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
                 ' Protect the document with a password.
                 document.Protect("123", DevExpress.XtraRichEdit.API.Native.DocumentProtectionType.[ReadOnly])
                 ' Create a comment related to the first paragraph.
-                document.Comments.Create(document.Paragraphs(CInt((0))).Range, "Admin")
+                document.Comments.Create(document.Paragraphs(0).Range, "Admin")
                 ' Access the comment content.
-                Dim commentDocument As DevExpress.XtraRichEdit.API.Native.SubDocument = document.Comments(CInt((0))).BeginUpdate()
+                Dim commentDocument As DevExpress.XtraRichEdit.API.Native.SubDocument = document.Comments(0).BeginUpdate()
                 ' Specify the comment text to indicate that the document is protected.
                 commentDocument.InsertText(commentDocument.CreatePosition(0), "Document is protected with a password." & Global.Microsoft.VisualBasic.Constants.vbLf & "You cannot modify the document until protection is removed.")
                 ' Finalize to edit the comment.
@@ -49,13 +49,13 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
             ' Access a document.
             Dim document As DevExpress.XtraRichEdit.API.Native.Document = wordProcessor.Document
             ' Check whether the document is protected.
-            If document.IsDocumentProtected = True Then
+            If document.IsDocumentProtected Is True Then
                 ' Unprotect the document.
                 document.Unprotect()
                 ' Create a comment related to the first paragraph.
-                document.Comments.Create(document.Paragraphs(CInt((0))).Range, "Admin")
+                document.Comments.Create(document.Paragraphs(0).Range, "Admin")
                 ' Access the comment content.
-                Dim commentDocument As DevExpress.XtraRichEdit.API.Native.SubDocument = document.Comments(CInt((0))).BeginUpdate()
+                Dim commentDocument As DevExpress.XtraRichEdit.API.Native.SubDocument = document.Comments(0).BeginUpdate()
                 ' Specify the comment text to indicate that the document is unprotected.
                 commentDocument.InsertText(commentDocument.CreatePosition(0), "Document is unprotected. You can modify the document according to your requests.")
                 ' Finalize to edit the comment.
@@ -78,7 +78,7 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
             Dim rangePermissions As DevExpress.XtraRichEdit.API.Native.RangePermissionCollection = document.BeginUpdateRangePermissions()
             If document.Paragraphs.Count > 3 Then
                 ' Specify the group of users and the user that are allowed to edit the document range.
-                Dim rp As DevExpress.XtraRichEdit.API.Native.RangePermission = rangePermissions.CreateRangePermission(document.Paragraphs(CInt((3))).Range)
+                Dim rp As DevExpress.XtraRichEdit.API.Native.RangePermission = rangePermissions.CreateRangePermission(document.Paragraphs(3).Range)
                 rp.Group = "Administrators"
                 rp.UserName = "admin@somecompany.com"
                 rangePermissions.Add(rp)
@@ -100,7 +100,7 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
                 wordProcessor.LoadDocument("ResultProtected.docx", DevExpress.XtraRichEdit.DocumentFormat.OpenXml)
                 ' Access a document.
                 Dim document As DevExpress.XtraRichEdit.API.Native.Document = wordProcessor.Document
-                If document.IsDocumentProtected = True Then
+                If document.IsDocumentProtected Is True Then
                     ' Unprotect the document.
                     document.Unprotect()
                 End If

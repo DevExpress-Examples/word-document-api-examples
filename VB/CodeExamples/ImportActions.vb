@@ -11,9 +11,9 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
 
     Friend Class ImportActions
 
-        Public Shared ImportRtfTextAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.ImportActions.ImportRtfText
+        Public Shared ImportRtfTextAction As Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf ImportRtfText
 
-        Public Shared BeforeImportAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.ImportActions.BeforeImport
+        Public Shared BeforeImportAction As Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf BeforeImport
 
         Private Shared Sub ImportRtfText(ByVal wordProcessor As DevExpress.XtraRichEdit.RichEditDocumentServer)
 #Region "#ImportRtfText"
@@ -33,13 +33,12 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
         Private Shared Sub BeforeImport(ByVal wordProcessor As DevExpress.XtraRichEdit.RichEditDocumentServer)
 #Region "#HandleBeforeImportEvent"
             ' Handle the Before Import event.
-            AddHandler wordProcessor.BeforeImport,
-                Sub(s, e)
-                    ' Specify the encoding before plain text is imported to the document.
-                    If e.DocumentFormat = DevExpress.XtraRichEdit.DocumentFormat.PlainText Then
-                        CType(e.Options, DevExpress.XtraRichEdit.Import.PlainTextDocumentImporterOptions).Encoding = System.Text.Encoding.GetEncoding(20866)
-                    End If
-                End Sub
+            wordProcessor.BeforeImport += Function(s, e)
+                ' Specify the encoding before plain text is imported to the document.
+                If e.DocumentFormat Is DevExpress.XtraRichEdit.DocumentFormat.PlainText Then
+                    CType(e.Options, DevExpress.XtraRichEdit.Import.PlainTextDocumentImporterOptions).Encoding = Encoding.GetEncoding(20866)
+                End If
+            End Function
             ' Load a document from a file.
             wordProcessor.LoadDocument("Documents\TerribleRevengeKOI8R.txt")
 #End Region  ' #HandleBeforeImportEvent

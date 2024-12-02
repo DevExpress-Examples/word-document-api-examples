@@ -7,15 +7,17 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
 
     Friend Class FormattingActions
 
-        Public Shared FormatTextAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.FormattingActions.FormatText
+        Public Shared FormatTextAction As Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf FormatText
 
-        Public Shared ChangeSpacingAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.FormattingActions.ChangeSpacing
+        Public Shared ChangeSpacingAction As Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf ChangeSpacing
 
-        Public Shared ResetCharacterFormattingAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.FormattingActions.ResetCharacterFormatting
+        Public Shared ResetCharacterFormattingAction As Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf ResetCharacterFormatting
 
-        Public Shared FormatParagraphAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.FormattingActions.FormatParagraph
+        Public Shared FormatParagraphAction As Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf FormatParagraph
 
-        Public Shared ResetParagraphFormattingAction As System.Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf RichEditDocumentServerAPIExample.CodeExamples.FormattingActions.ResetParagraphFormatting
+        Public Shared FormatParagraphBordersAction As Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf FormatParagraphBorders
+
+        Public Shared ResetParagraphFormattingAction As Action(Of DevExpress.XtraRichEdit.RichEditDocumentServer) = AddressOf ResetParagraphFormatting
 
         Private Shared Sub FormatText(ByVal wordProcessor As DevExpress.XtraRichEdit.RichEditDocumentServer)
 #Region "#FormatText"
@@ -28,16 +30,17 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
             ' Finalize to edit the document.
             document.EndUpdate()
             ' Access the range of the document's second paragraph.
-            Dim range As DevExpress.XtraRichEdit.API.Native.DocumentRange = document.Paragraphs(CInt((1))).Range
+            Dim range As DevExpress.XtraRichEdit.API.Native.DocumentRange = document.Paragraphs(1).Range
             ' Start to modify character formatting of the target range.
             Dim cp As DevExpress.XtraRichEdit.API.Native.CharacterProperties = document.BeginUpdateCharacters(range)
             ' Specify character formatting options.
             cp.FontName = "Comic Sans MS"
             cp.FontSize = 18
-            cp.ForeColor = System.Drawing.Color.Blue
-            cp.BackColor = System.Drawing.Color.Snow
+            cp.ForeColor = Color.Blue
+            cp.BackColor = Color.Snow
             cp.Underline = DevExpress.XtraRichEdit.API.Native.UnderlineType.DoubleWave
-            cp.UnderlineColor = System.Drawing.Color.Red
+            cp.UnderlineColor = Color.Red
+            cp.SmallCaps = True
             ' Finalize to modify character formatting.
             document.EndUpdateCharacters(cp)
 #End Region  ' #FormatText
@@ -54,7 +57,7 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
             ' Finalize to edit the document.
             document.EndUpdate()
             ' Access the range of the document's second paragraph.
-            Dim range As DevExpress.XtraRichEdit.API.Native.DocumentRange = document.Paragraphs(CInt((1))).Range
+            Dim range As DevExpress.XtraRichEdit.API.Native.DocumentRange = document.Paragraphs(1).Range
             ' Start to modify character formatting of the target range.
             Dim cp As DevExpress.XtraRichEdit.API.Native.CharacterProperties = document.BeginUpdateCharacters(range)
             ' Change character spacing and scaling.
@@ -74,7 +77,7 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
             ' Access a document.
             Dim document As DevExpress.XtraRichEdit.API.Native.Document = wordProcessor.Document
             ' Access the range of the document's first paragraph.
-            Dim range As DevExpress.XtraRichEdit.API.Native.DocumentRange = document.Paragraphs(CInt((0))).Range
+            Dim range As DevExpress.XtraRichEdit.API.Native.DocumentRange = document.Paragraphs(0).Range
             ' Start to modify character formatting of the target range.
             Dim cp As DevExpress.XtraRichEdit.API.Native.CharacterProperties = document.BeginUpdateCharacters(range)
             ' Set the font size and font name of the target range's characters to default values.   
@@ -96,7 +99,7 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
             ' Finalize to edit the document.
             document.EndUpdate()
             ' Access the first paragraph range.
-            Dim range As DevExpress.XtraRichEdit.API.Native.DocumentRange = document.Paragraphs(CInt((0))).Range
+            Dim range As DevExpress.XtraRichEdit.API.Native.DocumentRange = document.Paragraphs(0).Range
             ' Start to edit the paragraph.
             Dim pp As DevExpress.XtraRichEdit.API.Native.ParagraphProperties = document.BeginUpdateParagraphs(range)
             ' Specify the paragraph's alignment.
@@ -124,6 +127,32 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
 #End Region  ' #FormatParagraph
         End Sub
 
+        Private Shared Sub FormatParagraphBorders(ByVal wordProcessor As DevExpress.XtraRichEdit.RichEditDocumentServer)
+#Region "#FormatParagraphBorders"
+            ' Access a document.
+            Dim document As DevExpress.XtraRichEdit.API.Native.Document = wordProcessor.Document
+            ' Start to edit the document.
+            document.BeginUpdate()
+            ' Append text to the document.
+            document.AppendText([String].Format("Modified Paragraph" & Environment.NewLine & "Normal" + Environment.NewLine & "Normal"))
+            ' Finalize to edit the document.
+            document.EndUpdate()
+            ' Obtain the first and last paragraph ranges
+            Dim firstParagraph As DevExpress.XtraRichEdit.API.Native.Paragraph = document.Paragraphs(0)
+            Dim thirdParagraph As DevExpress.XtraRichEdit.API.Native.Paragraph = document.Paragraphs(2)
+            Dim paragraphRange As DevExpress.XtraRichEdit.API.Native.DocumentRange = document.CreateRange(firstParagraph.Range.Start, thirdParagraph.Range.[End].ToInt() - firstParagraph.Range.Start.ToInt())
+            ' Start to edit the paragraph.
+            Dim pp As DevExpress.XtraRichEdit.API.Native.ParagraphProperties = document.BeginUpdateParagraphs(paragraphRange)
+            Call RichEditDocumentServerAPIExample.CodeExamples.FormattingActions.SetBorder(pp.Borders.HorizontalBorder)
+            Call RichEditDocumentServerAPIExample.CodeExamples.FormattingActions.SetBorder(pp.Borders.BottomBorder)
+            Call RichEditDocumentServerAPIExample.CodeExamples.FormattingActions.SetBorder(pp.Borders.TopBorder)
+            Call RichEditDocumentServerAPIExample.CodeExamples.FormattingActions.SetBorder(pp.Borders.LeftBorder)
+            Call RichEditDocumentServerAPIExample.CodeExamples.FormattingActions.SetBorder(pp.Borders.RightBorder)
+            ' Finalize to edit the paragraph.
+            document.EndUpdateParagraphs(pp)
+#End Region  ' #FormatParagraphBorders
+        End Sub
+
         Private Shared Sub ResetParagraphFormatting(ByVal wordProcessor As DevExpress.XtraRichEdit.RichEditDocumentServer)
 #Region "#ResetParagraphFormatting"
             ' Load a document from a file.
@@ -131,7 +160,7 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
             ' Access a document.
             Dim document As DevExpress.XtraRichEdit.API.Native.Document = wordProcessor.Document
             ' Access the range of the document's first paragraph.
-            Dim range As DevExpress.XtraRichEdit.API.Native.DocumentRange = document.Paragraphs(CInt((0))).Range
+            Dim range As DevExpress.XtraRichEdit.API.Native.DocumentRange = document.Paragraphs(0).Range
             ' Start to edit the paragraph.
             Dim cp As DevExpress.XtraRichEdit.API.Native.ParagraphProperties = document.BeginUpdateParagraphs(range)
             ' Set alignmment and first line indent of the target paragraph to default values.   
@@ -140,6 +169,12 @@ Namespace RichEditDocumentServerAPIExample.CodeExamples
             ' Finalize to edit the paragraph.
             document.EndUpdateParagraphs(cp)
 #End Region  ' #ResetParagraphFormatting
+        End Sub
+
+        Private Shared Sub SetBorder(ByVal border As DevExpress.XtraRichEdit.API.Native.ParagraphBorder)
+            border.LineWidth = 2F
+            border.LineStyle = DevExpress.XtraRichEdit.API.Native.BorderLineStyle.Thick
+            border.LineColor = Color.SteelBlue
         End Sub
     End Class
 End Namespace

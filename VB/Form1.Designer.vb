@@ -109,7 +109,7 @@ Namespace RichEditDocumentServerAPIExample
             Me.simpleButton1.Size = New System.Drawing.Size(228, 78)
             Me.simpleButton1.TabIndex = 0
             Me.simpleButton1.Text = "Run"
-            AddHandler Me.simpleButton1.Click, New System.EventHandler(AddressOf Me.OnRunButtonClick)
+            Me.simpleButton1.Click += New System.EventHandler(AddressOf Me.OnRunButtonClick)
             ' 
             ' sidePanel4
             ' 
