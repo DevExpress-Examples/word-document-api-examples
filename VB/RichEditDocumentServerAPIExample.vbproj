@@ -47,9 +47,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DevExpress.Document.Processor" Version="24.2.*" />
-    <PackageReference Include="DevExpress.Win" Version="24.2.*" />
-    <PackageReference Include="DevExpress.Win.RichEdit" Version="24.2.*" />
+    <PackageReference Include="DevExpress.Document.Processor" Version="24.2.*-*" />
+    <PackageReference Include="DevExpress.Win" Version="24.2.*-*" />
+    <PackageReference Include="DevExpress.Win.RichEdit" Version="24.2.*-*" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
