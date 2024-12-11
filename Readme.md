@@ -7,7 +7,10 @@
 
 # Word Processing Document API – How to Process Word Documents in Code
 
-The  [Word Processing Document API](https://docs.devexpress.com/OfficeFileAPI/17488/word-processing-document-api) is a non-visual .NET library that allows you to generate, load, modify, import, export, and print Microsoft Word documents in code. 
+The  [Word Processing Document API](https://docs.devexpress.com/OfficeFileAPI/17488/word-processing-document-api) is a non-visual .NET library that allows you to generate, load, modify, import, export, and print Microsoft Word documents in code.
+
+> [!Important]  
+> The Universal Subscription or an additional Office File API Subscription is required to use this example in production code. For pricing information, please refer to the [DevExpress Subscription](https://www.devexpress.com/Subscriptions/) page.  
 
 This example demonstrates how to use the Word Processing Document API to execute the following actions: 
 
