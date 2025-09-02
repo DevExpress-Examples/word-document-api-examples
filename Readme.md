@@ -49,7 +49,7 @@ The application’s form contains the list of supported operations and the edito
 - [Document Conversion](http://docs.devexpress.com/OfficeFileAPI/119981/word-processing-document-api/examples/document-conversion) 
 - [Fields](http://docs.devexpress.com/OfficeFileAPI/15280/word-processing-document-api/fields) 
 - [Formatting](http://docs.devexpress.com/OfficeFileAPI/400460/word-processing-document-api/text-formatting) 
-- [Content Controls](https://docs.devexpress.com/OfficeFileAPI/404731/word-processing-document-api/word-processing-document/content-controls?v=23.2)
+- [Content Controls](https://docs.devexpress.com/OfficeFileAPI/404731/word-processing-document-api/word-processing-document/content-controls)
 - [Headers and Footers](http://docs.devexpress.com/OfficeFileAPI/15310/word-processing-document-api/word-processing-document/headers-and-footers) 
 - [Import and Export](http://docs.devexpress.com/OfficeFileAPI/15441/word-processing-document-api/import-and-export) 
 - [Lists](http://docs.devexpress.com/OfficeFileAPI/15314/word-processing-document-api/word-processing-document/lists) 
