@@ -23,7 +23,7 @@ This example demonstrates how to use the Word Processing Document API to execute
 - Create character, paragraph, and linked styles 
 - Import formatted text to a document 
 - Add checkbox form fields to a document 
-- Embed arbitrary XML data (custom XML parts) in a document 
+- Embed arbitrary XML data (custom XML parts) in a document
 
 The application’s form contains the list of supported operations and the editor that displays the code of these operations. A user can select an operation to view its code and click the **Run** button to open the resulting document in Microsoft Word. 
 
